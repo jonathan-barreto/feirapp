@@ -97,4 +97,21 @@ class ProductDatasourceImpl implements ProductDatasource {
       throw ServerException();
     }
   }
+
+  @override
+  Future<ProductDataModel> getDiscountedProducts() async {
+    final HttpResponse response = await httpClient.get(
+      endpoint: EndPoints.getDiscountedProducts,
+    );
+
+    if (response.statusCode == 200) {
+      return ProductDataModel.fromJson(
+        jsonDecode(
+          response.data,
+        ),
+      );
+    } else {
+      throw ServerException();
+    }
+  }
 }

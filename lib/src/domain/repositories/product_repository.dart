@@ -21,4 +21,6 @@ abstract class ProductRepository {
   Future<Either<Failure, ProductDataEntity>> getProductsByIds({
     required List<int> productIds,
   });
+
+  Future<Either<Failure, ProductDataEntity>> getDiscountedProducts();
 }

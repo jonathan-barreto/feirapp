@@ -5,4 +5,5 @@ class EndPoints {
   static const String getProductsByCategory = '/products/category';
   static const String getProductsByOrder = '/products/order';
   static const String getProductsByIds = '/products';
+  static const String getDiscountedProducts = '/discounted-products';
 }

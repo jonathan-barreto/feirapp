@@ -15,4 +15,6 @@ abstract class ProductDatasource {
   });
 
   Future<ProductDataModel> getProductsByIds({required List<int> productIds});
+
+  Future<ProductDataModel> getDiscountedProducts();
 }
