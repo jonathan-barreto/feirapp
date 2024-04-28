@@ -4,7 +4,7 @@ import 'package:sabor_natural_app/src/domain/entities/product_data_entity.dart';
 
 class ProductDataModel extends ProductDataEntity {
   final List<ProductModel> productsModel;
-  final PageLinkModel linksModel;
+  final PageLinkModel? linksModel;
 
   const ProductDataModel({
     required this.productsModel,
@@ -12,11 +12,12 @@ class ProductDataModel extends ProductDataEntity {
   }) : super(products: productsModel, links: linksModel);
 
   factory ProductDataModel.fromJson(Map<String, dynamic> json) {
+    final bool linksIsNotNull = json['links'] != null;
     return ProductDataModel(
       productsModel: (json['data'] as List).map((e) {
         return ProductModel.fromJson(e);
       }).toList(),
-      linksModel: PageLinkModel.fromJson(json['links']),
+      linksModel: linksIsNotNull ? PageLinkModel.fromJson(json['links']) : null,
     );
   }
 
@@ -24,7 +25,7 @@ class ProductDataModel extends ProductDataEntity {
     final Map<String, dynamic> data = {};
 
     data['data'] = productsModel.map((e) => e.toJson()).toList();
-    data['links'] = linksModel.toJson();
+    data['links'] = linksModel?.toJson();
 
     return data;
   }

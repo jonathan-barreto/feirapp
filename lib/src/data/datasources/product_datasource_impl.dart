@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:sabor_natural_app/src/core/errors/exceptions.dart';
 import 'package:sabor_natural_app/src/core/http_client/http_client.dart';
 import 'package:sabor_natural_app/src/core/shared/constants/endpoints.dart';
@@ -21,7 +19,7 @@ class ProductDatasourceImpl implements ProductDatasource {
 
     if (response.statusCode == 200) {
       return ProductDataModel.fromJson(
-        jsonDecode(response.data),
+        response.data,
       );
     } else {
       throw ServerException();
@@ -38,7 +36,7 @@ class ProductDatasourceImpl implements ProductDatasource {
 
     if (response.statusCode == 200) {
       return ProductDataModel.fromJson(
-        jsonDecode(response.data),
+        response.data,
       );
     } else {
       throw ServerException();
@@ -55,7 +53,7 @@ class ProductDatasourceImpl implements ProductDatasource {
 
     if (response.statusCode == 200) {
       return ProductDataModel.fromJson(
-        jsonDecode(response.data),
+        response.data,
       );
     } else {
       throw ServerException();
@@ -73,7 +71,7 @@ class ProductDatasourceImpl implements ProductDatasource {
 
     if (response.statusCode == 200) {
       return ProductDataModel.fromJson(
-        jsonDecode(response.data),
+        response.data,
       );
     } else {
       throw ServerException();
@@ -91,7 +89,7 @@ class ProductDatasourceImpl implements ProductDatasource {
 
     if (response.statusCode == 200) {
       return ProductDataModel.fromJson(
-        jsonDecode(response.data),
+        response.data,
       );
     } else {
       throw ServerException();
@@ -106,9 +104,7 @@ class ProductDatasourceImpl implements ProductDatasource {
 
     if (response.statusCode == 200) {
       return ProductDataModel.fromJson(
-        jsonDecode(
-          response.data,
-        ),
+        response.data,
       );
     } else {
       throw ServerException();

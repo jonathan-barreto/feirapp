@@ -8,6 +8,7 @@ class ProductModel extends ProductEntity {
     required super.unit,
     required super.price,
     required super.image,
+    super.discount,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -18,6 +19,7 @@ class ProductModel extends ProductEntity {
       unit: json['unit'],
       price: json['price'],
       image: json['image'],
+      discount: json['discount'],
     );
   }
 
@@ -30,6 +32,7 @@ class ProductModel extends ProductEntity {
     data['unit'] = unit;
     data['price'] = price;
     data['image'] = image;
+    data['discount'] = discount;
 
     return data;
   }

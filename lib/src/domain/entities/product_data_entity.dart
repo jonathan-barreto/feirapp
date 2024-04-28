@@ -4,7 +4,7 @@ import 'package:sabor_natural_app/src/domain/entities/product_entity.dart';
 
 class ProductDataEntity extends Equatable {
   final List<ProductEntity> products;
-  final PageLinkEntity links;
+  final PageLinkEntity? links;
 
   const ProductDataEntity({
     required this.products,
