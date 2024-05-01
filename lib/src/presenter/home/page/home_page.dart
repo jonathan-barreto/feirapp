@@ -42,20 +42,6 @@ class _HomePageState extends State<HomePage> {
                 height: screenHeight * 0.3,
                 child: const BannerAdWidget(),
               ),
-              // const Padding(
-              //   padding: EdgeInsets.all(8.0),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.start,
-              //     children: [
-              //       Text(
-              //         'Melhores Descontos',
-              //         // style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              //         //       letterSpacing: 0,
-              //         //     ),
-              //       ),1
-              //     ],
-              //   ),
-              // ),
               Expanded(
                 child: ListViewDescountedProducts(
                   products: value.output.products,
