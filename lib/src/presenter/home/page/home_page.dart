@@ -51,8 +51,8 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               SliverPadding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: StyleValues.small,
+                padding: const EdgeInsets.all(
+                  StyleValues.small,
                 ),
                 sliver: SliverGrid.builder(
                   itemCount: 10,

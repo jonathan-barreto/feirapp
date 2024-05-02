@@ -34,6 +34,7 @@ class CardProductWidget extends StatelessWidget {
         children: [
           Expanded(
             child: CachedNetworkImage(
+              width: StyleValues.extraLarge * 3,
               imageUrl: '${EndPoints.baseUrlImage}${product.image}',
               errorWidget: (context, url, error) => const Icon(Icons.error),
               progressIndicatorBuilder: (context, url, downloadProgress) {
