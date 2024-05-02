@@ -7,7 +7,9 @@ class ProductEntity extends Equatable {
   final String unit;
   final String price;
   final String image;
-  final String? discount;
+  final String? weight;
+  final int? discount;
+  final String? discountPrice;
 
   const ProductEntity({
     required this.id,
@@ -16,7 +18,9 @@ class ProductEntity extends Equatable {
     required this.unit,
     required this.price,
     required this.image,
+    this.weight,
     this.discount,
+    this.discountPrice,
   });
 
   @override
@@ -28,7 +32,9 @@ class ProductEntity extends Equatable {
       unit,
       price,
       image,
+      weight,
       discount,
+      discountPrice,
     ];
   }
 }

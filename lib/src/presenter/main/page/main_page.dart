@@ -29,12 +29,10 @@ class _MainPageState extends State<MainPage> {
       builder: (context, value, child) {
         if (value is SuccessState<MainState>) {
           return Scaffold(
-            appBar: AppBar(),
             body: SafeArea(
               child: store.widgets[value.output.indexSelected],
             ),
             bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: Colors.transparent,
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: FaIcon(
