@@ -20,7 +20,7 @@ class ProductTitleWidget extends StatelessWidget {
             productName,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: textTheme.bodyMedium?.copyWith(
+            style: textTheme.bodySmall?.copyWith(
               color: AppColors.primaryColorText,
               fontWeight: FontWeight.bold,
             ),

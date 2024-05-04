@@ -95,4 +95,20 @@ class ProductRepositoryImpl implements ProductRepository {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, ProductDataEntity>> getMoreProductsByLinkUsecase({
+    required String link,
+  }) async {
+    try {
+      final ProductDataEntity result =
+          await datasource.getMoreProductsByLinkUsecase(
+        link: link,
+      );
+
+      return Right(result);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }

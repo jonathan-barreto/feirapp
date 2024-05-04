@@ -49,12 +49,11 @@ final themeDataCustom = ThemeData(
     ),
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    elevation: 0,
+    elevation: 1,
     showSelectedLabels: false,
     showUnselectedLabels: false,
     type: BottomNavigationBarType.fixed,
-    backgroundColor: AppColors.white,
     selectedItemColor: AppColors.primary,
-    unselectedItemColor: AppColors.black,
+    unselectedItemColor: AppColors.primaryColorText,
   ),
 );

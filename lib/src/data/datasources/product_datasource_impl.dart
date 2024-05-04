@@ -110,4 +110,21 @@ class ProductDatasourceImpl implements ProductDatasource {
       throw ServerException();
     }
   }
+
+  @override
+  Future<ProductDataModel> getMoreProductsByLinkUsecase({
+    required String link,
+  }) async {
+    final HttpResponse response = await httpClient.get(
+      endpoint: link,
+    );
+
+    if (response.statusCode == 200) {
+      return ProductDataModel.fromJson(
+        response.data,
+      );
+    } else {
+      throw ServerException();
+    }
+  }
 }

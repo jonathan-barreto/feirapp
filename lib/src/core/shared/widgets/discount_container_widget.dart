@@ -19,7 +19,7 @@ class DiscountContainerWidget extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: screenWidth * 0.2,
+          width: screenWidth * 0.15,
           height: screenHeight * 0.04,
           decoration: BoxDecoration(
             border: Border.all(

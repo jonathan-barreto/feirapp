@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:sabor_natural_app/src/core/shared/state/raw_state.dart';
 import 'package:sabor_natural_app/src/init/init.dart';
 import 'package:sabor_natural_app/src/presenter/main/state/main_state.dart';
@@ -44,17 +45,18 @@ class _MainPageState extends State<MainPage> {
                   icon: FaIcon(
                     FontAwesomeIcons.magnifyingGlass,
                   ),
-                  label: 'Shop',
+                  label: 'Search',
                 ),
                 BottomNavigationBarItem(
                   icon: FaIcon(
-                    FontAwesomeIcons.cartShopping,
+                    FontAwesomeIcons.bagShopping,
                   ),
                   label: 'Carrinho',
                 ),
                 BottomNavigationBarItem(
                   icon: FaIcon(
-                    FontAwesomeIcons.user,
+                    LineAwesomeIcons.user,
+                    size: 35,
                   ),
                   label: 'Minha Conta',
                 ),

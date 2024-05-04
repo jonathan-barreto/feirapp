@@ -23,4 +23,8 @@ abstract class ProductRepository {
   });
 
   Future<Either<Failure, ProductDataEntity>> getDiscountedProducts();
+
+  Future<Either<Failure, ProductDataEntity>> getMoreProductsByLinkUsecase({
+    required String link,
+  });
 }

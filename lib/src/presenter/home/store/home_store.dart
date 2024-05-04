@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sabor_natural_app/src/core/shared/state/raw_state.dart';
 import 'package:sabor_natural_app/src/core/usecase/usecase.dart';
+import 'package:sabor_natural_app/src/domain/entities/product_entity.dart';
 import 'package:sabor_natural_app/src/domain/usecases/get_discounted_products_usecase.dart';
 import 'package:sabor_natural_app/src/presenter/home/state/home_state.dart';
 
@@ -26,19 +27,19 @@ class HomeStore extends ValueNotifier<RawState> {
 
     response.fold(
       (failure) {
-        value = const ErrorState(message: 'deu erro');
-
-        return null;
+        return value = const ErrorState(message: 'deu erro');
       },
       (productData) {
-        value = SuccessState(
+        return value = SuccessState(
           output: HomeState.getDiscountedProducts(
             listProducts: productData.products,
           ),
         );
-
-        return null;
       },
     );
+  }
+
+  Future<void> addProductInCart({required ProductEntity product}) async {
+    print(product.name);
   }
 }
