@@ -8,13 +8,10 @@ import 'package:sabor_natural_app/src/domain/repositories/product_repository.dar
 import 'package:sabor_natural_app/src/domain/usecases/get_all_products_usecase.dart';
 import 'package:sabor_natural_app/src/domain/usecases/get_discounted_products_usecase.dart';
 import 'package:sabor_natural_app/src/domain/usecases/get_more_products_by_link_usecase.dart';
-import 'package:sabor_natural_app/src/domain/usecases/get_products_by_category_usecase.dart';
 import 'package:sabor_natural_app/src/domain/usecases/get_products_by_ids_usecase.dart';
-import 'package:sabor_natural_app/src/domain/usecases/get_products_by_name_usecase.dart';
-import 'package:sabor_natural_app/src/domain/usecases/get_products_by_order_usecase.dart';
-import 'package:sabor_natural_app/src/presenter/home/store/home_store.dart';
-import 'package:sabor_natural_app/src/presenter/main/store/main_store.dart';
-import 'package:sabor_natural_app/src/presenter/search/store/search_store.dart';
+import 'package:sabor_natural_app/src/presenter/home/home_store.dart';
+import 'package:sabor_natural_app/src/presenter/main/main_store.dart';
+import 'package:sabor_natural_app/src/presenter/search/search_store.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -46,26 +43,8 @@ Future<void> init() async {
     ),
   );
 
-  getIt.registerFactory<GetProductsByCategoryUsecase>(
-    () => GetProductsByCategoryUsecase(
-      repository: getIt<ProductRepository>(),
-    ),
-  );
-
   getIt.registerFactory<GetProductsByIdsUsecase>(
     () => GetProductsByIdsUsecase(
-      repository: getIt<ProductRepository>(),
-    ),
-  );
-
-  getIt.registerFactory<GetProductsByNameUsecase>(
-    () => GetProductsByNameUsecase(
-      repository: getIt<ProductRepository>(),
-    ),
-  );
-
-  getIt.registerFactory<GetAllProductsByOrderUsecase>(
-    () => GetAllProductsByOrderUsecase(
       repository: getIt<ProductRepository>(),
     ),
   );

@@ -1,10 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:sabor_natural_app/src/core/shared/state/raw_state.dart';
-import 'package:sabor_natural_app/src/core/usecase/usecase.dart';
+import 'package:sabor_natural_app/src/core/shared/widgets/custom_bottom_modal_widget.dart';
 import 'package:sabor_natural_app/src/domain/entities/product_data_entity.dart';
 import 'package:sabor_natural_app/src/domain/usecases/get_all_products_usecase.dart';
 import 'package:sabor_natural_app/src/domain/usecases/get_more_products_by_link_usecase.dart';
-import 'package:sabor_natural_app/src/presenter/search/state/search_state.dart';
+import 'package:sabor_natural_app/src/presenter/search/search_state.dart';
 
 class SearchStore extends ValueNotifier<RawState> {
   final GetAllProductsUsecase getAllProductsUsecase;
@@ -16,9 +18,11 @@ class SearchStore extends ValueNotifier<RawState> {
   }) : super(const IdleState());
 
   late final ScrollController scrollController;
+  late final TextEditingController textController;
 
   void init() {
     scrollController = ScrollController();
+    textController = TextEditingController();
 
     scrollController.addListener(() {
       final position = scrollController.position;
@@ -91,26 +95,6 @@ class SearchStore extends ValueNotifier<RawState> {
         );
       }
     }
-    // if (value is SuccessState<HomeState>) {
-    //   final state = value as SuccessState<HomeState>;
-
-    //   value = SuccessState(
-    //     output: state.output.copyWith(
-    //       productLoading: true,
-    //     ),
-    //   );
-
-    //   final List<ProductModel> products = await respository.fetchSearchProducts(
-    //     search: search,
-    //   );
-
-    //   value = SuccessState(
-    //     output: state.output.copyWith(
-    //       products: products,
-    //       productLoading: false,
-    //     ),
-    //   );
-    // }
   }
 
   Future<void> getAllProducts() async {
@@ -123,23 +107,52 @@ class SearchStore extends ValueNotifier<RawState> {
       const Duration(seconds: 1),
     );
 
-    final NoParams noParams = NoParams();
-
-    final response = await getAllProductsUsecase.call(
-      noParams,
+    value = SuccessState<SearchState>(
+      output: SearchState.getProducts(
+        products: [],
+      ),
     );
 
-    response.fold((l) => hasError = true, (r) => productDataEntity = r);
+    // final NoParams noParams = NoParams();
 
-    if (hasError == true) {
-      value = const ErrorState(message: 'deu erro');
-    } else {
-      value = SuccessState<SearchState>(
-        output: SearchState.getProducts(
-          products: productDataEntity?.products ?? [],
-          links: productDataEntity?.links,
-        ),
-      );
-    }
+    // final response = await getAllProductsUsecase.call(
+    //   noParams,
+    // );
+
+    // response.fold((l) => hasError = true, (r) => productDataEntity = r);
+
+    // if (hasError == true) {
+    //   value = const ErrorState(message: 'deu erro');
+    // } else {
+    //   value = SuccessState<SearchState>(
+    //     output: SearchState.getProducts(
+    //       products: productDataEntity?.products ?? [],
+    //       links: productDataEntity?.links,
+    //     ),
+    //   );
+    // }
   }
+
+  Future<void> showFilterOptions({required BuildContext context}) async {
+    await FilterBottomModalWidget(
+      parentContext: context,
+    ).show();
+  }
+
+  // String _sanitizeText({required String text}) {
+  //   String textoSemAcentos = text
+  //       .replaceAll(RegExp(r'[áàâãä]', caseSensitive: false), 'a')
+  //       .replaceAll(RegExp(r'[éèêë]', caseSensitive: false), 'e')
+  //       .replaceAll(RegExp(r'[íìîï]', caseSensitive: false), 'i')
+  //       .replaceAll(RegExp(r'[óòôõö]', caseSensitive: false), 'o')
+  //       .replaceAll(RegExp(r'[úùûü]', caseSensitive: false), 'u')
+  //       .replaceAll(RegExp(r'[ç]', caseSensitive: false), 'c');
+
+  //   final String textoLimpo = textoSemAcentos.replaceAll(
+  //     RegExp(r'[^a-zA-Z]'),
+  //     '',
+  //   );
+
+  //   return textoLimpo.toLowerCase();
+  // }
 }

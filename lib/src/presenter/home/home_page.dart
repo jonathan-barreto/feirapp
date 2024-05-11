@@ -5,8 +5,8 @@ import 'package:sabor_natural_app/src/core/shared/widgets/banner_ad_widget.dart'
 import 'package:sabor_natural_app/src/core/shared/widgets/card_product_widget.dart';
 import 'package:sabor_natural_app/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:sabor_natural_app/src/init/init.dart';
-import 'package:sabor_natural_app/src/presenter/home/state/home_state.dart';
-import 'package:sabor_natural_app/src/presenter/home/store/home_store.dart';
+import 'package:sabor_natural_app/src/presenter/home/home_state.dart';
+import 'package:sabor_natural_app/src/presenter/home/home_store.dart';
 import 'package:sabor_natural_app/src/presenter/home/widgets/app_bar_home_widget.dart';
 
 class HomePage extends StatefulWidget {

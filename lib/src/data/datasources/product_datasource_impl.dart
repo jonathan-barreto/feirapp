@@ -3,6 +3,7 @@ import 'package:sabor_natural_app/src/core/http_client/http_client.dart';
 import 'package:sabor_natural_app/src/core/shared/constants/endpoints.dart';
 import 'package:sabor_natural_app/src/data/datasources/product_datasource.dart';
 import 'package:sabor_natural_app/src/data/model/product_data_model.dart';
+import 'package:sabor_natural_app/src/data/model/product_filter_param_model.dart';
 
 class ProductDatasourceImpl implements ProductDatasource {
   final HttpClient httpClient;
@@ -12,10 +13,10 @@ class ProductDatasourceImpl implements ProductDatasource {
   });
 
   @override
-  Future<ProductDataModel> getAllProducts() async {
-    final response = await httpClient.get(
-      endpoint: EndPoints.getAllProducts,
-    );
+  Future<ProductDataModel> getAllProducts(
+      {required ProductFilterParamModel filter}) async {
+    final response =
+        await httpClient.post(endpoint: EndPoints.getAllProducts, body: {});
 
     if (response.statusCode == 200) {
       return ProductDataModel.fromJson(

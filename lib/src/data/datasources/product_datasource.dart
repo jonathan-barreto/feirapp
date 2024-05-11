@@ -1,7 +1,10 @@
 import 'package:sabor_natural_app/src/data/model/product_data_model.dart';
+import 'package:sabor_natural_app/src/data/model/product_filter_param_model.dart';
 
 abstract class ProductDatasource {
-  Future<ProductDataModel> getAllProducts();
+  Future<ProductDataModel> getAllProducts({
+    required ProductFilterParamModel filter,
+  });
 
   Future<ProductDataModel> getProductsByName({required String productName});
 
@@ -16,9 +19,9 @@ abstract class ProductDatasource {
 
   Future<ProductDataModel> getProductsByIds({required List<int> productIds});
 
-  Future<ProductDataModel> getDiscountedProducts(); 
+  Future<ProductDataModel> getDiscountedProducts();
 
-   Future<ProductDataModel> getMoreProductsByLinkUsecase({
+  Future<ProductDataModel> getMoreProductsByLinkUsecase({
     required String link,
   });
 }

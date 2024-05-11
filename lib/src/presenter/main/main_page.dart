@@ -3,8 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:sabor_natural_app/src/core/shared/state/raw_state.dart';
 import 'package:sabor_natural_app/src/init/init.dart';
-import 'package:sabor_natural_app/src/presenter/main/state/main_state.dart';
-import 'package:sabor_natural_app/src/presenter/main/store/main_store.dart';
+import 'package:sabor_natural_app/src/presenter/main/main_state.dart';
+import 'package:sabor_natural_app/src/presenter/main/main_store.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
