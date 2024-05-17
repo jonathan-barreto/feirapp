@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:sabor_natural_app/src/core/errors/failure.dart';
-import 'package:sabor_natural_app/src/data/model/product_filter_param_model.dart';
 import 'package:sabor_natural_app/src/domain/entities/product_data_entity.dart';
+import 'package:sabor_natural_app/src/domain/entities/product_filter_param_entity.dart';
 
 abstract class ProductRepository {
   Future<Either<Failure, ProductDataEntity>> getAllProducts({
-    required ProductFilterParamModel filter,
+    required ProductFilterParamEntity params,
   });
 
   Future<Either<Failure, ProductDataEntity>> getProductsByIds({
@@ -16,5 +16,6 @@ abstract class ProductRepository {
 
   Future<Either<Failure, ProductDataEntity>> getMoreProductsByLinkUsecase({
     required String link,
+    required ProductFilterParamEntity? params,
   });
 }

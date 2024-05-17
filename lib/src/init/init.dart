@@ -9,9 +9,11 @@ import 'package:sabor_natural_app/src/domain/usecases/get_all_products_usecase.d
 import 'package:sabor_natural_app/src/domain/usecases/get_discounted_products_usecase.dart';
 import 'package:sabor_natural_app/src/domain/usecases/get_more_products_by_link_usecase.dart';
 import 'package:sabor_natural_app/src/domain/usecases/get_products_by_ids_usecase.dart';
-import 'package:sabor_natural_app/src/presenter/home/home_store.dart';
-import 'package:sabor_natural_app/src/presenter/main/main_store.dart';
-import 'package:sabor_natural_app/src/presenter/search/search_store.dart';
+import 'package:sabor_natural_app/src/presenter/search/controllers/search_filter_page_controller.dart';
+import 'package:sabor_natural_app/src/presenter/home/controllers/home_controller.dart';
+import 'package:sabor_natural_app/src/presenter/home/controllers/home_controller.dart';
+import 'package:sabor_natural_app/src/presenter/main/controllers/main_controller.dart';
+import 'package:sabor_natural_app/src/presenter/search/controllers/search_page_controller.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -54,22 +56,24 @@ Future<void> init() async {
       repository: getIt<ProductRepository>(),
     ),
   );
+  
+  // Controllers
+  getIt.registerFactory<MainController>(() => MainController());
 
-  // Stores
-  getIt.registerFactory<MainStore>(
-    () => MainStore(),
-  );
-
-  getIt.registerFactory<HomeStore>(
-    () => HomeStore(
+  getIt.registerFactory<HomeController>(
+    () => HomeController(
       getDiscountedProductsUsecase: getIt<GetDiscountedProductsUsecase>(),
     ),
   );
 
-  getIt.registerFactory<SearchStore>(
-    () => SearchStore(
+  getIt.registerFactory<SearchPageController>(
+    () => SearchPageController(
       getAllProductsUsecase: getIt<GetAllProductsUsecase>(),
       getMoreProductsByLinkUsecase: getIt<GetMoreProductsByLinkUsecase>(),
     ),
+  );
+
+  getIt.registerFactory<SearchFilterPageController>(
+    () => SearchFilterPageController(),
   );
 }

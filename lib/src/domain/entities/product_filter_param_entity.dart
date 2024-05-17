@@ -1,13 +1,14 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class ProductFilterParamEntity extends Equatable {
-  final String? name;
-  final String? category;
-  final double? minPrice;
-  final double? maxPrice;
-  final String? order;
+  String? name;
+  String? category;
+  double? minPrice;
+  double? maxPrice;
+  String? order;
 
-  const ProductFilterParamEntity({
+  ProductFilterParamEntity({
     this.name,
     this.category,
     this.minPrice,

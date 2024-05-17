@@ -5,6 +5,7 @@ import 'package:sabor_natural_app/src/data/datasources/product_datasource.dart';
 import 'package:sabor_natural_app/src/data/model/product_data_model.dart';
 import 'package:sabor_natural_app/src/data/model/product_filter_param_model.dart';
 import 'package:sabor_natural_app/src/domain/entities/product_data_entity.dart';
+import 'package:sabor_natural_app/src/domain/entities/product_filter_param_entity.dart';
 import 'package:sabor_natural_app/src/domain/repositories/product_repository.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
@@ -16,13 +17,17 @@ class ProductRepositoryImpl implements ProductRepository {
 
   @override
   Future<Either<Failure, ProductDataEntity>> getAllProducts({
-    required ProductFilterParamModel filter,
+    required ProductFilterParamEntity params,
   }) async {
+    final ProductFilterParamModel filter = ProductFilterParamModel.fromEntity(
+      params,
+    );
+
     try {
       final ProductDataModel result = await datasource.getAllProducts(
         filter: filter,
       );
-      
+
       return Right(result);
     } on ServerException {
       return Left(ServerFailure());
@@ -58,11 +63,13 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<Either<Failure, ProductDataEntity>> getMoreProductsByLinkUsecase({
     required String link,
+    required ProductFilterParamEntity? params,
   }) async {
     try {
       final ProductDataEntity result =
           await datasource.getMoreProductsByLinkUsecase(
         link: link,
+        params: params,
       );
 
       return Right(result);

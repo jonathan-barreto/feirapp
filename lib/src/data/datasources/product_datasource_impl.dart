@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:sabor_natural_app/src/core/errors/exceptions.dart';
 import 'package:sabor_natural_app/src/core/http_client/http_client.dart';
 import 'package:sabor_natural_app/src/core/shared/constants/endpoints.dart';
 import 'package:sabor_natural_app/src/data/datasources/product_datasource.dart';
 import 'package:sabor_natural_app/src/data/model/product_data_model.dart';
 import 'package:sabor_natural_app/src/data/model/product_filter_param_model.dart';
+import 'package:sabor_natural_app/src/domain/entities/product_filter_param_entity.dart';
 
 class ProductDatasourceImpl implements ProductDatasource {
   final HttpClient httpClient;
@@ -13,10 +16,17 @@ class ProductDatasourceImpl implements ProductDatasource {
   });
 
   @override
-  Future<ProductDataModel> getAllProducts(
-      {required ProductFilterParamModel filter}) async {
-    final response =
-        await httpClient.post(endpoint: EndPoints.getAllProducts, body: {});
+  Future<ProductDataModel> getAllProducts({
+    required ProductFilterParamModel filter,
+  }) async {
+    final String json = jsonEncode(
+      filter.toJson(),
+    );
+
+    final response = await httpClient.post(
+      endpoint: EndPoints.getAllProducts,
+      body: json,
+    );
 
     if (response.statusCode == 200) {
       return ProductDataModel.fromJson(
@@ -115,9 +125,11 @@ class ProductDatasourceImpl implements ProductDatasource {
   @override
   Future<ProductDataModel> getMoreProductsByLinkUsecase({
     required String link,
+    required ProductFilterParamEntity? params,
   }) async {
-    final HttpResponse response = await httpClient.get(
+    final HttpResponse response = await httpClient.post(
       endpoint: link,
+      body: params,
     );
 
     if (response.statusCode == 200) {

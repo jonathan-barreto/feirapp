@@ -1,5 +1,6 @@
 import 'package:sabor_natural_app/src/data/model/product_data_model.dart';
 import 'package:sabor_natural_app/src/data/model/product_filter_param_model.dart';
+import 'package:sabor_natural_app/src/domain/entities/product_filter_param_entity.dart';
 
 abstract class ProductDatasource {
   Future<ProductDataModel> getAllProducts({
@@ -23,5 +24,6 @@ abstract class ProductDatasource {
 
   Future<ProductDataModel> getMoreProductsByLinkUsecase({
     required String link,
+    required ProductFilterParamEntity? params,
   });
 }
