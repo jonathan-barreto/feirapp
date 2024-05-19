@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sabor_natural_app/src/core/shared/enums/filter_order_enum.dart';
 import 'package:sabor_natural_app/src/core/shared/enums/product_category_enum.dart';
 import 'package:sabor_natural_app/src/domain/entities/category_tile_entity.dart';
 import 'package:sabor_natural_app/src/domain/entities/get_product_param_entity.dart';
@@ -46,6 +47,8 @@ class SearchPageController extends ChangeNotifier {
       category: ProductCategoryEnum.tempero,
     ),
   ];
+
+  FilterOrderEnum? order;
 
   bool hasError = false;
 
@@ -207,7 +210,19 @@ class SearchPageController extends ChangeNotifier {
     if (existsFilterSelected) getProductByFilter();
   }
 
+  void _setOrder({required FilterOrderEnum value}) {
+    final Map<FilterOrderEnum, String> mapping = {
+      FilterOrderEnum.asc: 'asc',
+      FilterOrderEnum.desc: 'desc',
+    };
+
+    order = value;
+    productFilterParamEntity.order = mapping[value];
+  }
+
   Future<void> showFilterOptions({required BuildContext context}) async {
+    print('order quando abre $order');
+
     await SearchFilterPage(
       parentContext: context,
       categories: categories,
@@ -215,7 +230,9 @@ class SearchPageController extends ChangeNotifier {
       end: productFilterParamEntity.maxPrice,
       searchOnPressed: _checkSearchOnPressed,
       radioChange: (value) => _setCategoryInFilter(value: value),
+      orderOnChange: (value) => _setOrder(value: value),
       rangeSliderChange: (values) => _setRangePriceInFilter(values: values),
+      order: order,
     ).show();
   }
 }

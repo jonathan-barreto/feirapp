@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+import 'package:sabor_natural_app/src/core/shared/constants/app_colors.dart';
+import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
+
+class ElevatedButtonCustomWidget extends StatelessWidget {
+  final String label;
+  final VoidCallback onPressed;
+  final bool isLight;
+
+  const ElevatedButtonCustomWidget({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.isLight = false,
+  });
+
+  const ElevatedButtonCustomWidget.light({
+    super.key,
+    required this.label,
+    required this.onPressed,
+  }) : isLight = true;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(
+          isLight ? AppColors.white : AppColors.primary,
+        ),
+        side: const WidgetStatePropertyAll(
+          BorderSide(
+            color: AppColors.primary,
+          ),
+        ),
+      ),
+      child: Text(
+        label,
+        style: textTheme.bodyMedium?.copyWith(
+          color: isLight ? AppColors.primary : AppColors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+}

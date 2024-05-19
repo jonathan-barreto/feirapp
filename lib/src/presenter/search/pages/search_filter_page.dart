@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sabor_natural_app/src/core/shared/constants/app_colors.dart';
 import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
+import 'package:sabor_natural_app/src/core/shared/enums/filter_order_enum.dart';
 import 'package:sabor_natural_app/src/core/shared/enums/product_category_enum.dart';
 import 'package:sabor_natural_app/src/core/shared/widgets/base_widget_for_bottom_modal.dart';
 import 'package:sabor_natural_app/src/core/shared/widgets/filter_category_container_widget.dart';
 import 'package:sabor_natural_app/src/domain/entities/category_tile_entity.dart';
 import 'package:sabor_natural_app/src/init/init.dart';
 import 'package:sabor_natural_app/src/presenter/search/controllers/search_filter_page_controller.dart';
+import 'package:sabor_natural_app/src/presenter/search/widgets/elevated_button_custom_widget.dart';
+import 'package:sabor_natural_app/src/presenter/search/widgets/filter_expansion_tile_widget.dart';
+import 'package:sabor_natural_app/src/presenter/search/widgets/filter_order_widget.dart';
 import 'package:sabor_natural_app/src/presenter/search/widgets/range_price_container_widget.dart';
 
 class SearchFilterPage extends StatefulWidget {
@@ -16,6 +20,8 @@ class SearchFilterPage extends StatefulWidget {
   final double? end;
   final void Function(ProductCategoryEnum?) radioChange;
   final void Function(RangeValues) rangeSliderChange;
+  final FilterOrderEnum? order;
+  final void Function(FilterOrderEnum) orderOnChange;
   final VoidCallback searchOnPressed;
 
   const SearchFilterPage({
@@ -26,7 +32,9 @@ class SearchFilterPage extends StatefulWidget {
     this.end,
     required this.radioChange,
     required this.rangeSliderChange,
+    required this.orderOnChange,
     required this.searchOnPressed,
+    this.order,
   });
 
   Future<void> _showModal() async {
@@ -59,73 +67,110 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
       categorieList: widget.categories,
       start: widget.start,
       end: widget.end,
+      order: widget.order,
     );
   }
 
   @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
     final double screenHeight = MediaQuery.of(context).size.height;
 
     return AnimatedBuilder(
       animation: controller,
       builder: (context, child) {
         return Container(
-          height: screenHeight * 0.8,
-          decoration: BoxDecoration(
+          height: screenHeight * 0.9,
+          decoration: const BoxDecoration(
             color: AppColors.white,
-            borderRadius: BorderRadius.circular(
-              StyleValues.normal,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(
+                StyleValues.normal,
+              ),
+              topRight: Radius.circular(
+                StyleValues.normal,
+              ),
             ),
           ),
           child: BaseWidgetForBottomModal(
             child: Column(
               children: [
                 Expanded(
-                  child: Column(
-                    children: [
-                      // const Divider(),
-                      FilterCategoryContainerWidget(
-                        categories: controller.categories,
-                        onChange: (index) {
-                          final categorySelected = controller.radioChange(
-                            index: index,
-                          );
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        FilterExpansionTileWidget(
+                          label: 'Ordenação',
+                          child: FilterOrderWidget(
+                            order: controller.myOrder,
+                            orderOnChange: (value) {
+                              controller.orderChange(
+                                value: value,
+                              );
 
-                          widget.radioChange(categorySelected.category);
-                        },
-                      ),
-                      const Divider(),
-                      RangePriceContainerWidget(
-                        rangeValues: controller.currentRangeValues,
-                        onChange: (values) {
-                          controller.rangeSliderChange(
-                            values: values,
-                          );
+                              widget.orderOnChange(
+                                value,
+                              );
+                            },
+                          ),
+                        ),
+                        const Divider(),
+                        FilterExpansionTileWidget(
+                          label: 'Categoria',
+                          child: FilterCategoryContainerWidget(
+                            categories: controller.categories,
+                            onChange: (index) {
+                              final categorySelected = controller.radioChange(
+                                index: index,
+                              );
 
-                          widget.rangeSliderChange(values);
-                        },
-                      ),
-                      const Divider(),
-                    ],
+                              widget.radioChange(categorySelected.category);
+                            },
+                          ),
+                        ),
+                        const Divider(),
+                        FilterExpansionTileWidget(
+                          label: 'Preço',
+                          child: RangePriceContainerWidget(
+                            rangeValues: controller.currentRangeValues,
+                            onChange: (values) {
+                              controller.rangeSliderChange(
+                                values: values,
+                              );
+
+                              widget.rangeSliderChange(values);
+                            },
+                          ),
+                        ),
+                        // const OrderWidget(),
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(
-                    StyleValues.normal,
+                    StyleValues.small,
                   ),
-                  child: ElevatedButtonCustomWidget(
-                    label: 'Aplicar',
-                    onPressed: () {
-                      widget.searchOnPressed();
-                      Navigator.pop(context);
-                    },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButtonCustomWidget.light(
+                          label: 'Limpar',
+                          onPressed: () {},
+                        ),
+                      ),
+                      const SizedBox(
+                        width: StyleValues.small,
+                      ),
+                      Expanded(
+                        child: ElevatedButtonCustomWidget(
+                          label: 'Aplicar',
+                          onPressed: () {
+                            widget.searchOnPressed();
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -133,46 +178,6 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
           ),
         );
       },
-    );
-  }
-}
-
-class ElevatedButtonCustomWidget extends StatelessWidget {
-  final String label;
-  final VoidCallback onPressed;
-
-  const ElevatedButtonCustomWidget({
-    super.key,
-    required this.label,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    final double screenHeight = MediaQuery.of(context).size.height;
-
-    return SizedBox(
-      width: double.infinity,
-      height: screenHeight * 0.06,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: const ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(
-            AppColors.primary,
-          ),
-          side: MaterialStatePropertyAll(BorderSide()),
-          shape: MaterialStatePropertyAll(
-            RoundedRectangleBorder(),
-          ),
-        ),
-        child: Text(
-          label,
-          style: textTheme.bodyMedium?.copyWith(
-            color: AppColors.white,
-          ),
-        ),
-      ),
     );
   }
 }

@@ -21,10 +21,9 @@ class PriceContainerWidget extends StatelessWidget {
       ),
       child: Container(
         height: StyleValues.extraLarge,
-        // color: Colors.redAccent,
         decoration: BoxDecoration(
           border: Border.all(
-            color: AppColors.secondColorText,
+            color: AppColors.primaryColorText,
           ),
           borderRadius: BorderRadius.circular(
             StyleValues.small,
@@ -38,8 +37,7 @@ class PriceContainerWidget extends StatelessWidget {
               ),
               child: Text(
                 'R\$',
-                style: textTheme.bodyLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
+                style: textTheme.bodyMedium?.copyWith(
                   color: AppColors.primaryColorText,
                 ),
               ),
@@ -48,7 +46,7 @@ class PriceContainerWidget extends StatelessWidget {
               child: AutoSizeText(
                 value,
                 maxLines: 1,
-                style: textTheme.bodyLarge?.copyWith(),
+                style: textTheme.bodyMedium?.copyWith(),
               ),
             ),
           ],

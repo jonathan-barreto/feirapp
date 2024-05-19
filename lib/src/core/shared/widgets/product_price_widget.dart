@@ -18,6 +18,8 @@ class ProductPriceWidget extends StatelessWidget {
   String getPriceFormated({required String value}) {
     final String priceFormated = value.replaceAll('.', ',');
 
+    if (priceFormated.contains(',') == false) return 'R\$ $priceFormated,00';
+
     if (priceFormated.isNotEmpty) {
       final List<String> strings = priceFormated.split(',');
 

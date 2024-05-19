@@ -20,7 +20,6 @@ class FilterCategoryContainerWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: StyleValues.normal,
         horizontal: StyleValues.normal,
       ),
       child: Container(
@@ -31,37 +30,33 @@ class FilterCategoryContainerWidget extends StatelessWidget {
             StyleValues.smaller,
           ),
         ),
-        child: Column(
-          children: [
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: categories.length,
-              itemBuilder: (context, index) {
-                return Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: StyleValues.small,
-                        ),
-                        child: Text(
-                          categories[index].title,
-                          style: textTheme.bodySmall?.copyWith(),
-                        ),
-                      ),
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            return Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: StyleValues.small,
                     ),
-                    Radio<bool>(
-                      value: categories[index].isSelected,
-                      activeColor: AppColors.primary,
-                      groupValue: category,
-                      onChanged: (value) => onChange(index),
+                    child: Text(
+                      categories[index].title,
+                      style: textTheme.bodySmall?.copyWith(),
                     ),
-                  ],
-                );
-              },
-            ),
-          ],
+                  ),
+                ),
+                Radio<bool>(
+                  value: categories[index].isSelected,
+                  activeColor: AppColors.primary,
+                  groupValue: category,
+                  onChanged: (value) => onChange(index),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
