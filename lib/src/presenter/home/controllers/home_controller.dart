@@ -47,8 +47,6 @@ class HomeController extends ChangeNotifier {
 
     response.fold((l) => hasError = true, (r) => productDataEntity = r);
 
-    print(productDataEntity?.products);
-
     if (productDataEntity != null) {
       products = productDataEntity?.products ?? [];
       notifyListeners();

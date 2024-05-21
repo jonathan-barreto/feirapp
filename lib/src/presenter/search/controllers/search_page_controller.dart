@@ -221,8 +221,6 @@ class SearchPageController extends ChangeNotifier {
   }
 
   Future<void> showFilterOptions({required BuildContext context}) async {
-    print('order quando abre $order');
-
     await SearchFilterPage(
       parentContext: context,
       categories: categories,

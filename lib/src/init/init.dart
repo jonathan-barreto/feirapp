@@ -11,7 +11,6 @@ import 'package:sabor_natural_app/src/domain/usecases/get_more_products_by_link_
 import 'package:sabor_natural_app/src/domain/usecases/get_products_by_ids_usecase.dart';
 import 'package:sabor_natural_app/src/presenter/search/controllers/search_filter_page_controller.dart';
 import 'package:sabor_natural_app/src/presenter/home/controllers/home_controller.dart';
-import 'package:sabor_natural_app/src/presenter/home/controllers/home_controller.dart';
 import 'package:sabor_natural_app/src/presenter/main/controllers/main_controller.dart';
 import 'package:sabor_natural_app/src/presenter/search/controllers/search_page_controller.dart';
 
