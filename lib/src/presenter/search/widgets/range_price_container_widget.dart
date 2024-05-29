@@ -26,7 +26,7 @@ class RangePriceContainerWidget extends StatelessWidget {
           RangeSlider(
             values: rangeValues,
             max: 100,
-            activeColor: AppColors.primary,
+            activeColor: Theme.of(context).primaryColor ,
             onChanged: (RangeValues values) => onChange(values),
             labels: RangeLabels(
               '${rangeValues.start.round()}',

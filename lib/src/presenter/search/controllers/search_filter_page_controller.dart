@@ -17,9 +17,7 @@ class SearchFilterPageController extends ChangeNotifier {
 
     myOrder = order;
 
-    if (start != null && end != null) {
-      currentRangeValues = RangeValues(start, end);
-    }
+    currentRangeValues = RangeValues(start ?? 0, end ?? 100);
   }
 
   CategoryTileEntity radioChange({required int index}) {

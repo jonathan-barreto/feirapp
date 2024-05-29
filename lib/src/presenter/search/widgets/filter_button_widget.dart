@@ -19,15 +19,15 @@ class FilterButtonWidget extends StatelessWidget {
         width: StyleValues.extraLarge * 1.25,
         height: StyleValues.extraLarge * 1.15,
         decoration: BoxDecoration(
-          color: AppColors.primary,
+          color: Theme.of(context).primaryColor ,
           borderRadius: BorderRadius.circular(
             StyleValues.small,
           ),
         ),
-        child: const Center(
+        child:  Center(
           child: FaIcon(
             FontAwesomeIcons.list,
-            color: AppColors.white,
+            color: Theme.of(context).colorScheme.primary ,
           ),
         ),
       ),

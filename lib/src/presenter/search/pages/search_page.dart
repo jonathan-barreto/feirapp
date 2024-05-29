@@ -61,12 +61,17 @@ class _SearchPageState extends State<SearchPage> {
                                   color: AppColors.white,
                                   child: SearchBarWidget(
                                     textController: controller.textController,
-                                    onPressed: () =>
-                                        controller.showFilterOptions(
-                                      context: context,
-                                    ),
+                                    onPressed: () {
+                                      controller.showFilterOptions(
+                                        context: context,
+                                      );
+                                    },
                                     clearPressed: () {},
-                                    onChange: (value) {},
+                                    onChange: (value) {
+                                      controller.searchByProductName(
+                                        productName: value,
+                                      );
+                                    },
                                   ),
                                 ),
                               ],

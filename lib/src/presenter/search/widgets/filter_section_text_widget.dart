@@ -18,7 +18,7 @@ class FilterSectionTextWidget extends StatelessWidget {
         Text(
           label,
           style: textTheme.bodyMedium?.copyWith(
-            color: AppColors.primaryColorText,
+            
             fontWeight: FontWeight.bold,
           ),
         ),

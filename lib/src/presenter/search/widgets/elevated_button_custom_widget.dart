@@ -27,18 +27,18 @@ class ElevatedButtonCustomWidget extends StatelessWidget {
       onPressed: onPressed,
       style: ButtonStyle(
         backgroundColor: MaterialStatePropertyAll(
-          isLight ? AppColors.white : AppColors.primary,
+          isLight ? AppColors.white : Theme.of(context).primaryColor,
         ),
-        side: const MaterialStatePropertyAll(
+        side: MaterialStatePropertyAll(
           BorderSide(
-            color: AppColors.primary,
+            color: Theme.of(context).primaryColor,
           ),
         ),
       ),
       child: Text(
         label,
         style: textTheme.bodyMedium?.copyWith(
-          color: isLight ? AppColors.primary : AppColors.white,
+          color: isLight ? Theme.of(context).primaryColor : AppColors.white,
           fontWeight: FontWeight.bold,
         ),
       ),

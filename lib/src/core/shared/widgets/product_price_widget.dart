@@ -46,7 +46,7 @@ class ProductPriceWidget extends StatelessWidget {
               AutoSizeText(
                 getPriceFormated(value: price),
                 style: textTheme.bodyMedium?.copyWith(
-                  color: AppColors.primary,
+                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -61,7 +61,7 @@ class ProductPriceWidget extends StatelessWidget {
               AutoSizeText(
                 getPriceFormated(value: discountPrice ?? ''),
                 style: textTheme.bodyMedium?.copyWith(
-                  color: AppColors.primary,
+                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),

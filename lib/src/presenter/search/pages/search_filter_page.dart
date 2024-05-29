@@ -23,6 +23,7 @@ class SearchFilterPage extends StatefulWidget {
   final FilterOrderEnum? order;
   final void Function(FilterOrderEnum) orderOnChange;
   final VoidCallback searchOnPressed;
+  final VoidCallback clearFilters;
 
   const SearchFilterPage({
     super.key,
@@ -35,6 +36,7 @@ class SearchFilterPage extends StatefulWidget {
     required this.orderOnChange,
     required this.searchOnPressed,
     this.order,
+    required this.clearFilters,
   });
 
   Future<void> _showModal() async {
@@ -80,9 +82,9 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
       builder: (context, child) {
         return Container(
           height: screenHeight * 0.9,
-          decoration: const BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(
                 StyleValues.normal,
               ),
@@ -141,7 +143,6 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
                             },
                           ),
                         ),
-                        // const OrderWidget(),
                       ],
                     ),
                   ),
@@ -153,21 +154,30 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: ElevatedButtonCustomWidget.light(
-                          label: 'Limpar',
-                          onPressed: () {},
+                        child: SizedBox(
+                          height: screenHeight * 0.06,
+                          child: ElevatedButtonCustomWidget.light(
+                            label: 'Limpar',
+                            onPressed: () {
+                              widget.clearFilters();
+                              Navigator.pop(context);
+                            },
+                          ),
                         ),
                       ),
                       const SizedBox(
                         width: StyleValues.small,
                       ),
                       Expanded(
-                        child: ElevatedButtonCustomWidget(
-                          label: 'Aplicar',
-                          onPressed: () {
-                            widget.searchOnPressed();
-                            Navigator.pop(context);
-                          },
+                        child: SizedBox(
+                          height: screenHeight * 0.06,
+                          child: ElevatedButtonCustomWidget(
+                            label: 'Aplicar',
+                            onPressed: () {
+                              widget.searchOnPressed();
+                              Navigator.pop(context);
+                            },
+                          ),
                         ),
                       ),
                     ],

@@ -1,28 +1,19 @@
 import 'package:sabor_natural_app/src/data/model/product_data_model.dart';
 import 'package:sabor_natural_app/src/data/model/product_filter_param_model.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_filter_param_entity.dart';
+import 'package:sabor_natural_app/src/domain/params/product_filter_param_entity.dart';
 
-abstract class ProductDatasource {
+abstract class ProductRemoteDatasource {
   Future<ProductDataModel> getAllProducts({
     required ProductFilterParamModel filter,
   });
 
-  Future<ProductDataModel> getProductsByName({required String productName});
-
-  Future<ProductDataModel> getProductsByCategory({
-    required String productCategory,
-  });
-
-  Future<ProductDataModel> getProductsByOrder({
-    required String order,
-    required String direction,
-  });
+  Future<ProductDataModel> getProductById({required String id});
 
   Future<ProductDataModel> getProductsByIds({required List<int> productIds});
 
   Future<ProductDataModel> getDiscountedProducts();
 
-  Future<ProductDataModel> getMoreProductsByLinkUsecase({
+  Future<ProductDataModel> getMoreProductsByLink({
     required String link,
     required ProductFilterParamEntity? params,
   });

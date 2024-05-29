@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      theme: themeDataCustom,
+      theme: AppTheme.getTheme,
       routes: {
         '/': (context) => const MainPage(),
       },

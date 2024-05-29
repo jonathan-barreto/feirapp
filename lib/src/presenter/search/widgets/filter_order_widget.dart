@@ -40,7 +40,7 @@ class FilterOrderWidget extends StatelessWidget {
               Radio<FilterOrderEnum>(
                 value: FilterOrderEnum.asc,
                 groupValue: character,
-                activeColor: AppColors.primary,
+                activeColor: Theme.of(context).primaryColor ,
                 onChanged: (value) {
                   if (value != null) orderOnChange(value);
                 },
@@ -63,7 +63,7 @@ class FilterOrderWidget extends StatelessWidget {
               Radio<FilterOrderEnum>(
                 value: FilterOrderEnum.desc,
                 groupValue: character,
-                activeColor: AppColors.primary,
+                activeColor: Theme.of(context).primaryColor ,
                 onChanged: (value) {
                   if (value != null) orderOnChange(value);
                 },

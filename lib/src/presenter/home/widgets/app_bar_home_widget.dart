@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_colors.dart';
 import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
 
 class AppBarHomeWidget extends StatelessWidget {
@@ -7,13 +6,14 @@ class AppBarHomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
     final double screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
       width: double.infinity,
       height: screenHeight * 0.1,
-      color: AppColors.white,
+      color: themeData.appBarTheme.backgroundColor,
       padding: const EdgeInsets.symmetric(
         horizontal: StyleValues.small,
       ),
@@ -27,15 +27,14 @@ class AppBarHomeWidget extends StatelessWidget {
             Text(
               'Olá, Jonathan!',
               style: textTheme.bodyLarge?.copyWith(
-                color: AppColors.primaryColorText,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Container(
               width: 50,
               height: 50,
-              decoration: const BoxDecoration(
-                color: AppColors.primary,
+              decoration: BoxDecoration(
+                color: themeData.primaryColor,
                 shape: BoxShape.circle,
               ),
             ),

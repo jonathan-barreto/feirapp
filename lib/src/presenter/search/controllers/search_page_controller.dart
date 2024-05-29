@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sabor_natural_app/src/core/shared/enums/filter_order_enum.dart';
 import 'package:sabor_natural_app/src/core/shared/enums/product_category_enum.dart';
+import 'package:sabor_natural_app/src/core/shared/services/debounce_service.dart';
+import 'package:sabor_natural_app/src/core/shared/services/debounce_service_impl.dart';
 import 'package:sabor_natural_app/src/domain/entities/category_tile_entity.dart';
-import 'package:sabor_natural_app/src/domain/entities/get_product_param_entity.dart';
+import 'package:sabor_natural_app/src/domain/params/get_product_param_entity.dart';
 import 'package:sabor_natural_app/src/domain/entities/page_link_entity.dart';
 import 'package:sabor_natural_app/src/domain/entities/product_data_entity.dart';
 import 'package:sabor_natural_app/src/domain/entities/product_entity.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_filter_param_entity.dart';
+import 'package:sabor_natural_app/src/domain/params/product_filter_param_entity.dart';
 import 'package:sabor_natural_app/src/domain/usecases/get_all_products_usecase.dart';
 import 'package:sabor_natural_app/src/domain/usecases/get_more_products_by_link_usecase.dart';
 import 'package:sabor_natural_app/src/presenter/search/pages/search_filter_page.dart';
@@ -19,6 +21,8 @@ class SearchPageController extends ChangeNotifier {
     required this.getAllProductsUsecase,
     required this.getMoreProductsByLinkUsecase,
   });
+
+  final DebounceService debounce = DebounceServiceImpl();
 
   late ScrollController scrollController;
   late TextEditingController textController;
@@ -176,6 +180,11 @@ class SearchPageController extends ChangeNotifier {
     _hideProductLoading();
   }
 
+  void searchByProductName({required String productName}) {
+    productFilterParamEntity.name = productName;
+    debounce(getProductByFilter);
+  }
+
   void _setCategoryInFilter({required ProductCategoryEnum? value}) {
     final Map<ProductCategoryEnum, String> filterMap = {
       ProductCategoryEnum.todos: '',
@@ -195,19 +204,8 @@ class SearchPageController extends ChangeNotifier {
     productFilterParamEntity.maxPrice = values.end;
   }
 
-  bool _checkIfExistsFilterSelected() {
-    final objectProps = productFilterParamEntity.props;
-
-    for (int index = 0; index < objectProps.length; index++) {
-      if (objectProps[index] != null) return true;
-    }
-
-    return false;
-  }
-
   void _checkSearchOnPressed() {
-    final bool existsFilterSelected = _checkIfExistsFilterSelected();
-    if (existsFilterSelected) getProductByFilter();
+    getProductByFilter();
   }
 
   void _setOrder({required FilterOrderEnum value}) {
@@ -218,6 +216,22 @@ class SearchPageController extends ChangeNotifier {
 
     order = value;
     productFilterParamEntity.order = mapping[value];
+  }
+
+  void _clearFilters() {
+    for (int index = 0; index < categories.length; index++) {
+      if (index == 0) {
+        categories[index].isSelected = true;
+      } else {
+        categories[index].isSelected = false;
+      }
+    }
+
+    order = null;
+
+    productFilterParamEntity.clear();
+
+    getAllProducts();
   }
 
   Future<void> showFilterOptions({required BuildContext context}) async {
@@ -231,6 +245,7 @@ class SearchPageController extends ChangeNotifier {
       orderOnChange: (value) => _setOrder(value: value),
       rangeSliderChange: (values) => _setRangePriceInFilter(values: values),
       order: order,
+      clearFilters: _clearFilters,
     ).show();
   }
 }

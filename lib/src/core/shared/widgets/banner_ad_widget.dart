@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_colors.dart';
+import 'package:sabor_natural_app/src/core/shared/constants/app_assets.dart';
 import 'package:sabor_natural_app/src/presenter/home/widgets/item_for_carousel_slider_widget.dart';
 
 class BannerAdWidget extends StatefulWidget {
@@ -18,17 +18,17 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
     return Container(
       width: double.infinity,
       height: screenHeight * 0.25,
-      color: AppColors.white,
+      color: Theme.of(context).colorScheme.primary,
       child: CarouselSlider(
         items: const [
           ItemForCarouselSlider(
-            color: Colors.redAccent,
+            image: AppAssets.bannerAd1,
           ),
           ItemForCarouselSlider(
-            color: Colors.greenAccent,
+            image: AppAssets.bannerAd2,
           ),
           ItemForCarouselSlider(
-            color: Colors.blueAccent,
+            image: AppAssets.bannerAd3,
           ),
         ],
         options: CarouselOptions(

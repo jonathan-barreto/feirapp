@@ -10,7 +10,7 @@ class BottomLoadingMoreProductsWidget extends StatelessWidget {
     return Positioned(
       left: (MediaQuery.of(context).size.width / 2) - StyleValues.medium,
       bottom: StyleValues.smaller,
-      child: const CircleAvatar(
+      child:  CircleAvatar(
         backgroundColor: Colors.white,
         child: SizedBox(
           width: StyleValues.medium,
@@ -19,7 +19,7 @@ class BottomLoadingMoreProductsWidget extends StatelessWidget {
             width: StyleValues.smaller,
             height: StyleValues.smaller,
             child: CircularProgressIndicator(
-              color: AppColors.primary,
+              color: Theme.of(context).primaryColor ,
             ),
           ),
         ),

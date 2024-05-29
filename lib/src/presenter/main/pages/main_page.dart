@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:sabor_natural_app/src/init/init.dart';
 import 'package:sabor_natural_app/src/presenter/main/controllers/main_controller.dart';
+import 'package:sabor_natural_app/src/presenter/main/widgets/standard_icon_image_widget.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -24,33 +23,16 @@ class _MainPageState extends State<MainPage> {
             child: controller.widgets[controller.indexSelected],
           ),
           bottomNavigationBar: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.house,
+            items: controller.iconsAssets.asMap().entries.map((e) {
+              return BottomNavigationBarItem(
+                label: '',
+                icon: StandardIconImageWidget(
+                  imagePath: e.value,
+                  iconIndex: e.key,
+                  indexSelected: controller.indexSelected,
                 ),
-                label: 'Início',
-              ),
-              BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.magnifyingGlass,
-                ),
-                label: 'Search',
-              ),
-              BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.bagShopping,
-                ),
-                label: 'Carrinho',
-              ),
-              BottomNavigationBarItem(
-                icon: FaIcon(
-                  LineAwesomeIcons.user,
-                  size: 35,
-                ),
-                label: 'Minha Conta',
-              ),
-            ],
+              );
+            }).toList(),
             currentIndex: controller.indexSelected,
             onTap: (value) => controller.selectedIndex(value),
           ),

@@ -3,15 +3,15 @@ import 'dart:convert';
 import 'package:sabor_natural_app/src/core/errors/exceptions.dart';
 import 'package:sabor_natural_app/src/core/http_client/http_client.dart';
 import 'package:sabor_natural_app/src/core/shared/constants/endpoints.dart';
-import 'package:sabor_natural_app/src/data/datasources/product_datasource.dart';
+import 'package:sabor_natural_app/src/data/datasources/remote/product_remote_datasource.dart';
 import 'package:sabor_natural_app/src/data/model/product_data_model.dart';
 import 'package:sabor_natural_app/src/data/model/product_filter_param_model.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_filter_param_entity.dart';
+import 'package:sabor_natural_app/src/domain/params/product_filter_param_entity.dart';
 
-class ProductDatasourceImpl implements ProductDatasource {
+class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
   final HttpClient httpClient;
 
-  ProductDatasourceImpl({
+  ProductRemoteDatasourceImpl({
     required this.httpClient,
   });
 
@@ -38,28 +38,10 @@ class ProductDatasourceImpl implements ProductDatasource {
   }
 
   @override
-  Future<ProductDataModel> getProductsByName({
-    required String productName,
-  }) async {
+  Future<ProductDataModel> getProductById({required String id}) async {
     final response = await httpClient.get(
-      endpoint: EndPoints.getProductsByName,
-    );
-
-    if (response.statusCode == 200) {
-      return ProductDataModel.fromJson(
-        response.data,
-      );
-    } else {
-      throw ServerException();
-    }
-  }
-
-  @override
-  Future<ProductDataModel> getProductsByCategory({
-    required String productCategory,
-  }) async {
-    final response = await httpClient.get(
-      endpoint: EndPoints.getProductsByCategory,
+      endpoint: '${EndPoints.getProductById}/$id',
+ 
     );
 
     if (response.statusCode == 200) {
@@ -90,24 +72,6 @@ class ProductDatasourceImpl implements ProductDatasource {
   }
 
   @override
-  Future<ProductDataModel> getProductsByOrder({
-    required String order,
-    required String direction,
-  }) async {
-    final response = await httpClient.get(
-      endpoint: '${EndPoints.getProductsByOrder}/$order/sorted-by/$direction',
-    );
-
-    if (response.statusCode == 200) {
-      return ProductDataModel.fromJson(
-        response.data,
-      );
-    } else {
-      throw ServerException();
-    }
-  }
-
-  @override
   Future<ProductDataModel> getDiscountedProducts() async {
     final HttpResponse response = await httpClient.get(
       endpoint: EndPoints.getDiscountedProducts,
@@ -123,7 +87,7 @@ class ProductDatasourceImpl implements ProductDatasource {
   }
 
   @override
-  Future<ProductDataModel> getMoreProductsByLinkUsecase({
+  Future<ProductDataModel> getMoreProductsByLink({
     required String link,
     required ProductFilterParamEntity? params,
   }) async {

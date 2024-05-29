@@ -24,7 +24,7 @@ class ProductUnitAndWeightWidget extends StatelessWidget {
             productUnit,
             style: textTheme.bodySmall?.copyWith(
               fontSize: StyleValues.smaller,
-              color: AppColors.primaryColorText,
+              
             ),
           ),
         ),
@@ -35,7 +35,7 @@ class ProductUnitAndWeightWidget extends StatelessWidget {
             maxLines: 1,
             style: textTheme.bodySmall?.copyWith(
               fontSize: StyleValues.smaller,
-              color: AppColors.primaryColorText,
+              
             ),
           ),
         ),

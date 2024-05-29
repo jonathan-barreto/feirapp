@@ -22,25 +22,22 @@ class TextFieldSearchBarWidget extends StatefulWidget {
 class _TextFieldSearchBarWidgetState extends State<TextFieldSearchBarWidget> {
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ThemeData themeData = Theme.of(context);
 
     return Expanded(
       child: TextField(
         controller: widget.controller,
-        style: textTheme.bodySmall?.copyWith(
-          color: AppColors.primaryColorText,
-        ),
-        cursorColor: AppColors.primaryColorText,
+        style: themeData.textTheme.bodySmall?.copyWith(),
+        cursorColor: themeData.colorScheme.tertiary,
         decoration: InputDecoration(
           filled: true,
-          fillColor: AppColors.white,
+          fillColor: Theme.of(context).colorScheme.primary ,
           border: const OutlineInputBorder(),
           labelText: 'Pesquisar',
           prefixIcon: IconButton(
             onPressed: () {},
             icon: const Icon(
               FontAwesomeIcons.magnifyingGlass,
-              color: AppColors.primaryColorText,
             ),
           ),
           suffixIcon: Visibility(
@@ -55,22 +52,15 @@ class _TextFieldSearchBarWidgetState extends State<TextFieldSearchBarWidget> {
               },
               icon: const Icon(
                 Icons.clear,
-                color: AppColors.primaryColorText,
               ),
             ),
           ),
-          labelStyle: textTheme.bodySmall?.copyWith(
-            color: AppColors.primaryColorText,
-          ),
+          labelStyle: themeData.textTheme.bodySmall,
           enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.primaryColorText,
-            ),
+            borderSide: BorderSide(),
           ),
           focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.primaryColorText,
-            ),
+            borderSide: BorderSide(),
           ),
         ),
         onChanged: (value) {

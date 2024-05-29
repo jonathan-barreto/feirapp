@@ -23,7 +23,7 @@ class PriceContainerWidget extends StatelessWidget {
         height: StyleValues.extraLarge,
         decoration: BoxDecoration(
           border: Border.all(
-            color: AppColors.primaryColorText,
+            
           ),
           borderRadius: BorderRadius.circular(
             StyleValues.small,
@@ -38,7 +38,7 @@ class PriceContainerWidget extends StatelessWidget {
               child: Text(
                 'R\$',
                 style: textTheme.bodyMedium?.copyWith(
-                  color: AppColors.primaryColorText,
+                  
                 ),
               ),
             ),

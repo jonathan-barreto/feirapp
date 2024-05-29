@@ -14,6 +14,8 @@ class FilterExpansionTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+      collapsedIconColor: Theme.of(context).colorScheme.secondary,
+      iconColor: Theme.of(context).colorScheme.secondary,
       shape: const Border(),
       title: FilterSectionTextWidget(
         label: label,

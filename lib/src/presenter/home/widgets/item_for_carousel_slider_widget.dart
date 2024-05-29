@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
 
 class ItemForCarouselSlider extends StatelessWidget {
-  final Color color;
+  final String image;
 
   const ItemForCarouselSlider({
     super.key,
-    required this.color,
+    required this.image,
   });
 
   @override
@@ -15,11 +15,15 @@ class ItemForCarouselSlider extends StatelessWidget {
       padding: const EdgeInsets.all(
         StyleValues.small,
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: color,
+      child: SizedBox(
+        width: double.infinity,
+        child: ClipRRect(
           borderRadius: BorderRadius.circular(
             StyleValues.normal,
+          ),
+          child: Image.asset(
+            image,
+            fit: BoxFit.cover,
           ),
         ),
       ),

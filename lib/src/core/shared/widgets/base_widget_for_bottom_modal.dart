@@ -27,7 +27,7 @@ class BaseWidgetForBottomModal extends StatelessWidget {
                 height: StyleValues.small,
                 width: StyleValues.largeMedium * 2,
                 decoration: BoxDecoration(
-                  color: AppColors.secondColorText,
+                  
                   borderRadius: BorderRadius.circular(
                     StyleValues.small,
                   ),

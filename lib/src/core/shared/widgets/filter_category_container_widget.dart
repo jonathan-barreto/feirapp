@@ -25,7 +25,7 @@ class FilterCategoryContainerWidget extends StatelessWidget {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(
             StyleValues.smaller,
           ),
@@ -50,7 +50,7 @@ class FilterCategoryContainerWidget extends StatelessWidget {
                 ),
                 Radio<bool>(
                   value: categories[index].isSelected,
-                  activeColor: AppColors.primary,
+                  activeColor: Theme.of(context).primaryColor,
                   groupValue: category,
                   onChanged: (value) => onChange(index),
                 ),

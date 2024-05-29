@@ -6,3 +6,8 @@ class ServerFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
+
+class SharedPreferencesFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}

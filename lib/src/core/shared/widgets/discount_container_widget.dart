@@ -32,7 +32,7 @@ class DiscountContainerWidget extends StatelessWidget {
               '$discount% off',
               style: textTheme.bodySmall?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: AppColors.redAccent,
+                color: Colors.redAccent,
               ),
             ),
           ),
