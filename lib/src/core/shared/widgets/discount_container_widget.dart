@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_colors.dart';
 
 class DiscountContainerWidget extends StatelessWidget {
   final int discount;

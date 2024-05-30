@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_colors.dart';
 
 class FilterSectionTextWidget extends StatelessWidget {
   final String label;

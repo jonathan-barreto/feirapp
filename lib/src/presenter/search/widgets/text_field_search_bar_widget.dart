@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_colors.dart';
 
 class TextFieldSearchBarWidget extends StatefulWidget {
   final TextEditingController controller;

@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_colors.dart';
 import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
 
 class BaseWidgetForBottomModal extends StatelessWidget {

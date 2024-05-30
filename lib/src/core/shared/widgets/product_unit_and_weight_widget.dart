@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_colors.dart';
+
 import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
 
 class ProductUnitAndWeightWidget extends StatelessWidget {
@@ -24,7 +24,6 @@ class ProductUnitAndWeightWidget extends StatelessWidget {
             productUnit,
             style: textTheme.bodySmall?.copyWith(
               fontSize: StyleValues.smaller,
-              
             ),
           ),
         ),
@@ -35,7 +34,6 @@ class ProductUnitAndWeightWidget extends StatelessWidget {
             maxLines: 1,
             style: textTheme.bodySmall?.copyWith(
               fontSize: StyleValues.smaller,
-              
             ),
           ),
         ),

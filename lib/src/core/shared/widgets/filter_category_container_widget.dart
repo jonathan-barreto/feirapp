@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_colors.dart';
+
 import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
 import 'package:sabor_natural_app/src/domain/entities/category_tile_entity.dart';
 
