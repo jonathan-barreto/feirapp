@@ -18,7 +18,7 @@ class BottomLoadingMoreProductsWidget extends StatelessWidget {
             width: StyleValues.smaller,
             height: StyleValues.smaller,
             child: CircularProgressIndicator(
-              color: Theme.of(context).primaryColor ,
+              color: Theme.of(context).primaryColor,
             ),
           ),
         ),
