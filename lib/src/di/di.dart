@@ -1,3 +1,7 @@
+import 'package:feirapp/src/data/datasources/local/authentication_local_datasource.dart';
+import 'package:feirapp/src/data/datasources/local/authentication_local_datasource_impl.dart';
+import 'package:feirapp/src/domain/usecases/save_user_credentials_usecase.dart';
+import 'package:feirapp/src/presenter/splash/controller/splash_controller.dart';
 import 'package:get_it/get_it.dart';
 import 'package:feirapp/src/core/http_client/http_client.dart';
 import 'package:feirapp/src/core/http_client/http_client_impl.dart';
@@ -145,6 +149,12 @@ Future<void> init() async {
     () => InitController(),
   );
 
+  getIt.registerFactory<AuthenticationLocalDatasource>(
+    () => AuthenticationLocalDatasourceImpl(
+      storage: getIt<LocalStorage>(),
+    ),
+  );
+
   getIt.registerFactory<AuthenticationRemoteDatasource>(
     () => AuthenticationRemoteDatasourceImpl(
       httpClient: getIt<HttpClient>(),
@@ -154,6 +164,7 @@ Future<void> init() async {
   getIt.registerFactory<AuthenticationRepository>(
     () => AuthenticationRepositoryImpl(
       remoteDatasource: getIt<AuthenticationRemoteDatasource>(),
+      localDatasource: getIt<AuthenticationLocalDatasource>(),
     ),
   );
 
@@ -163,9 +174,20 @@ Future<void> init() async {
     ),
   );
 
+  getIt.registerFactory<SaveUserCredentialsUsecase>(
+    () => SaveUserCredentialsUsecase(
+      repository: getIt<AuthenticationRepository>(),
+    ),
+  );
+
   getIt.registerFactory<LoginController>(
     () => LoginController(
       loginUsecase: getIt<LoginUsecase>(),
+      saveUserCredentialsUsecase: getIt<SaveUserCredentialsUsecase>(),
     ),
+  );
+
+  getIt.registerFactory<SplashController>(
+    () => SplashController(),
   );
 }

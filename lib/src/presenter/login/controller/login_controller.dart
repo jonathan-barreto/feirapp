@@ -1,3 +1,4 @@
+import 'package:feirapp/src/domain/usecases/save_user_credentials_usecase.dart';
 import 'package:flutter/foundation.dart';
 import 'package:feirapp/src/domain/entities/login_data_entity.dart';
 import 'package:feirapp/src/domain/params/login_param.dart';
@@ -5,9 +6,11 @@ import 'package:feirapp/src/domain/usecases/login_usecase.dart';
 
 class LoginController extends ChangeNotifier {
   final LoginUsecase loginUsecase;
+  final SaveUserCredentialsUsecase saveUserCredentialsUsecase;
 
   LoginController({
     required this.loginUsecase,
+    required this.saveUserCredentialsUsecase,
   });
 
   String? email = kDebugMode ? 'jonathan777barreto@gmail.com' : null;
@@ -26,7 +29,7 @@ class LoginController extends ChangeNotifier {
   Future<void> login() async {
     _setLoading();
 
-    if (email != null && password != null) {
+    if (kDebugMode || email != null && password != null) {
       final LoginParam loginParam = LoginParam(
         email: email!,
         password: password!,
@@ -37,5 +40,15 @@ class LoginController extends ChangeNotifier {
     }
 
     _setLoading();
+
+    saveUserCredentials();
+  }
+
+  Future<void> saveUserCredentials() async {
+    if (loginDataEntity?.data != null) {
+      final result = await saveUserCredentialsUsecase.call(
+        loginDataEntity!.data,
+      );
+    }
   }
 }
