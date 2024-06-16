@@ -1,6 +1,6 @@
+import 'package:feirapp/src/di/di.dart' as di;
+import 'package:feirapp/src/presenter/app.dart';
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/init/init.dart' as di;
-import 'package:sabor_natural_app/src/presenter/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

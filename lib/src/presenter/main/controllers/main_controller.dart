@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_assets.dart';
-import 'package:sabor_natural_app/src/presenter/home/pages/home_page.dart';
-import 'package:sabor_natural_app/src/presenter/search/pages/search_page.dart';
+import 'package:feirapp/src/core/shared/constants/app_assets.dart';
+import 'package:feirapp/src/presenter/home/pages/home_page.dart';
+import 'package:feirapp/src/presenter/search/pages/search_page.dart';
 
 class MainController extends ChangeNotifier {
   int indexSelected = 0;

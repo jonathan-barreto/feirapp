@@ -1,4 +1,4 @@
-import 'package:sabor_natural_app/src/core/shared/enums/product_category_enum.dart';
+import 'package:feirapp/src/core/shared/enums/product_category_enum.dart';
 
 class CategoryTileEntity {
   final String title;

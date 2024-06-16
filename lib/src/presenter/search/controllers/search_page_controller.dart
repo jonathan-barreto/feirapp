@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/enums/filter_order_enum.dart';
-import 'package:sabor_natural_app/src/core/shared/enums/product_category_enum.dart';
-import 'package:sabor_natural_app/src/core/shared/services/debounce_service.dart';
-import 'package:sabor_natural_app/src/core/shared/services/debounce_service_impl.dart';
-import 'package:sabor_natural_app/src/domain/entities/category_tile_entity.dart';
-import 'package:sabor_natural_app/src/domain/params/get_product_param_entity.dart';
-import 'package:sabor_natural_app/src/domain/entities/page_link_entity.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_data_entity.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_entity.dart';
-import 'package:sabor_natural_app/src/domain/params/product_filter_param_entity.dart';
-import 'package:sabor_natural_app/src/domain/usecases/get_all_products_usecase.dart';
-import 'package:sabor_natural_app/src/domain/usecases/get_more_products_by_link_usecase.dart';
-import 'package:sabor_natural_app/src/presenter/search/pages/search_filter_page.dart';
+import 'package:feirapp/src/core/shared/enums/filter_order_enum.dart';
+import 'package:feirapp/src/core/shared/enums/product_category_enum.dart';
+import 'package:feirapp/src/core/shared/services/debounce_service.dart';
+import 'package:feirapp/src/core/shared/services/debounce_service_impl.dart';
+import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
+import 'package:feirapp/src/domain/params/get_product_param_entity.dart';
+import 'package:feirapp/src/domain/entities/page_link_entity.dart';
+import 'package:feirapp/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/domain/entities/product_entity.dart';
+import 'package:feirapp/src/domain/params/product_filter_param_entity.dart';
+import 'package:feirapp/src/domain/usecases/get_all_products_usecase.dart';
+import 'package:feirapp/src/domain/usecases/get_more_products_by_link_usecase.dart';
+import 'package:feirapp/src/presenter/search/pages/search_filter_page.dart';
 
 class SearchPageController extends ChangeNotifier {
   final GetAllProductsUsecase getAllProductsUsecase;

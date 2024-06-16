@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:sabor_natural_app/src/core/errors/exceptions.dart';
-import 'package:sabor_natural_app/src/core/errors/failure.dart';
-import 'package:sabor_natural_app/src/data/datasources/local/product_local_datasource.dart';
-import 'package:sabor_natural_app/src/data/datasources/remote/product_remote_datasource.dart';
-import 'package:sabor_natural_app/src/data/model/product_data_model.dart';
-import 'package:sabor_natural_app/src/data/model/product_filter_param_model.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_data_entity.dart';
-import 'package:sabor_natural_app/src/domain/params/product_filter_param_entity.dart';
-import 'package:sabor_natural_app/src/domain/repositories/product_repository.dart';
+import 'package:feirapp/src/core/errors/exceptions.dart';
+import 'package:feirapp/src/core/errors/failure.dart';
+import 'package:feirapp/src/data/datasources/local/product_local_datasource.dart';
+import 'package:feirapp/src/data/datasources/remote/product_remote_datasource.dart';
+import 'package:feirapp/src/data/model/product_data_model.dart';
+import 'package:feirapp/src/data/model/product_filter_param_model.dart';
+import 'package:feirapp/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/domain/params/product_filter_param_entity.dart';
+import 'package:feirapp/src/domain/repositories/product_repository.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
   final ProductRemoteDatasource remoteDatasource;

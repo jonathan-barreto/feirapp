@@ -1,4 +1,4 @@
-import 'package:sabor_natural_app/src/core/local_storage/local_storage.dart';
+import 'package:feirapp/src/core/local_storage/local_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesLocalStorage implements LocalStorage {

@@ -1,6 +1,6 @@
-import 'package:sabor_natural_app/src/data/model/page_link_model.dart';
-import 'package:sabor_natural_app/src/data/model/product_model.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/data/model/page_link_model.dart';
+import 'package:feirapp/src/data/model/product_model.dart';
+import 'package:feirapp/src/domain/entities/product_data_entity.dart';
 
 class ProductDataModel extends ProductDataEntity {
   final List<ProductModel> productsModel;

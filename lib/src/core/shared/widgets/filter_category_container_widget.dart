@@ -1,7 +1,6 @@
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
 import 'package:flutter/material.dart';
-
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
-import 'package:sabor_natural_app/src/domain/entities/category_tile_entity.dart';
 
 class FilterCategoryContainerWidget extends StatelessWidget {
   final List<CategoryTileEntity> categories;

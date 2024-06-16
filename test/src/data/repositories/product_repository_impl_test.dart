@@ -1,13 +1,13 @@
 // import 'package:dartz/dartz.dart';
 // import 'package:flutter_test/flutter_test.dart';
 // import 'package:mocktail/mocktail.dart';
-// import 'package:sabor_natural_app/src/core/errors/exceptions.dart';
-// import 'package:sabor_natural_app/src/core/errors/failure.dart';
-// import 'package:sabor_natural_app/src/data/datasources/product_datasource.dart';
-// import 'package:sabor_natural_app/src/data/model/page_link_model.dart';
-// import 'package:sabor_natural_app/src/data/model/product_data_model.dart';
-// import 'package:sabor_natural_app/src/data/model/product_model.dart';
-// import 'package:sabor_natural_app/src/data/repositories/product_repository_impl.dart';
+// import 'package:feirapp/src/core/errors/exceptions.dart';
+// import 'package:feirapp/src/core/errors/failure.dart';
+// import 'package:feirapp/src/data/datasources/product_datasource.dart';
+// import 'package:feirapp/src/data/model/page_link_model.dart';
+// import 'package:feirapp/src/data/model/product_data_model.dart';
+// import 'package:feirapp/src/data/model/product_model.dart';
+// import 'package:feirapp/src/data/repositories/product_repository_impl.dart';
 
 // class MockProductDatasource extends Mock implements ProductDatasource {}
 

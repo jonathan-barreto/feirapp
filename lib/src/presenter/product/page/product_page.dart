@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_assets.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/circular_progress_indicator_custom.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/searche_empty_widget.dart';
-import 'package:sabor_natural_app/src/init/init.dart';
-import 'package:sabor_natural_app/src/presenter/product/controller/product_controller.dart';
-import 'package:sabor_natural_app/src/presenter/product/widgets/content_product_page_widget.dart';
-import 'package:sabor_natural_app/src/presenter/product/widgets/icon_image_widget.dart';
+import 'package:feirapp/src/core/shared/constants/app_assets.dart';
+import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
+import 'package:feirapp/src/core/shared/widgets/searche_empty_widget.dart';
+import 'package:feirapp/src/di/di.dart';
+import 'package:feirapp/src/presenter/product/controller/product_controller.dart';
+import 'package:feirapp/src/presenter/product/widgets/content_product_page_widget.dart';
+import 'package:feirapp/src/presenter/product/widgets/icon_image_widget.dart';
 
 class ProductPage extends StatefulWidget {
   final String id;

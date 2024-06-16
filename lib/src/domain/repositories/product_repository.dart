@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:sabor_natural_app/src/core/errors/failure.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_data_entity.dart';
-import 'package:sabor_natural_app/src/domain/params/product_filter_param_entity.dart';
+import 'package:feirapp/src/core/errors/failure.dart';
+import 'package:feirapp/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/domain/params/product_filter_param_entity.dart';
 
 abstract class ProductRepository {
   Future<Either<Failure, ProductDataEntity>> getAllProducts({
@@ -30,5 +30,5 @@ abstract class ProductRepository {
     required List<String> products,
   });
 
-   Either<Failure, void> removeKey({required String key});
+  Either<Failure, void> removeKey({required String key});
 }

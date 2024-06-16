@@ -1,5 +1,5 @@
-import 'package:sabor_natural_app/src/core/local_storage/local_storage.dart';
-import 'package:sabor_natural_app/src/data/datasources/local/product_local_datasource.dart';
+import 'package:feirapp/src/core/local_storage/local_storage.dart';
+import 'package:feirapp/src/data/datasources/local/product_local_datasource.dart';
 
 class ProductLocalDatasourceImpl implements ProductLocalDatasource {
   final LocalStorage storage;

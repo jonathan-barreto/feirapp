@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/presenter/search/widgets/filter_section_text_widget.dart';
+import 'package:feirapp/src/presenter/search/widgets/filter_section_text_widget.dart';
 
 class FilterExpansionTileWidget extends StatelessWidget {
   final String label;

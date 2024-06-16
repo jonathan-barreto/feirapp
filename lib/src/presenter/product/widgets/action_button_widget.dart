@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
 
 class ActionButtonWidget extends StatelessWidget {
   final bool isAdd;

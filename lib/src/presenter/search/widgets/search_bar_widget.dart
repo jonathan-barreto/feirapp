@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
-import 'package:sabor_natural_app/src/presenter/search/widgets/filter_button_widget.dart';
-import 'package:sabor_natural_app/src/presenter/search/widgets/text_field_search_bar_widget.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/presenter/search/widgets/filter_button_widget.dart';
+import 'package:feirapp/src/presenter/search/widgets/text_field_search_bar_widget.dart';
 
 class SearchBarWidget extends StatelessWidget {
   final TextEditingController textController;

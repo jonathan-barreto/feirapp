@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
-import 'package:sabor_natural_app/src/core/shared/enums/filter_order_enum.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/enums/filter_order_enum.dart';
 
 class FilterOrderWidget extends StatelessWidget {
   final FilterOrderEnum? order;
@@ -39,7 +39,7 @@ class FilterOrderWidget extends StatelessWidget {
               Radio<FilterOrderEnum>(
                 value: FilterOrderEnum.asc,
                 groupValue: character,
-                activeColor: Theme.of(context).primaryColor ,
+                activeColor: Theme.of(context).primaryColor,
                 onChanged: (value) {
                   if (value != null) orderOnChange(value);
                 },
@@ -62,7 +62,7 @@ class FilterOrderWidget extends StatelessWidget {
               Radio<FilterOrderEnum>(
                 value: FilterOrderEnum.desc,
                 groupValue: character,
-                activeColor: Theme.of(context).primaryColor ,
+                activeColor: Theme.of(context).primaryColor,
                 onChanged: (value) {
                   if (value != null) orderOnChange(value);
                 },

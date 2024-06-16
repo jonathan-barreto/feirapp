@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:sabor_natural_app/src/core/errors/failure.dart';
-import 'package:sabor_natural_app/src/core/usecase/usecase.dart';
-import 'package:sabor_natural_app/src/domain/params/set_product_to_favorite_param.dart';
-import 'package:sabor_natural_app/src/domain/repositories/product_repository.dart';
+import 'package:feirapp/src/core/errors/failure.dart';
+import 'package:feirapp/src/core/usecase/usecase.dart';
+import 'package:feirapp/src/domain/params/set_product_to_favorite_param.dart';
+import 'package:feirapp/src/domain/repositories/product_repository.dart';
 
 class SetProductToFavoriteUsecase
     implements Usecase<bool?, SetProductToFavoriteParam> {

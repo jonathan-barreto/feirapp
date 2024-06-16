@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
 
 class FilterButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
@@ -18,15 +18,15 @@ class FilterButtonWidget extends StatelessWidget {
         width: StyleValues.extraLarge * 1.25,
         height: StyleValues.extraLarge * 1.15,
         decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor ,
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(
             StyleValues.small,
           ),
         ),
-        child:  Center(
+        child: Center(
           child: FaIcon(
             FontAwesomeIcons.list,
-            color: Theme.of(context).colorScheme.primary ,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
       ),

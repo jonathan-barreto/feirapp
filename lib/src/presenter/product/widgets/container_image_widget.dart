@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/endpoints.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/circular_progress_indicator_custom.dart';
+import 'package:feirapp/src/core/shared/constants/endpoints.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 
 class ContainerImageWidget extends StatelessWidget {
   final String imageUrl;

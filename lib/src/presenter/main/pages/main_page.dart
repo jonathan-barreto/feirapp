@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/init/init.dart';
-import 'package:sabor_natural_app/src/presenter/main/controllers/main_controller.dart';
-import 'package:sabor_natural_app/src/presenter/main/widgets/standard_icon_image_widget.dart';
+import 'package:feirapp/src/di/di.dart';
+import 'package:feirapp/src/presenter/main/controllers/main_controller.dart';
+import 'package:feirapp/src/presenter/main/widgets/standard_icon_image_widget.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

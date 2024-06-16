@@ -1,5 +1,5 @@
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
 import 'package:flutter/widgets.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
 
 class BaseWidgetForBottomModal extends StatelessWidget {
   final Widget child;
@@ -26,7 +26,6 @@ class BaseWidgetForBottomModal extends StatelessWidget {
                 height: StyleValues.small,
                 width: StyleValues.largeMedium * 2,
                 decoration: BoxDecoration(
-                  
                   borderRadius: BorderRadius.circular(
                     StyleValues.small,
                   ),

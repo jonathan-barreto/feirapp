@@ -1,4 +1,4 @@
-import 'package:sabor_natural_app/src/domain/entities/page_link_entity.dart';
+import 'package:feirapp/src/domain/entities/page_link_entity.dart';
 
 class PageLinkModel extends PageLinkEntity {
   const PageLinkModel({

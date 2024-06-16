@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:sabor_natural_app/src/core/errors/failure.dart';
-import 'package:sabor_natural_app/src/core/usecase/usecase.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_data_entity.dart';
-import 'package:sabor_natural_app/src/domain/repositories/product_repository.dart';
+import 'package:feirapp/src/core/errors/failure.dart';
+import 'package:feirapp/src/core/usecase/usecase.dart';
+import 'package:feirapp/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/domain/repositories/product_repository.dart';
 
 class GetDiscountedProductsUsecase
     implements Usecase<ProductDataEntity, NoParams> {

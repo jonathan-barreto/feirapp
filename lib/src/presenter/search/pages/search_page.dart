@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_colors.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/card_product_widget.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/circular_progress_indicator_custom.dart';
-import 'package:sabor_natural_app/src/init/init.dart';
-import 'package:sabor_natural_app/src/presenter/search/controllers/search_page_controller.dart';
-import 'package:sabor_natural_app/src/presenter/search/widgets/bottom_loading_more_products_widget.dart';
-import 'package:sabor_natural_app/src/presenter/search/widgets/search_bar_widget.dart';
+import 'package:feirapp/src/core/shared/constants/app_colors.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/widgets/card_product_widget.dart';
+import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
+import 'package:feirapp/src/di/di.dart';
+import 'package:feirapp/src/presenter/search/controllers/search_page_controller.dart';
+import 'package:feirapp/src/presenter/search/widgets/bottom_loading_more_products_widget.dart';
+import 'package:feirapp/src/presenter/search/widgets/search_bar_widget.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});

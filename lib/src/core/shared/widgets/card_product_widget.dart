@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:feirapp/src/core/shared/constants/endpoints.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/widgets/add_to_cart_button_widget.dart';
+import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
+import 'package:feirapp/src/core/shared/widgets/product_price_widget.dart';
+import 'package:feirapp/src/core/shared/widgets/product_title_widget.dart';
+import 'package:feirapp/src/core/shared/widgets/product_unit_and_weight_widget.dart';
+import 'package:feirapp/src/domain/entities/product_entity.dart';
+import 'package:feirapp/src/presenter/product/page/product_page.dart';
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/endpoints.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/add_to_cart_button_widget.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/circular_progress_indicator_custom.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/product_price_widget.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/product_title_widget.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/product_unit_and_weight_widget.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_entity.dart';
-import 'package:sabor_natural_app/src/presenter/product/page/product_page.dart';
 
 class CardProductWidget extends StatelessWidget {
   final ProductEntity product;

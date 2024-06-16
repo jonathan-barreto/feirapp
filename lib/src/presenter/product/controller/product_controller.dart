@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/services/debounce_service.dart';
-import 'package:sabor_natural_app/src/core/shared/services/debounce_service_impl.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_entity.dart';
-import 'package:sabor_natural_app/src/domain/params/set_product_to_favorite_param.dart';
-import 'package:sabor_natural_app/src/domain/usecases/get_all_favorite_products_usecase.dart';
-import 'package:sabor_natural_app/src/domain/usecases/get_product_by_id_usecase.dart';
-import 'package:sabor_natural_app/src/domain/usecases/remove_key_usecase.dart';
-import 'package:sabor_natural_app/src/domain/usecases/set_product_to_favorite_usecase.dart';
+import 'package:feirapp/src/core/shared/services/debounce_service.dart';
+import 'package:feirapp/src/core/shared/services/debounce_service_impl.dart';
+import 'package:feirapp/src/domain/entities/product_entity.dart';
+import 'package:feirapp/src/domain/params/set_product_to_favorite_param.dart';
+import 'package:feirapp/src/domain/usecases/get_all_favorite_products_usecase.dart';
+import 'package:feirapp/src/domain/usecases/get_product_by_id_usecase.dart';
+import 'package:feirapp/src/domain/usecases/remove_key_usecase.dart';
+import 'package:feirapp/src/domain/usecases/set_product_to_favorite_usecase.dart';
 
 class ProductController extends ChangeNotifier {
   final GetProductByIdUsecase getProductByIdUsecase;

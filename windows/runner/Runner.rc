@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "sabor_natural_app" "\0"
+            VALUE "FileDescription", "feirapp" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "sabor_natural_app" "\0"
+            VALUE "InternalName", "feirapp" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "sabor_natural_app.exe" "\0"
-            VALUE "ProductName", "sabor_natural_app" "\0"
+            VALUE "OriginalFilename", "feirapp.exe" "\0"
+            VALUE "ProductName", "feirapp" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

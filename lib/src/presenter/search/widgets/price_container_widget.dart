@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
 
 class PriceContainerWidget extends StatelessWidget {
   final String value;
@@ -21,9 +21,7 @@ class PriceContainerWidget extends StatelessWidget {
       child: Container(
         height: StyleValues.extraLarge,
         decoration: BoxDecoration(
-          border: Border.all(
-            
-          ),
+          border: Border.all(),
           borderRadius: BorderRadius.circular(
             StyleValues.small,
           ),
@@ -36,9 +34,7 @@ class PriceContainerWidget extends StatelessWidget {
               ),
               child: Text(
                 'R\$',
-                style: textTheme.bodyMedium?.copyWith(
-                  
-                ),
+                style: textTheme.bodyMedium?.copyWith(),
               ),
             ),
             Expanded(

@@ -1,4 +1,4 @@
-import 'package:sabor_natural_app/src/domain/entities/product_entity.dart';
+import 'package:feirapp/src/domain/entities/product_entity.dart';
 
 class ProductModel extends ProductEntity {
   const ProductModel({

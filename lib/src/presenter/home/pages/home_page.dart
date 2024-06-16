@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/banner_ad_widget.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/card_product_widget.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/circular_progress_indicator_custom.dart';
-import 'package:sabor_natural_app/src/init/init.dart';
-import 'package:sabor_natural_app/src/presenter/home/controllers/home_controller.dart';
-import 'package:sabor_natural_app/src/presenter/home/widgets/app_bar_home_widget.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/widgets/banner_ad_widget.dart';
+import 'package:feirapp/src/core/shared/widgets/card_product_widget.dart';
+import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
+import 'package:feirapp/src/di/di.dart';
+import 'package:feirapp/src/presenter/home/controllers/home_controller.dart';
+import 'package:feirapp/src/presenter/home/widgets/app_bar_home_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

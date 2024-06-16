@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:feirapp/src/core/shared/constants/app_assets.dart';
+import 'package:feirapp/src/presenter/home/widgets/item_for_carousel_slider_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_assets.dart';
-import 'package:sabor_natural_app/src/presenter/home/widgets/item_for_carousel_slider_widget.dart';
 
 class BannerAdWidget extends StatefulWidget {
   const BannerAdWidget({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
-import 'package:sabor_natural_app/src/presenter/search/widgets/price_container_widget.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/presenter/search/widgets/price_container_widget.dart';
 
 class RangePriceContainerWidget extends StatelessWidget {
   final RangeValues rangeValues;
@@ -25,7 +25,7 @@ class RangePriceContainerWidget extends StatelessWidget {
           RangeSlider(
             values: rangeValues,
             max: 100,
-            activeColor: Theme.of(context).primaryColor ,
+            activeColor: Theme.of(context).primaryColor,
             onChanged: (RangeValues values) => onChange(values),
             labels: RangeLabels(
               '${rangeValues.start.round()}',

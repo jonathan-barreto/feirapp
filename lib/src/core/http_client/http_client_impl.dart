@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:sabor_natural_app/src/core/http_client/http_client.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/endpoints.dart';
+import 'package:feirapp/src/core/http_client/http_client.dart';
+import 'package:feirapp/src/core/shared/constants/endpoints.dart';
 
 class HttpClientImpl implements HttpClient {
   final Dio dio = Dio(

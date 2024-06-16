@@ -1,4 +1,4 @@
-package com.example.sabor_natural_app
+package com.example.feirapp
 
 import io.flutter.embedding.android.FlutterActivity
 

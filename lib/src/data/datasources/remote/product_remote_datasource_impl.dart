@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:sabor_natural_app/src/core/errors/exceptions.dart';
-import 'package:sabor_natural_app/src/core/http_client/http_client.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/endpoints.dart';
-import 'package:sabor_natural_app/src/data/datasources/remote/product_remote_datasource.dart';
-import 'package:sabor_natural_app/src/data/model/product_data_model.dart';
-import 'package:sabor_natural_app/src/data/model/product_filter_param_model.dart';
-import 'package:sabor_natural_app/src/domain/params/product_filter_param_entity.dart';
+import 'package:feirapp/src/core/errors/exceptions.dart';
+import 'package:feirapp/src/core/http_client/http_client.dart';
+import 'package:feirapp/src/core/shared/constants/endpoints.dart';
+import 'package:feirapp/src/data/datasources/remote/product_remote_datasource.dart';
+import 'package:feirapp/src/data/model/product_data_model.dart';
+import 'package:feirapp/src/data/model/product_filter_param_model.dart';
+import 'package:feirapp/src/domain/params/product_filter_param_entity.dart';
 
 class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
   final HttpClient httpClient;
@@ -41,7 +41,6 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
   Future<ProductDataModel> getProductById({required String id}) async {
     final response = await httpClient.get(
       endpoint: '${EndPoints.getProductById}/$id',
- 
     );
 
     if (response.statusCode == 200) {

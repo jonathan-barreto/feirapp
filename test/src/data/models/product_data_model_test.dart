@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sabor_natural_app/src/data/model/page_link_model.dart';
-import 'package:sabor_natural_app/src/data/model/product_data_model.dart';
-import 'package:sabor_natural_app/src/data/model/product_model.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/data/model/page_link_model.dart';
+import 'package:feirapp/src/data/model/product_data_model.dart';
+import 'package:feirapp/src/data/model/product_model.dart';
+import 'package:feirapp/src/domain/entities/product_data_entity.dart';
 
 import '../../../mocks/product_data_model_mock.dart';
 

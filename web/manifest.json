@@ -1,6 +1,6 @@
 {
-    "name": "sabor_natural_app",
-    "short_name": "sabor_natural_app",
+    "name": "feirapp",
+    "short_name": "feirapp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

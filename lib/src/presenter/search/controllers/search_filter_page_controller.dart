@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/enums/filter_order_enum.dart';
-import 'package:sabor_natural_app/src/domain/entities/category_tile_entity.dart';
+import 'package:feirapp/src/core/shared/enums/filter_order_enum.dart';
+import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
 
 class SearchFilterPageController extends ChangeNotifier {
   List<CategoryTileEntity> categories = [];

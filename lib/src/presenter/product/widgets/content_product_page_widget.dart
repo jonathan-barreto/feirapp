@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/product_price_widget.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_entity.dart';
-import 'package:sabor_natural_app/src/presenter/product/widgets/action_button_widget.dart';
-import 'package:sabor_natural_app/src/presenter/product/widgets/container_image_widget.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/widgets/product_price_widget.dart';
+import 'package:feirapp/src/domain/entities/product_entity.dart';
+import 'package:feirapp/src/presenter/product/widgets/action_button_widget.dart';
+import 'package:feirapp/src/presenter/product/widgets/container_image_widget.dart';
 
 class ContentProductPage extends StatelessWidget {
   final ProductEntity? product;

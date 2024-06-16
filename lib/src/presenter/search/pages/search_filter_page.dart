@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
-import 'package:sabor_natural_app/src/core/shared/enums/filter_order_enum.dart';
-import 'package:sabor_natural_app/src/core/shared/enums/product_category_enum.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/base_widget_for_bottom_modal.dart';
-import 'package:sabor_natural_app/src/core/shared/widgets/filter_category_container_widget.dart';
-import 'package:sabor_natural_app/src/domain/entities/category_tile_entity.dart';
-import 'package:sabor_natural_app/src/init/init.dart';
-import 'package:sabor_natural_app/src/presenter/search/controllers/search_filter_page_controller.dart';
-import 'package:sabor_natural_app/src/presenter/search/widgets/elevated_button_custom_widget.dart';
-import 'package:sabor_natural_app/src/presenter/search/widgets/filter_expansion_tile_widget.dart';
-import 'package:sabor_natural_app/src/presenter/search/widgets/filter_order_widget.dart';
-import 'package:sabor_natural_app/src/presenter/search/widgets/range_price_container_widget.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/enums/filter_order_enum.dart';
+import 'package:feirapp/src/core/shared/enums/product_category_enum.dart';
+import 'package:feirapp/src/core/shared/widgets/base_widget_for_bottom_modal.dart';
+import 'package:feirapp/src/core/shared/widgets/filter_category_container_widget.dart';
+import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
+import 'package:feirapp/src/di/di.dart';
+import 'package:feirapp/src/presenter/search/controllers/search_filter_page_controller.dart';
+import 'package:feirapp/src/presenter/search/widgets/elevated_button_custom_widget.dart';
+import 'package:feirapp/src/presenter/search/widgets/filter_expansion_tile_widget.dart';
+import 'package:feirapp/src/presenter/search/widgets/filter_order_widget.dart';
+import 'package:feirapp/src/presenter/search/widgets/range_price_container_widget.dart';
 
 class SearchFilterPage extends StatefulWidget {
   final BuildContext parentContext;

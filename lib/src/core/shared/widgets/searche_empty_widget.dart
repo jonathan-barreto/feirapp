@@ -1,5 +1,5 @@
+import 'package:feirapp/src/core/shared/constants/app_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/shared/constants/app_assets.dart';
 
 class SearchEmptyWidget extends StatelessWidget {
   final String label;

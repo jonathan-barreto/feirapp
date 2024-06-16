@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:feirapp/src/core/shared/services/debounce_service.dart';
 import 'package:flutter/services.dart';
-import 'package:sabor_natural_app/src/core/shared/services/debounce_service.dart';
 
 class DebounceServiceImpl implements DebounceService {
   Timer? timer;

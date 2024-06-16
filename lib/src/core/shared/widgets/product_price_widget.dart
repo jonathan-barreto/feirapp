@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:feirapp/src/core/shared/constants/style_values.dart';
 import 'package:flutter/material.dart';
-
-import 'package:sabor_natural_app/src/core/shared/constants/style_values.dart';
 
 class ProductPriceWidget extends StatelessWidget {
   final String price;

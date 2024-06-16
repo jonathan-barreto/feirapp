@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sabor_natural_app/src/core/usecase/usecase.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_data_entity.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_entity.dart';
-import 'package:sabor_natural_app/src/domain/usecases/get_discounted_products_usecase.dart';
+import 'package:feirapp/src/core/usecase/usecase.dart';
+import 'package:feirapp/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/domain/entities/product_entity.dart';
+import 'package:feirapp/src/domain/usecases/get_discounted_products_usecase.dart';
 
 class HomeController extends ChangeNotifier {
   final GetDiscountedProductsUsecase getDiscountedProductsUsecase;

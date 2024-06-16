@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:sabor_natural_app/src/domain/entities/page_link_entity.dart';
-import 'package:sabor_natural_app/src/domain/entities/product_entity.dart';
+import 'package:feirapp/src/domain/entities/page_link_entity.dart';
+import 'package:feirapp/src/domain/entities/product_entity.dart';
 
 class ProductDataEntity extends Equatable {
   final List<ProductEntity> products;
