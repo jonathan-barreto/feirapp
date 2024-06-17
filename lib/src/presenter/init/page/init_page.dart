@@ -1,3 +1,4 @@
+import 'package:feirapp/src/presenter/login/page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_assets.dart';
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
@@ -15,6 +16,15 @@ class InitPage extends StatefulWidget {
 class _InitPageState extends State<InitPage> {
   final InitController controller = getIt<InitController>();
 
+  Future<void> goToLoginPage() async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LoginPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
@@ -30,70 +40,37 @@ class _InitPageState extends State<InitPage> {
                 Expanded(
                   flex: 4,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        flex: 2,
-                        child: Image.asset(
-                          AppAssets.logo,
+                      Text(
+                        'FEIRAPP',
+                        style: themeData.textTheme.bodyLarge?.copyWith(
+                          fontSize: StyleValues.extraLarge,
+                          fontWeight: FontWeight.w900,
+                          color: AppColors.primary,
                         ),
                       ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text(
-                              'FEIRAPP',
-                              style: themeData.textTheme.bodyLarge?.copyWith(
-                                fontSize: StyleValues.extraLarge,
-                                fontWeight: FontWeight.w900,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: StyleValues.large,
-                              ),
-                              child: Text(
-                                'É um fato conhecido de todos que um leitor se distrairá com o conteúdo de texto legível',
-                                textAlign: TextAlign.center,
-                                style: themeData.textTheme.bodySmall?.copyWith(
-                                  color: AppColors.mediumGrey,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      Image.asset(
+                        AppAssets.logo,
                       ),
                     ],
                   ),
                 ),
                 Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 70,
-                        width: StyleValues.extraLarge * 6,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                            shape: MaterialStatePropertyAll(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  StyleValues.normal,
-                                ),
-                              ),
-                            ),
-                          ),
-                          child: Text(
-                            'Entrar',
-                            style: themeData.textTheme.bodySmall?.copyWith(
-                              color: AppColors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                  child: GestureDetector(
+                    onTap: goToLoginPage,
+                    child: Container(
+                      width: StyleValues.extraLarge * 1.5,
+                      decoration: const BoxDecoration(
+                        color: AppColors.primary,
+                        shape: BoxShape.circle,
                       ),
-                    ],
+                      child: const Icon(
+                        Icons.arrow_forward_sharp,
+                        color: AppColors.white,
+                        size: StyleValues.large * 1.5,
+                      ),
+                    ),
                   ),
                 ),
               ],
