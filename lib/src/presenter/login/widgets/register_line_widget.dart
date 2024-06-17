@@ -17,7 +17,9 @@ class RegisterLineWidget extends StatelessWidget {
         ),
         InkWell(
           onTap: () {},
-          splashColor: Colors.transparent,
+          overlayColor: const MaterialStatePropertyAll(
+            AppColors.white,
+          ),
           child: Text(
             ' Registre-se',
             style: themeData.textTheme.bodySmall?.copyWith(
