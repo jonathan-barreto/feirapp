@@ -21,6 +21,8 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
+  Future<void> goToRegisterPage() async {}
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -48,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                             passwordOnChanged: (value) {
                               controller.password = value;
                             },
+                            registerOnPressed: goToRegisterPage,
                           ),
                         ),
                       ),

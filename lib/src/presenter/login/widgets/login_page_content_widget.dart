@@ -14,6 +14,7 @@ class LoginPageContentWidget extends StatelessWidget {
   final VoidCallback loginOnPressed;
   final void Function(String) emailOnChanged;
   final void Function(String) passwordOnChanged;
+  final VoidCallback registerOnPressed;
 
   const LoginPageContentWidget({
     super.key,
@@ -21,6 +22,7 @@ class LoginPageContentWidget extends StatelessWidget {
     required this.loginOnPressed,
     required this.emailOnChanged,
     required this.passwordOnChanged,
+    required this.registerOnPressed,
   });
 
   @override
@@ -65,7 +67,9 @@ class LoginPageContentWidget extends StatelessWidget {
         ),
         Visibility(
           visible: !isKeyboardVisible,
-          child: const RegisterLineWidget(),
+          child: RegisterLineWidget(
+            registerOnPressed: registerOnPressed,
+          ),
         ),
         const SizedBox(
           height: StyleValues.small,
