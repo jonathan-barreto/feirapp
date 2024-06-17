@@ -32,32 +32,35 @@ class _LoginPageState extends State<LoginPage> {
               backgroundColor: AppColors.white,
               appBar: AppBar(),
               body: SafeArea(
-                child: Column(
-                  children: [
-                    Visibility(
-                      visible: !controller.loading,
-                      child: Expanded(
-                        child: LoginPageContentWidget(
-                          isKeyboardVisible: isKeyboardVisible,
-                          loginOnPressed: controller.login,
-                          emailOnChanged: (value) {
-                            controller.email = value;
-                          },
-                          passwordOnChanged: (value) {
-                            controller.password = value;
-                          },
+                child: GestureDetector(
+                  onTap: () => FocusScope.of(context).unfocus(),
+                  child: Column(
+                    children: [
+                      Visibility(
+                        visible: !controller.loading,
+                        child: Expanded(
+                          child: LoginPageContentWidget(
+                            isKeyboardVisible: isKeyboardVisible,
+                            loginOnPressed: controller.login,
+                            emailOnChanged: (value) {
+                              controller.email = value;
+                            },
+                            passwordOnChanged: (value) {
+                              controller.password = value;
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                    Visibility(
-                      visible: controller.loading,
-                      child: const Expanded(
-                        child: Center(
-                          child: CircularProgressIndicatorCustom(),
+                      Visibility(
+                        visible: controller.loading,
+                        child: const Expanded(
+                          child: Center(
+                            child: CircularProgressIndicatorCustom(),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );
