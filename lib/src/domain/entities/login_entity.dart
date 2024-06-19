@@ -14,7 +14,7 @@ class LoginEntity {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = {};
 
     data['acess_token'] = acessToken;

@@ -1,3 +1,5 @@
+import 'package:feirapp/src/core/shared/extensions/get_user_first_name_extension.dart';
+import 'package:feirapp/src/domain/entities/current_user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/style_values.dart';
 import 'package:feirapp/src/core/shared/widgets/banner_ad_widget.dart';
@@ -16,6 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final HomeController controller = getIt<HomeController>();
+  final CurrentUserEntity currentUser = getIt<CurrentUserEntity>();
 
   @override
   void initState() {
@@ -48,9 +51,11 @@ class _HomePageState extends State<HomePage> {
                     child: CustomScrollView(
                       slivers: [
                         SliverList.list(
-                          children: const [
-                            AppBarHomeWidget(),
-                            BannerAdWidget(),
+                          children: [
+                            AppBarHomeWidget(
+                              name: '${currentUser.data?.name.getFirstName()}',
+                            ),
+                            const BannerAdWidget(),
                           ],
                         ),
                         SliverPadding(

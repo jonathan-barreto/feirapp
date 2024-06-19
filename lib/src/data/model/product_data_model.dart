@@ -1,23 +1,23 @@
-import 'package:feirapp/src/data/model/page_link_model.dart';
+
 import 'package:feirapp/src/data/model/product_model.dart';
 import 'package:feirapp/src/domain/entities/product_data_entity.dart';
 
 class ProductDataModel extends ProductDataEntity {
   final List<ProductModel> productsModel;
-  final PageLinkModel? linksModel;
 
   const ProductDataModel({
     required this.productsModel,
-    required this.linksModel,
-  }) : super(products: productsModel, links: linksModel);
+    required super.link,
+  }) : super(products: productsModel);
 
   factory ProductDataModel.fromJson(Map<String, dynamic> json) {
-    final bool linksIsNotNull = json['links'] != null;
+    final bool linksIsNotNull = json['next_page_url'] != null;
+    
     return ProductDataModel(
       productsModel: (json['data'] as List).map((e) {
         return ProductModel.fromJson(e);
       }).toList(),
-      linksModel: linksIsNotNull ? PageLinkModel.fromJson(json['links']) : null,
+      link: linksIsNotNull ? json['next_page_url'] : null,
     );
   }
 
@@ -25,7 +25,7 @@ class ProductDataModel extends ProductDataEntity {
     final Map<String, dynamic> data = {};
 
     data['data'] = productsModel.map((e) => e.toJson()).toList();
-    data['links'] = linksModel?.toJson();
+    data['links'] = link;
 
     return data;
   }

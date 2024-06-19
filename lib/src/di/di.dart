@@ -1,5 +1,7 @@
 import 'package:feirapp/src/data/datasources/local/authentication_local_datasource.dart';
 import 'package:feirapp/src/data/datasources/local/authentication_local_datasource_impl.dart';
+import 'package:feirapp/src/domain/entities/current_user_entity.dart';
+import 'package:feirapp/src/domain/usecases/get_user_usecase.dart';
 import 'package:feirapp/src/domain/usecases/save_user_credentials_usecase.dart';
 import 'package:feirapp/src/presenter/splash/controller/splash_controller.dart';
 import 'package:get_it/get_it.dart';
@@ -38,6 +40,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 GetIt getIt = GetIt.instance;
 
 Future<void> init() async {
+  // Local Storage
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   getIt.registerFactory<LocalStorage>(
@@ -46,8 +49,11 @@ Future<void> init() async {
     ),
   );
 
+  // HttpClient
   getIt.registerFactory<HttpClient>(
-    () => HttpClientImpl(),
+    () => HttpClientImpl(
+      localStorage: getIt<LocalStorage>(),
+    ),
   );
 
   // Datasources
@@ -59,11 +65,30 @@ Future<void> init() async {
     () => ProductLocalDatasourceImpl(storage: getIt<LocalStorage>()),
   );
 
+  getIt.registerFactory<AuthenticationLocalDatasource>(
+    () => AuthenticationLocalDatasourceImpl(
+      storage: getIt<LocalStorage>(),
+    ),
+  );
+
+  getIt.registerFactory<AuthenticationRemoteDatasource>(
+    () => AuthenticationRemoteDatasourceImpl(
+      httpClient: getIt<HttpClient>(),
+    ),
+  );
+
   // Repositories
   getIt.registerFactory<ProductRepository>(
     () => ProductRepositoryImpl(
       remoteDatasource: getIt<ProductRemoteDatasource>(),
       localDatasource: getIt<ProductLocalDatasource>(),
+    ),
+  );
+
+  getIt.registerFactory<AuthenticationRepository>(
+    () => AuthenticationRepositoryImpl(
+      remoteDatasource: getIt<AuthenticationRemoteDatasource>(),
+      localDatasource: getIt<AuthenticationLocalDatasource>(),
     ),
   );
 
@@ -116,6 +141,24 @@ Future<void> init() async {
     ),
   );
 
+  getIt.registerFactory<LoginUsecase>(
+    () => LoginUsecase(
+      repository: getIt<AuthenticationRepository>(),
+    ),
+  );
+
+  getIt.registerFactory<SaveUserCredentialsUsecase>(
+    () => SaveUserCredentialsUsecase(
+      repository: getIt<AuthenticationRepository>(),
+    ),
+  );
+
+  getIt.registerFactory<GetUserUsecase>(
+    () => GetUserUsecase(
+      repository: getIt<AuthenticationRepository>(),
+    ),
+  );
+
   // Controllers
   getIt.registerFactory<MainController>(() => MainController());
 
@@ -149,37 +192,6 @@ Future<void> init() async {
     () => InitController(),
   );
 
-  getIt.registerFactory<AuthenticationLocalDatasource>(
-    () => AuthenticationLocalDatasourceImpl(
-      storage: getIt<LocalStorage>(),
-    ),
-  );
-
-  getIt.registerFactory<AuthenticationRemoteDatasource>(
-    () => AuthenticationRemoteDatasourceImpl(
-      httpClient: getIt<HttpClient>(),
-    ),
-  );
-
-  getIt.registerFactory<AuthenticationRepository>(
-    () => AuthenticationRepositoryImpl(
-      remoteDatasource: getIt<AuthenticationRemoteDatasource>(),
-      localDatasource: getIt<AuthenticationLocalDatasource>(),
-    ),
-  );
-
-  getIt.registerFactory<LoginUsecase>(
-    () => LoginUsecase(
-      repository: getIt<AuthenticationRepository>(),
-    ),
-  );
-
-  getIt.registerFactory<SaveUserCredentialsUsecase>(
-    () => SaveUserCredentialsUsecase(
-      repository: getIt<AuthenticationRepository>(),
-    ),
-  );
-
   getIt.registerFactory<LoginController>(
     () => LoginController(
       loginUsecase: getIt<LoginUsecase>(),
@@ -188,6 +200,13 @@ Future<void> init() async {
   );
 
   getIt.registerFactory<SplashController>(
-    () => SplashController(),
+    () => SplashController(
+      getUserUsecase: getIt<GetUserUsecase>(),
+    ),
+  );
+
+  //
+  getIt.registerLazySingleton<CurrentUserEntity>(
+    () => CurrentUserEntity(),
   );
 }

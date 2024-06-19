@@ -4,6 +4,7 @@ import 'package:feirapp/src/core/errors/exceptions.dart';
 import 'package:feirapp/src/core/http_client/http_client.dart';
 import 'package:feirapp/src/data/datasources/remote/authentication_remote_datasource.dart';
 import 'package:feirapp/src/data/model/login_data_model.dart';
+import 'package:feirapp/src/data/model/user_model.dart';
 import 'package:feirapp/src/domain/params/login_param.dart';
 
 class AuthenticationRemoteDatasourceImpl
@@ -28,6 +29,21 @@ class AuthenticationRemoteDatasourceImpl
     if (response.statusCode == 200) {
       return LoginDataModel.fromJson(
         response.data,
+      );
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<UserModel> getUser() async {
+    final HttpResponse response = await httpClient.get(
+      endpoint: '/user/profile',
+    );
+
+    if (response.statusCode == 200) {
+      return UserModel.fromJson(
+        response.data['data'],
       );
     } else {
       throw ServerException();

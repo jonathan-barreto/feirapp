@@ -5,7 +5,6 @@ import 'package:feirapp/src/core/shared/services/debounce_service.dart';
 import 'package:feirapp/src/core/shared/services/debounce_service_impl.dart';
 import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
 import 'package:feirapp/src/domain/params/get_product_param_entity.dart';
-import 'package:feirapp/src/domain/entities/page_link_entity.dart';
 import 'package:feirapp/src/domain/entities/product_data_entity.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/params/product_filter_param_entity.dart';
@@ -60,7 +59,7 @@ class SearchPageController extends ChangeNotifier {
   bool productLoading = false;
   bool loadingMoreProducts = false;
 
-  PageLinkEntity? links;
+  String? link;
   List<ProductEntity> products = [];
 
   void _showPageLoading() {
@@ -122,9 +121,9 @@ class SearchPageController extends ChangeNotifier {
 
     _showLoadingMoreProducts();
 
-    if (links?.next != null) {
+    if (link != null) {
       final String endPoint = _getEndPointByUrl(
-        url: links?.next ?? '',
+        url: link ?? '',
       );
 
       final getMoreProductsParam = GetProductParamEntity(
@@ -141,7 +140,7 @@ class SearchPageController extends ChangeNotifier {
         productDataEntity?.products ?? [],
       );
 
-      links = productDataEntity?.links;
+      link = productDataEntity?.link;
     }
 
     _hideLoadingMoreProducts();
@@ -161,7 +160,7 @@ class SearchPageController extends ChangeNotifier {
     response.fold((l) => hasError = true, (r) => productDataEntity = r);
 
     products = productDataEntity?.products ?? [];
-    links = productDataEntity?.links;
+    link = productDataEntity?.link;
   }
 
   Future<void> getAllProducts() async {

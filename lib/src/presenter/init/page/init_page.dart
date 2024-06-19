@@ -5,6 +5,8 @@ import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/constants/style_values.dart';
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/presenter/init/controller/init_controller.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class InitPage extends StatefulWidget {
   const InitPage({super.key});
@@ -23,6 +25,15 @@ class _InitPageState extends State<InitPage> {
         builder: (context) => const LoginPage(),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    SchedulerBinding.instance.addPostFrameCallback((duration) {
+      FlutterNativeSplash.remove();
+    });
   }
 
   @override

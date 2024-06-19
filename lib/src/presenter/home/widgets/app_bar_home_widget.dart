@@ -1,8 +1,14 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/style_values.dart';
 
 class AppBarHomeWidget extends StatelessWidget {
-  const AppBarHomeWidget({super.key});
+  final String name;
+
+  const AppBarHomeWidget({
+    super.key,
+    required this.name,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +30,9 @@ class AppBarHomeWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Olá, Jonathan!',
+            AutoSizeText(
+              'Olá, $name!',
+              maxLines: 1,
               style: textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),

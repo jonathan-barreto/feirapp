@@ -5,6 +5,7 @@ import 'package:feirapp/src/data/datasources/local/authentication_local_datasour
 import 'package:feirapp/src/data/datasources/remote/authentication_remote_datasource.dart';
 import 'package:feirapp/src/domain/entities/login_data_entity.dart';
 import 'package:feirapp/src/domain/entities/login_entity.dart';
+import 'package:feirapp/src/domain/entities/user_entity.dart';
 import 'package:feirapp/src/domain/params/login_param.dart';
 import 'package:feirapp/src/domain/repositories/authentication_repository.dart';
 
@@ -41,6 +42,16 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         param: param,
       );
 
+      return Right(result);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> getUser() async {
+    try {
+      final result = await remoteDatasource.getUser();
       return Right(result);
     } on ServerException {
       return Left(ServerFailure());

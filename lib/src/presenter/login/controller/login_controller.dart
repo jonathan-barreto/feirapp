@@ -26,7 +26,7 @@ class LoginController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> login() async {
+  Future<bool> login() async {
     _setLoading();
 
     if (kDebugMode || email != null && password != null) {
@@ -39,14 +39,16 @@ class LoginController extends ChangeNotifier {
       result.fold((l) => hasError = true, (r) => loginDataEntity = r);
     }
 
+    saveUserCredentials();
+
     _setLoading();
 
-    saveUserCredentials();
+    return hasError;
   }
 
   Future<void> saveUserCredentials() async {
     if (loginDataEntity?.data != null) {
-      final result = await saveUserCredentialsUsecase.call(
+      await saveUserCredentialsUsecase.call(
         loginDataEntity!.data,
       );
     }

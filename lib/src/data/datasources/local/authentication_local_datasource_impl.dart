@@ -15,7 +15,7 @@ class AuthenticationLocalDatasourceImpl
   @override
   Future<bool?> saveUserCredentials({required LoginEntity param}) {
     final String json = jsonEncode(
-      param.toJson(),
+      param.toMap(),
     );
 
     return storage.setString(key: 'credentials', value: json);

@@ -1,3 +1,4 @@
+import 'package:feirapp/src/presenter/splash/page/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
@@ -19,6 +20,22 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+  }
+
+  Future<void> login() async {
+    final bool response = await controller.login();
+
+    if (mounted) {
+      if (response == false) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SplashPage(),
+          ),
+          (Route<dynamic> route) => false,
+        );
+      }
+    }
   }
 
   Future<void> goToRegisterPage() async {}
@@ -43,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Expanded(
                           child: LoginPageContentWidget(
                             isKeyboardVisible: isKeyboardVisible,
-                            loginOnPressed: controller.login,
+                            loginOnPressed: login,
                             emailOnChanged: (value) {
                               controller.email = value;
                             },
