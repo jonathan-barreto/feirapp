@@ -31,6 +31,7 @@ class _SearchPageState extends State<SearchPage> {
       context,
       MaterialPageRoute(
         builder: (context) => FilterPage(
+          filterEntity: controller.filterEntity,
           filterOnPressed: (filters) {
             controller.setProductFilterParam(
               filters: filters,

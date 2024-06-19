@@ -1,9 +1,12 @@
 import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
+import 'package:feirapp/src/domain/entities/filter_entity.dart';
 import 'package:feirapp/src/domain/entities/order_tile_entity.dart';
 import 'package:flutter/material.dart';
 
 class FilterStore extends ChangeNotifier {
-  final List<CategoryTileEntity> categories = [
+  FilterEntity? filterEntity;
+
+  List<CategoryTileEntity> categories = [
     CategoryTileEntity(
       title: 'Todos',
       category: '',
@@ -27,7 +30,7 @@ class FilterStore extends ChangeNotifier {
     ),
   ];
 
-  final List<OrderTileEntity> orders = [
+  List<OrderTileEntity> orders = [
     OrderTileEntity(
       title: 'Padrão',
       order: '',
@@ -44,6 +47,40 @@ class FilterStore extends ChangeNotifier {
   ];
 
   RangeValues currentRangeValues = const RangeValues(0, 100);
+
+  bool loading = true;
+
+  void _showLoading() {
+    loading = true;
+    notifyListeners();
+  }
+
+  void _hideLoading() {
+    loading = false;
+    notifyListeners();
+  }
+
+  void init({FilterEntity? filter}) {
+    _showLoading();
+
+    if (filter != null) {
+      categories = filter.categories;
+      orders = filter.orders;
+      currentRangeValues = filter.currentRangeValues;
+    }
+
+    _hideLoading();
+  }
+
+  FilterEntity getFilterEntity() {
+    final FilterEntity filterEntity = FilterEntity(
+      categories: categories,
+      orders: orders,
+      currentRangeValues: currentRangeValues,
+    );
+
+    return filterEntity;
+  }
 
   void setCategoryIsSelected({required int index}) {
     for (int i = 0; i < categories.length; i++) {

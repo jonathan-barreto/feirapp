@@ -22,7 +22,9 @@ class SearchPageController extends ChangeNotifier {
 
   late ScrollController scrollController;
   late TextEditingController textController;
+
   late ProductFilterParamEntity productFilterParamEntity;
+  FilterEntity? filterEntity;
 
   final DebounceService debounce = DebounceServiceImpl();
 
@@ -144,12 +146,6 @@ class SearchPageController extends ChangeNotifier {
   }
 
   Future<void> setProductFilterParam({required FilterEntity filters}) async {
-    await Future.delayed(
-      const Duration(
-        milliseconds: 500,
-      ),
-    );
-
     final String categorySelected = getCategorySelected(
       filters.categories,
     );
@@ -166,6 +162,7 @@ class SearchPageController extends ChangeNotifier {
     );
 
     productFilterParamEntity = param;
+    filterEntity = filters;
     notifyListeners();
 
     getAllProducts();
@@ -208,20 +205,6 @@ class SearchPageController extends ChangeNotifier {
     productFilterParamEntity.name = productName;
     debounce(getProductByFilter);
   }
-
-  // void setCategoryInFilter({required ProductCategoryEnum? value}) {
-  //   final Map<ProductCategoryEnum, String> filterMap = {
-  //     ProductCategoryEnum.todos: '',
-  //     ProductCategoryEnum.vegetal: 'vegetal',
-  //     ProductCategoryEnum.verdura: 'verdura',
-  //     ProductCategoryEnum.tempero: 'tempero',
-  //     ProductCategoryEnum.fruta: 'fruta',
-  //   };
-
-  //   if (value != null) {
-  //     productFilterParamEntity.category = filterMap[value];
-  //   }
-  // }
 
   void checkSearchOnPressed() {
     getProductByFilter();

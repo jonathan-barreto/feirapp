@@ -1,5 +1,6 @@
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/domain/entities/filter_entity.dart';
 import 'package:feirapp/src/presenter/search/stores/filter_store.dart';
@@ -8,10 +9,12 @@ import 'package:feirapp/src/presenter/search/widgets/filter_elevated_button.dart
 import 'package:flutter/material.dart';
 
 class FilterPage extends StatefulWidget {
+  final FilterEntity? filterEntity;
   final void Function(FilterEntity) filterOnPressed;
 
   const FilterPage({
     super.key,
+    this.filterEntity,
     required this.filterOnPressed,
   });
 
@@ -23,15 +26,28 @@ class _FilterPageState extends State<FilterPage> {
   final FilterStore store = getIt<FilterStore>();
 
   void filterOnPressed() {
-    final FilterEntity filterEntity = FilterEntity(
-      categories: store.categories,
-      orders: store.orders,
-      currentRangeValues: store.currentRangeValues,
-    );
+    final FilterEntity filterEntity = store.getFilterEntity();
 
     widget.filterOnPressed(filterEntity);
 
     Navigator.pop(context);
+  }
+
+  void clearFilter() {
+    store.clearFilter();
+
+    final FilterEntity filterEntity = store.getFilterEntity();
+
+    widget.filterOnPressed(filterEntity);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    store.init(
+      filter: widget.filterEntity,
+    );
   }
 
   @override
@@ -50,132 +66,138 @@ class _FilterPageState extends State<FilterPage> {
             ),
           ),
           body: SafeArea(
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 10,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: StyleValues.small,
-                    ),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: StyleValues.small,
-                        ),
-                        FilterDividerWidget(
-                          label: 'Categoria',
-                          child: Wrap(
-                            spacing: StyleValues.normal,
-                            children: store.categories.asMap().entries.map((e) {
-                              return FilterButtonForSelectionWidget(
-                                label: e.value.title,
-                                isSelected: e.value.isSelected,
-                                onPressed: () {
-                                  store.setCategoryIsSelected(
-                                    index: e.key,
-                                  );
-                                },
-                              );
-                            }).toList(),
+            child: store.loading
+                ? const CircularProgressIndicatorCustom()
+                : Column(
+                    children: [
+                      Expanded(
+                        flex: 10,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: StyleValues.small,
                           ),
-                        ),
-                        const SizedBox(
-                          height: StyleValues.extraLarge,
-                        ),
-                        FilterDividerWidget(
-                          label: 'Ordem',
-                          child: Wrap(
-                            spacing: StyleValues.normal,
-                            children: store.orders.asMap().entries.map((e) {
-                              return FilterButtonForSelectionWidget(
-                                label: e.value.title,
-                                isSelected: e.value.isSelected,
-                                onPressed: () {
-                                  store.setOrderIsSelected(
-                                    index: e.key,
-                                  );
-                                },
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: StyleValues.extraLarge,
-                        ),
-                        FilterDividerWidget(
-                          label: 'Preço',
                           child: Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: StyleValues.normal,
+                              const SizedBox(
+                                height: StyleValues.small,
+                              ),
+                              FilterDividerWidget(
+                                label: 'Categoria',
+                                child: Wrap(
+                                  spacing: StyleValues.normal,
+                                  children:
+                                      store.categories.asMap().entries.map((e) {
+                                    return FilterButtonForSelectionWidget(
+                                      label: e.value.title,
+                                      isSelected: e.value.isSelected,
+                                      onPressed: () {
+                                        store.setCategoryIsSelected(
+                                          index: e.key,
+                                        );
+                                      },
+                                    );
+                                  }).toList(),
                                 ),
-                                child: Row(
+                              ),
+                              const SizedBox(
+                                height: StyleValues.extraLarge,
+                              ),
+                              FilterDividerWidget(
+                                label: 'Ordem',
+                                child: Wrap(
+                                  spacing: StyleValues.normal,
+                                  children:
+                                      store.orders.asMap().entries.map((e) {
+                                    return FilterButtonForSelectionWidget(
+                                      label: e.value.title,
+                                      isSelected: e.value.isSelected,
+                                      onPressed: () {
+                                        store.setOrderIsSelected(
+                                          index: e.key,
+                                        );
+                                      },
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: StyleValues.extraLarge,
+                              ),
+                              FilterDividerWidget(
+                                label: 'Preço',
+                                child: Column(
                                   children: [
-                                    Expanded(
-                                      child: FilterPriceContainerWidget(
-                                        title: 'De',
-                                        label: store.getStartRangeValue(),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: StyleValues.normal,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: FilterPriceContainerWidget(
+                                              title: 'De',
+                                              label: store.getStartRangeValue(),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: StyleValues.normal,
+                                          ),
+                                          Expanded(
+                                            child: FilterPriceContainerWidget(
+                                              title: 'Para',
+                                              label: store.getEndRangeValue(),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    const SizedBox(
-                                      width: StyleValues.normal,
-                                    ),
-                                    Expanded(
-                                      child: FilterPriceContainerWidget(
-                                        title: 'Para',
-                                        label: store.getEndRangeValue(),
-                                      ),
+                                    RangeSlider(
+                                      values: store.currentRangeValues,
+                                      max: 100,
+                                      activeColor: AppColors.primary,
+                                      inactiveColor: AppColors.mediumGrey,
+                                      onChanged: (RangeValues values) {
+                                        store.rangeValuesNnChanged(
+                                          values: values,
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),
                               ),
-                              RangeSlider(
-                                values: store.currentRangeValues,
-                                max: 100,
-                                activeColor: AppColors.primary,
-                                inactiveColor: AppColors.mediumGrey,
-                                onChanged: (RangeValues values) {
-                                  store.rangeValuesNnChanged(values: values);
-                                },
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: StyleValues.small,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: FilterElevatedButton(
+                                  label: 'Limpar',
+                                  isBorded: true,
+                                  onPressed: clearFilter,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: StyleValues.small,
+                              ),
+                              Expanded(
+                                child: FilterElevatedButton(
+                                  label: 'Filtrar',
+                                  onPressed: filterOnPressed,
+                                ),
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: StyleValues.small,
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: FilterElevatedButton(
-                            label: 'Limpar',
-                            isBorded: true,
-                            onPressed: store.clearFilter,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: StyleValues.small,
-                        ),
-                        Expanded(
-                          child: FilterElevatedButton(
-                            label: 'Filtrar',
-                            onPressed: filterOnPressed,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
           ),
         );
       },
