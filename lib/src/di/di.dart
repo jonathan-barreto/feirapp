@@ -3,6 +3,7 @@ import 'package:feirapp/src/data/datasources/local/authentication_local_datasour
 import 'package:feirapp/src/domain/entities/current_user_entity.dart';
 import 'package:feirapp/src/domain/usecases/get_user_usecase.dart';
 import 'package:feirapp/src/domain/usecases/save_user_credentials_usecase.dart';
+import 'package:feirapp/src/presenter/profile/controller/profile_controller.dart';
 import 'package:feirapp/src/presenter/splash/controller/splash_controller.dart';
 import 'package:get_it/get_it.dart';
 import 'package:feirapp/src/core/http_client/http_client.dart';
@@ -203,6 +204,10 @@ Future<void> init() async {
     () => SplashController(
       getUserUsecase: getIt<GetUserUsecase>(),
     ),
+  );
+
+  getIt.registerFactory<ProfileController>(
+    () => ProfileController(),
   );
 
   //

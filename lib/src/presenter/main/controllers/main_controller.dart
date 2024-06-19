@@ -1,3 +1,4 @@
+import 'package:feirapp/src/presenter/profile/page/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_assets.dart';
 import 'package:feirapp/src/presenter/home/pages/home_page.dart';
@@ -8,16 +9,10 @@ class MainController extends ChangeNotifier {
 
   final List<Widget> widgets = [
     const HomePage(),
-    Container(
-      color: Colors.greenAccent,
-    ),
+    Container(),
     const SearchPage(),
-    Container(
-      color: Colors.blueAccent,
-    ),
-    Container(
-      color: Colors.greenAccent,
-    ),
+    Container(),
+    const ProfilePage(),
   ];
 
   final List<String> iconsAssets = [
