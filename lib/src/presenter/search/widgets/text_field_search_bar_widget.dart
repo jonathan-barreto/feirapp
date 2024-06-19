@@ -30,9 +30,9 @@ class _TextFieldSearchBarWidgetState extends State<TextFieldSearchBarWidget> {
         cursorColor: themeData.colorScheme.tertiary,
         decoration: InputDecoration(
           filled: true,
-          fillColor: Theme.of(context).colorScheme.primary ,
+          fillColor: Theme.of(context).colorScheme.primary,
           border: const OutlineInputBorder(),
-          labelText: 'Pesquisar',
+          hintText: 'Pesquisar',
           prefixIcon: IconButton(
             onPressed: () {},
             icon: const Icon(
@@ -54,7 +54,7 @@ class _TextFieldSearchBarWidgetState extends State<TextFieldSearchBarWidget> {
               ),
             ),
           ),
-          labelStyle: themeData.textTheme.bodySmall,
+          hintStyle: themeData.textTheme.bodySmall,
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(),
           ),

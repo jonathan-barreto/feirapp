@@ -15,8 +15,8 @@ class FilterButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: StyleValues.extraLarge * 1.25,
-        height: StyleValues.extraLarge * 1.15,
+        width: StyleValues.extraLarge * 1.35,
+        height: StyleValues.extraLarge * 1.35,
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(
