@@ -124,7 +124,7 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
                                 index: index,
                               );
 
-                              widget.radioChange(categorySelected.category);
+                              // widget.radioChange(categorySelected.category);
                             },
                           ),
                         ),

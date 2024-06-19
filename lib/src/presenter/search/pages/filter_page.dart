@@ -1,13 +1,19 @@
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/constants/style_values.dart';
 import 'package:feirapp/src/di/di.dart';
+import 'package:feirapp/src/domain/entities/filter_entity.dart';
 import 'package:feirapp/src/presenter/search/stores/filter_store.dart';
 import 'package:feirapp/src/presenter/search/widgets/filter_divider_widget.dart';
 import 'package:feirapp/src/presenter/search/widgets/filter_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class FilterPage extends StatefulWidget {
-  const FilterPage({super.key});
+  final void Function(FilterEntity) filterOnPressed;
+
+  const FilterPage({
+    super.key,
+    required this.filterOnPressed,
+  });
 
   @override
   State<FilterPage> createState() => _FilterPageState();
@@ -15,6 +21,18 @@ class FilterPage extends StatefulWidget {
 
 class _FilterPageState extends State<FilterPage> {
   final FilterStore store = getIt<FilterStore>();
+
+  void filterOnPressed() {
+    final FilterEntity filterEntity = FilterEntity(
+      categories: store.categories,
+      orders: store.orders,
+      currentRangeValues: store.currentRangeValues,
+    );
+
+    widget.filterOnPressed(filterEntity);
+
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +158,7 @@ class _FilterPageState extends State<FilterPage> {
                           child: FilterElevatedButton(
                             label: 'Limpar',
                             isBorded: true,
-                            onPressed: () => store.clearFilter(),
+                            onPressed: store.clearFilter,
                           ),
                         ),
                         const SizedBox(
@@ -149,7 +167,7 @@ class _FilterPageState extends State<FilterPage> {
                         Expanded(
                           child: FilterElevatedButton(
                             label: 'Filtrar',
-                            onPressed: () {},
+                            onPressed: filterOnPressed,
                           ),
                         ),
                       ],

@@ -1,8 +1,6 @@
-import 'package:feirapp/src/core/shared/enums/product_category_enum.dart';
-
 class CategoryTileEntity {
   final String title;
-  final ProductCategoryEnum category;
+  final String category;
   bool isSelected;
 
   CategoryTileEntity({

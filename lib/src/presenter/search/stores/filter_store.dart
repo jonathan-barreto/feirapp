@@ -1,5 +1,3 @@
-import 'package:feirapp/src/core/shared/enums/filter_order_enum.dart';
-import 'package:feirapp/src/core/shared/enums/product_category_enum.dart';
 import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
 import 'package:feirapp/src/domain/entities/order_tile_entity.dart';
 import 'package:flutter/material.dart';
@@ -8,40 +6,40 @@ class FilterStore extends ChangeNotifier {
   final List<CategoryTileEntity> categories = [
     CategoryTileEntity(
       title: 'Todos',
-      category: ProductCategoryEnum.todos,
+      category: '',
       isSelected: true,
     ),
     CategoryTileEntity(
       title: 'Frutas',
-      category: ProductCategoryEnum.fruta,
+      category: 'fruta',
     ),
     CategoryTileEntity(
       title: 'Verduras',
-      category: ProductCategoryEnum.verdura,
+      category: 'verdura',
     ),
     CategoryTileEntity(
       title: 'Vegetais',
-      category: ProductCategoryEnum.vegetal,
+      category: 'vegetal',
     ),
     CategoryTileEntity(
       title: 'Temperos',
-      category: ProductCategoryEnum.tempero,
+      category: 'tempero',
     ),
   ];
 
   final List<OrderTileEntity> orders = [
     OrderTileEntity(
       title: 'Padrão',
-      order: FilterOrderEnum.standard,
+      order: '',
       isSelected: true,
     ),
     OrderTileEntity(
       title: 'Crescente',
-      order: FilterOrderEnum.asc,
+      order: 'asc',
     ),
     OrderTileEntity(
       title: 'Decrescente',
-      order: FilterOrderEnum.desc,
+      order: 'desc',
     ),
   ];
 

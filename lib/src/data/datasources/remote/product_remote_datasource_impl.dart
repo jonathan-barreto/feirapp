@@ -23,6 +23,8 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
       filter.toJson(),
     );
 
+    print(json);
+
     final response = await httpClient.post(
       endpoint: EndPoints.getAllProducts,
       body: json,

@@ -30,10 +30,16 @@ class _SearchPageState extends State<SearchPage> {
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const FilterPage(),
+        builder: (context) => FilterPage(
+          filterOnPressed: (filters) {
+            controller.setProductFilterParam(
+              filters: filters,
+            );
+          },
+        ),
       ),
     );
-    
+
     // await SearchFilterPage(
     //   parentContext: context,
     //   categories: controller.categories,

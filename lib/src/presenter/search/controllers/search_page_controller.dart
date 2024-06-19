@@ -1,6 +1,6 @@
+import 'package:feirapp/src/domain/entities/filter_entity.dart';
+import 'package:feirapp/src/domain/entities/order_tile_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/enums/filter_order_enum.dart';
-import 'package:feirapp/src/core/shared/enums/product_category_enum.dart';
 import 'package:feirapp/src/core/shared/services/debounce_service.dart';
 import 'package:feirapp/src/core/shared/services/debounce_service_impl.dart';
 import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
@@ -20,37 +20,11 @@ class SearchPageController extends ChangeNotifier {
     required this.getMoreProductsByLinkUsecase,
   });
 
-  final DebounceService debounce = DebounceServiceImpl();
-
   late ScrollController scrollController;
   late TextEditingController textController;
   late ProductFilterParamEntity productFilterParamEntity;
 
-  final List<CategoryTileEntity> categories = [
-    CategoryTileEntity(
-      title: 'Todos',
-      category: ProductCategoryEnum.todos,
-      isSelected: true,
-    ),
-    CategoryTileEntity(
-      title: 'Frutas',
-      category: ProductCategoryEnum.fruta,
-    ),
-    CategoryTileEntity(
-      title: 'Verduras',
-      category: ProductCategoryEnum.verdura,
-    ),
-    CategoryTileEntity(
-      title: 'Vegetais',
-      category: ProductCategoryEnum.vegetal,
-    ),
-    CategoryTileEntity(
-      title: 'Temperos',
-      category: ProductCategoryEnum.tempero,
-    ),
-  ];
-
-  FilterOrderEnum? order;
+  final DebounceService debounce = DebounceServiceImpl();
 
   bool hasError = false;
 
@@ -145,6 +119,58 @@ class SearchPageController extends ChangeNotifier {
     _hideLoadingMoreProducts();
   }
 
+  String getCategorySelected(List<CategoryTileEntity> categories) {
+    String category = '';
+
+    for (int i = 0; i < categories.length; i++) {
+      if (categories[i].isSelected) {
+        category = categories[i].category;
+      }
+    }
+
+    return category;
+  }
+
+  String getOrderSelected(List<OrderTileEntity> orders) {
+    String order = '';
+
+    for (int i = 0; i < orders.length; i++) {
+      if (orders[i].isSelected) {
+        order = orders[i].order;
+      }
+    }
+
+    return order;
+  }
+
+  Future<void> setProductFilterParam({required FilterEntity filters}) async {
+    await Future.delayed(
+      const Duration(
+        milliseconds: 500,
+      ),
+    );
+
+    final String categorySelected = getCategorySelected(
+      filters.categories,
+    );
+
+    final String orderSelected = getOrderSelected(
+      filters.orders,
+    );
+
+    final ProductFilterParamEntity param = ProductFilterParamEntity(
+      category: categorySelected,
+      order: orderSelected,
+      minPrice: filters.currentRangeValues.start,
+      maxPrice: filters.currentRangeValues.end,
+    );
+
+    productFilterParamEntity = param;
+    notifyListeners();
+
+    getAllProducts();
+  }
+
   Future<void> getProducts() async {
     ProductDataEntity? productDataEntity;
 
@@ -183,52 +209,21 @@ class SearchPageController extends ChangeNotifier {
     debounce(getProductByFilter);
   }
 
-  void setCategoryInFilter({required ProductCategoryEnum? value}) {
-    final Map<ProductCategoryEnum, String> filterMap = {
-      ProductCategoryEnum.todos: '',
-      ProductCategoryEnum.vegetal: 'vegetal',
-      ProductCategoryEnum.verdura: 'verdura',
-      ProductCategoryEnum.tempero: 'tempero',
-      ProductCategoryEnum.fruta: 'fruta',
-    };
+  // void setCategoryInFilter({required ProductCategoryEnum? value}) {
+  //   final Map<ProductCategoryEnum, String> filterMap = {
+  //     ProductCategoryEnum.todos: '',
+  //     ProductCategoryEnum.vegetal: 'vegetal',
+  //     ProductCategoryEnum.verdura: 'verdura',
+  //     ProductCategoryEnum.tempero: 'tempero',
+  //     ProductCategoryEnum.fruta: 'fruta',
+  //   };
 
-    if (value != null) {
-      productFilterParamEntity.category = filterMap[value];
-    }
-  }
-
-  void setRangePriceInFilter({required RangeValues values}) {
-    productFilterParamEntity.minPrice = values.start;
-    productFilterParamEntity.maxPrice = values.end;
-  }
+  //   if (value != null) {
+  //     productFilterParamEntity.category = filterMap[value];
+  //   }
+  // }
 
   void checkSearchOnPressed() {
     getProductByFilter();
-  }
-
-  void setOrder({required FilterOrderEnum value}) {
-    final Map<FilterOrderEnum, String> mapping = {
-      FilterOrderEnum.asc: 'asc',
-      FilterOrderEnum.desc: 'desc',
-    };
-
-    order = value;
-    productFilterParamEntity.order = mapping[value];
-  }
-
-  void clearFilters() {
-    for (int index = 0; index < categories.length; index++) {
-      if (index == 0) {
-        categories[index].isSelected = true;
-      } else {
-        categories[index].isSelected = false;
-      }
-    }
-
-    order = null;
-
-    productFilterParamEntity.clear();
-
-    getAllProducts();
   }
 }
