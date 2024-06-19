@@ -165,7 +165,7 @@ class SearchPageController extends ChangeNotifier {
     filterEntity = filters;
     notifyListeners();
 
-    getAllProducts();
+    getProductByFilter();
   }
 
   Future<void> getProducts() async {
@@ -201,12 +201,20 @@ class SearchPageController extends ChangeNotifier {
     _hideProductLoading();
   }
 
-  void searchByProductName({required String productName}) {
+  Future<void> searchByProductName({required String productName}) async {
     productFilterParamEntity.name = productName;
-    debounce(getProductByFilter);
+
+    debounce(() async {
+      await getProductByFilter();
+    });
   }
 
   void checkSearchOnPressed() {
+    getProductByFilter();
+  }
+
+  void clearOnPressed() {
+    productFilterParamEntity.name = '';
     getProductByFilter();
   }
 }

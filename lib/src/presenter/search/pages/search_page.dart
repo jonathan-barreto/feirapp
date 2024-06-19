@@ -1,5 +1,4 @@
 import 'package:feirapp/src/presenter/search/pages/filter_page.dart';
-import 'package:feirapp/src/presenter/search/pages/search_filter_page.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/constants/style_values.dart';
@@ -40,21 +39,21 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
     );
+  }
 
-    // await SearchFilterPage(
-    //   parentContext: context,
-    //   categories: controller.categories,
-    //   start: controller.productFilterParamEntity.minPrice,
-    //   end: controller.productFilterParamEntity.maxPrice,
-    //   searchOnPressed: controller.checkSearchOnPressed,
-    //   radioChange: (value) => controller.setCategoryInFilter(value: value),
-    //   orderOnChange: (value) => controller.setOrder(value: value),
-    //   order: controller.order,
-    //   clearFilters: controller.clearFilters,
-    //   rangeSliderChange: (values) => controller.setRangePriceInFilter(
-    //     values: values,
-    //   ),
-    // ).show();
+  Future<void> searchProductByName(String name) async {
+    await controller.searchByProductName(
+      productName: name,
+    );
+
+    if (mounted) {
+      FocusScope.of(context).unfocus();
+    }
+  }
+
+  void clearOnPressed() {
+    controller.clearOnPressed();
+    FocusScope.of(context).unfocus();
   }
 
   @override
@@ -94,8 +93,8 @@ class _SearchPageState extends State<SearchPage> {
                                 color: AppColors.white,
                                 child: SearchBarWidget(
                                   textController: controller.textController,
-                                  onPressed: () => openFilterPage(),
-                                  clearPressed: () {},
+                                  onPressed: openFilterPage,
+                                  clearPressed: clearOnPressed,
                                   onChange: (value) {
                                     controller.searchByProductName(
                                       productName: value,
