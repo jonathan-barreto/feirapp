@@ -10,7 +10,6 @@ import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/params/product_filter_param_entity.dart';
 import 'package:feirapp/src/domain/usecases/get_all_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_more_products_by_link_usecase.dart';
-import 'package:feirapp/src/presenter/search/pages/search_filter_page.dart';
 
 class SearchPageController extends ChangeNotifier {
   final GetAllProductsUsecase getAllProductsUsecase;
@@ -184,7 +183,7 @@ class SearchPageController extends ChangeNotifier {
     debounce(getProductByFilter);
   }
 
-  void _setCategoryInFilter({required ProductCategoryEnum? value}) {
+  void setCategoryInFilter({required ProductCategoryEnum? value}) {
     final Map<ProductCategoryEnum, String> filterMap = {
       ProductCategoryEnum.todos: '',
       ProductCategoryEnum.vegetal: 'vegetal',
@@ -198,16 +197,16 @@ class SearchPageController extends ChangeNotifier {
     }
   }
 
-  void _setRangePriceInFilter({required RangeValues values}) {
+  void setRangePriceInFilter({required RangeValues values}) {
     productFilterParamEntity.minPrice = values.start;
     productFilterParamEntity.maxPrice = values.end;
   }
 
-  void _checkSearchOnPressed() {
+  void checkSearchOnPressed() {
     getProductByFilter();
   }
 
-  void _setOrder({required FilterOrderEnum value}) {
+  void setOrder({required FilterOrderEnum value}) {
     final Map<FilterOrderEnum, String> mapping = {
       FilterOrderEnum.asc: 'asc',
       FilterOrderEnum.desc: 'desc',
@@ -217,7 +216,7 @@ class SearchPageController extends ChangeNotifier {
     productFilterParamEntity.order = mapping[value];
   }
 
-  void _clearFilters() {
+  void clearFilters() {
     for (int index = 0; index < categories.length; index++) {
       if (index == 0) {
         categories[index].isSelected = true;
@@ -231,20 +230,5 @@ class SearchPageController extends ChangeNotifier {
     productFilterParamEntity.clear();
 
     getAllProducts();
-  }
-
-  Future<void> showFilterOptions({required BuildContext context}) async {
-    await SearchFilterPage(
-      parentContext: context,
-      categories: categories,
-      start: productFilterParamEntity.minPrice,
-      end: productFilterParamEntity.maxPrice,
-      searchOnPressed: _checkSearchOnPressed,
-      radioChange: (value) => _setCategoryInFilter(value: value),
-      orderOnChange: (value) => _setOrder(value: value),
-      rangeSliderChange: (values) => _setRangePriceInFilter(values: values),
-      order: order,
-      clearFilters: _clearFilters,
-    ).show();
   }
 }

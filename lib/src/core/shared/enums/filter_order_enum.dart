@@ -1,1 +1,1 @@
-enum FilterOrderEnum { asc, desc }
+enum FilterOrderEnum { standard, asc, desc }
