@@ -23,10 +23,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> login() async {
-    final bool response = await controller.login();
+    final bool hasLoginError = await controller.login();
 
     if (mounted) {
-      if (response == false) {
+      if (hasLoginError == false) {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -34,11 +34,19 @@ class _LoginPageState extends State<LoginPage> {
           ),
           (Route<dynamic> route) => false,
         );
+      } else {
+        controller.hideLoading();
       }
     }
   }
 
   Future<void> goToRegisterPage() async {}
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:feirapp/src/data/datasources/local/authentication_local_datasource.dart';
 import 'package:feirapp/src/data/datasources/local/authentication_local_datasource_impl.dart';
 import 'package:feirapp/src/domain/entities/current_user_entity.dart';
+import 'package:feirapp/src/domain/usecases/get_user_credentials_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_user_usecase.dart';
 import 'package:feirapp/src/domain/usecases/save_user_credentials_usecase.dart';
 import 'package:feirapp/src/presenter/profile/controller/profile_controller.dart';
@@ -155,6 +156,12 @@ Future<void> init() async {
     ),
   );
 
+  getIt.registerFactory<GetUserCredentialsUsecase>(
+    () => GetUserCredentialsUsecase(
+      repository: getIt<AuthenticationRepository>(),
+    ),
+  );
+
   getIt.registerFactory<GetUserUsecase>(
     () => GetUserUsecase(
       repository: getIt<AuthenticationRepository>(),
@@ -204,6 +211,7 @@ Future<void> init() async {
   getIt.registerFactory<SplashController>(
     () => SplashController(
       getUserUsecase: getIt<GetUserUsecase>(),
+      getUserCredentialsUsecase: getIt<GetUserCredentialsUsecase>(),
     ),
   );
 
@@ -211,7 +219,7 @@ Future<void> init() async {
     () => ProfileController(),
   );
 
-   getIt.registerFactory<FilterStore>(
+  getIt.registerFactory<FilterStore>(
     () => FilterStore(),
   );
 

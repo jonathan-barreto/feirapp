@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:feirapp/src/core/http_client/http_client.dart';
 import 'package:feirapp/src/core/local_storage/local_storage.dart';
 import 'package:feirapp/src/core/shared/constants/endpoints.dart';
-import 'package:feirapp/src/domain/entities/login_entity.dart';
+import 'package:feirapp/src/data/model/login_model.dart';
 
 class HttpClientImpl implements HttpClient {
   final LocalStorage localStorage;
@@ -17,7 +17,7 @@ class HttpClientImpl implements HttpClient {
     String? authorization;
 
     if (json != null) {
-      final LoginEntity credentials = LoginEntity.fromJson(
+      final LoginModel credentials = LoginModel.fromJson(
         jsonDecode(json),
       );
       

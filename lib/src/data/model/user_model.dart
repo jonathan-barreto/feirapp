@@ -1,15 +1,17 @@
+import 'dart:convert';
+
 import 'package:feirapp/src/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
-  final String createdAt;
-  final String updatedAt;
+  String? createdAt;
+  String? updatedAt;
 
   UserModel({
     required super.id,
     required super.name,
     required super.numberContact,
-    required this.createdAt,
-    required this.updatedAt,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -22,7 +24,23 @@ class UserModel extends UserEntity {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  factory UserModel.fromEntity(UserEntity entity) {
+    return UserModel(
+      id: entity.id,
+      name: entity.name,
+      numberContact: entity.numberContact,
+    );
+  }
+
+  UserEntity toEntity() {
+    return UserEntity(
+      id: id,
+      name: name,
+      numberContact: numberContact,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = {};
 
     data['id'] = id;
@@ -32,5 +50,9 @@ class UserModel extends UserEntity {
     data['updated_at'] = updatedAt;
 
     return data;
+  }
+
+  String toJson() {
+    return jsonEncode(toMap());
   }
 }

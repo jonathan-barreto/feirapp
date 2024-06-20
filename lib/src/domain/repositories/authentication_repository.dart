@@ -10,9 +10,11 @@ abstract class AuthenticationRepository {
     required LoginParam param,
   });
 
-  Future<Either<Failure, bool?>> saveUserCredentials({
+  Future<Either<Failure, bool>> saveUserCredentials({
     required LoginEntity param,
   });
+
+  Future<Either<Failure, LoginEntity>> getUserCredentials();
 
   Future<Either<Failure, UserEntity>> getUser();
 }

@@ -21,13 +21,18 @@ class LoginController extends ChangeNotifier {
   bool hasError = false;
   LoginDataEntity? loginDataEntity;
 
-  void _setLoading() {
-    loading = !loading;
+  void showLoading() {
+    loading = true;
+    notifyListeners();
+  }
+
+  void hideLoading() {
+    loading = false;
     notifyListeners();
   }
 
   Future<bool> login() async {
-    _setLoading();
+    showLoading();
 
     if (kDebugMode || email != null && password != null) {
       final LoginParam loginParam = LoginParam(
@@ -39,17 +44,20 @@ class LoginController extends ChangeNotifier {
       result.fold((l) => hasError = true, (r) => loginDataEntity = r);
     }
 
-    saveUserCredentials();
-
-    _setLoading();
+    await saveUserCredentials();
 
     return hasError;
   }
 
   Future<void> saveUserCredentials() async {
     if (loginDataEntity?.data != null) {
-      await saveUserCredentialsUsecase.call(
+      final result = await saveUserCredentialsUsecase.call(
         loginDataEntity!.data,
+      );
+
+      result.fold(
+        (l) => hasError = true,
+        (r) => r == false ? hasError = true : hasError = false,
       );
     }
   }

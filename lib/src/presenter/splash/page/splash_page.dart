@@ -1,6 +1,4 @@
 import 'package:feirapp/src/di/di.dart';
-import 'package:feirapp/src/domain/entities/current_user_entity.dart';
-import 'package:feirapp/src/domain/entities/user_entity.dart';
 import 'package:feirapp/src/presenter/init/page/init_page.dart';
 import 'package:feirapp/src/presenter/main/pages/main_page.dart';
 import 'package:feirapp/src/presenter/splash/controller/splash_controller.dart';
@@ -25,18 +23,15 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
 
-    final UserEntity? user = await controller.getUser();
-    
-    final CurrentUserEntity currentUser = getIt<CurrentUserEntity>();
-    currentUser.data = user;
+    final bool hasUser = await controller.getUser();
 
     if (mounted) {
-      if (user != null) {
+      if (hasUser == true) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => MainPage(
-              user: user,
+              user: controller.user!,
             ),
           ),
         );
