@@ -1,13 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:feirapp/src/core/shared/constants/app_colors.dart';
+import 'package:feirapp/src/core/shared/constants/endpoints.dart';
+import 'package:feirapp/src/core/shared/extensions/string_converter_to_brl_extension.dart';
+import 'package:feirapp/src/core/shared/extensions/upper_case_first_letter_extension.dart';
+import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/style_values.dart';
-import 'package:feirapp/src/core/shared/widgets/product_price_widget.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
-import 'package:feirapp/src/presenter/product/widgets/action_button_widget.dart';
-import 'package:feirapp/src/presenter/product/widgets/container_image_widget.dart';
 
 class ContentProductPage extends StatelessWidget {
   final ProductEntity? product;
+  final String productPrice;
   final String quantity;
   final VoidCallback incrementQuantity;
   final VoidCallback decrementQuantity;
@@ -15,6 +19,7 @@ class ContentProductPage extends StatelessWidget {
   const ContentProductPage({
     super.key,
     required this.product,
+    required this.productPrice,
     required this.quantity,
     required this.incrementQuantity,
     required this.decrementQuantity,
@@ -22,109 +27,209 @@ class ContentProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Column(
       children: [
         Expanded(
-          child: Column(
-            children: [
-              ContainerImageWidget(
-                imageUrl: product?.image ?? '',
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: StyleValues.normal,
-                ),
-                child: Container(
-                  width: double.infinity,
-                  height: screenHeight * 0.1,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      StyleValues.normal,
+          flex: 5,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: StyleValues.small,
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: CachedNetworkImage(
+                    imageUrl: '${EndPoints.baseUrlImage}${product?.image}',
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.error,
                     ),
+                    progressIndicatorBuilder: (context, url, downloadProgress) {
+                      return const CircularProgressIndicatorCustom();
+                    },
                   ),
+                ),
+                Expanded(
                   child: Row(
                     children: [
                       Expanded(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Row(
                               children: [
                                 Text(
                                   product?.name ?? '',
-                                  maxLines: 1,
                                   style: textTheme.bodyLarge?.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ],
                             ),
-                            ProductPriceWidget(
-                              price: product?.price ?? '',
-                              discountPrice: product?.discountPrice,
+                            Row(
+                              children: [
+                                Text(
+                                  'Categoria: ${product?.category}',
+                                  style: textTheme.bodySmall?.copyWith(),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                AutoSizeText(
+                                  '${product?.unit.upperCaseFirstLetter()}:',
+                                  maxLines: 1,
+                                  style: textTheme.bodySmall?.copyWith(),
+                                ),
+                                Visibility(
+                                  visible: product?.weight != null,
+                                  child: Expanded(
+                                    child: AutoSizeText(
+                                      ' aprox. ${product?.weight}',
+                                      maxLines: 1,
+                                      style: textTheme.bodySmall?.copyWith(),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ),
                       Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.background,
-                            borderRadius: BorderRadius.circular(
-                              StyleValues.extraLarge,
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              ActionButtonWidget(
-                                isAdd: false,
-                                onPressed: decrementQuantity,
-                              ),
-                              AutoSizeText(
-                                quantity,
-                                maxLines: 1,
-                                style: textTheme.bodyLarge?.copyWith(
-                                  fontWeight: FontWeight.bold,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  '⭐ ⭐ ⭐ ⭐ ⭐',
+                                  style: textTheme.bodyMedium?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              ActionButtonWidget(
-                                onPressed: incrementQuantity,
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  '(0 Reviews)',
+                                  style: textTheme.bodySmall?.copyWith(),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-        Container(
-          width: double.infinity,
-          height: screenHeight * 0.1,
-          padding: const EdgeInsets.symmetric(
-            vertical: StyleValues.small,
-            horizontal: StyleValues.normal,
-          ),
-          child: ElevatedButton(
-            onPressed: () {},
-            style: const ButtonStyle(
-              elevation: MaterialStatePropertyAll(
-                0,
+        Expanded(
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(
+                StyleValues.large,
+              ),
+              topRight: Radius.circular(
+                StyleValues.large,
               ),
             ),
-            child: Text(
-              'Adicionar ao Carrinho',
-              style: textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
+            child: Container(
+              color: AppColors.primary,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        productPrice.converterToBRL(),
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: StyleValues.extraLarge * 1.5,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColors.white,
+                              width: StyleValues.extraSmall,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              StyleValues.normal,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              IconButton(
+                                onPressed: decrementQuantity,
+                                icon: const Icon(
+                                  Icons.remove,
+                                  color: AppColors.white,
+                                ),
+                              ),
+                              Expanded(
+                                child: Center(
+                                  child: AutoSizeText(
+                                    quantity,
+                                    maxLines: 1,
+                                    style: textTheme.bodyMedium?.copyWith(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: incrementQuantity,
+                                icon: const Icon(
+                                  Icons.add,
+                                  color: AppColors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          elevation: const MaterialStatePropertyAll(0),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                StyleValues.normal,
+                              ),
+                            ),
+                          ),
+                          backgroundColor: const MaterialStatePropertyAll(
+                            AppColors.white,
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.save,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

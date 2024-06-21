@@ -1,3 +1,4 @@
+import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/style_values.dart';
 
@@ -12,8 +13,8 @@ class IconImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+      decoration: const BoxDecoration(
+        color: AppColors.white,
         shape: BoxShape.circle,
       ),
       padding: const EdgeInsets.all(
@@ -22,7 +23,7 @@ class IconImageWidget extends StatelessWidget {
       child: Image.asset(
         image,
         width: StyleValues.large,
-        color: Theme.of(context).colorScheme.primary,
+        color: AppColors.primary,
       ),
     );
   }

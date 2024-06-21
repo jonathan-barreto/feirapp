@@ -27,7 +27,8 @@ class ProductController extends ChangeNotifier {
   bool hasError = false;
   bool productIsFavorite = false;
 
-  int quantity = 0;
+  int quantity = 1;
+  String? productPrice;
 
   ProductEntity? product;
 
@@ -57,7 +58,9 @@ class ProductController extends ChangeNotifier {
   Future<void> getProduct({required String productId}) async {
     showLoading();
 
-    checkIfIsFavoriteProduct(productId: productId);
+    checkIfIsFavoriteProduct(
+      productId: productId,
+    );
 
     await Future.delayed(
       const Duration(
@@ -65,19 +68,54 @@ class ProductController extends ChangeNotifier {
       ),
     );
 
-    final response = await getProductByIdUsecase.call(productId);
+    final response = await getProductByIdUsecase.call(
+      productId,
+    );
+
     response.fold((l) => hasError = true, (r) => product = r.products.first);
+
+    productPrice = product?.discountPrice ?? product?.price;
 
     hideLoading();
   }
 
+  void _minusOrPlusProductPrice({bool isMinus = false}) {
+    final double productPrintDouble = double.parse(
+      '$productPrice',
+    );
+
+    final double price = double.parse(
+      product?.discountPrice ?? (product?.price ?? ''),
+    );
+
+    late final double finalValue;
+
+    if (isMinus) {
+      finalValue = productPrintDouble - price;
+    } else {
+      finalValue = productPrintDouble + price;
+    }
+
+    productPrice = '$finalValue';
+  }
+
   void incrementQuantity() {
     quantity = quantity + 1;
+
+    _minusOrPlusProductPrice();
+
     notifyListeners();
   }
 
   void decrementQuantity() {
-    if (quantity > 0) quantity = quantity - 1;
+    if (quantity > 1) {
+      quantity = quantity - 1;
+
+      _minusOrPlusProductPrice(
+        isMinus: true,
+      );
+    }
+
     notifyListeners();
   }
 

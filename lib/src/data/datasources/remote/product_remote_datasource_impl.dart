@@ -17,14 +17,12 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
   Future<ProductDataEntity> getAllProducts({
     required SearchProductFilterParam filter,
   }) async {
-    final String json = filter.toJson();
+    try {
+      final HttpResponse response = await httpClient.post(
+        endpoint: EndPoints.getAllProducts,
+        body: filter.toJson(),
+      );
 
-    final HttpResponse response = await httpClient.post(
-      endpoint: EndPoints.getAllProducts,
-      body: json,
-    );
-
-    if (response.statusCode == 200) {
       final productDataModel = ProductDataModel.fromJson(
         response.data,
       );
@@ -32,22 +30,26 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
       final ProductDataEntity productDataEntity = productDataModel.toEntity();
 
       return productDataEntity;
-    } else {
+    } catch (e) {
       throw ServerException();
     }
   }
 
   @override
   Future<ProductDataEntity> getProductById({required String id}) async {
-    final response = await httpClient.get(
-      endpoint: '${EndPoints.getProductById}/$id',
-    );
+    try {
+      final HttpResponse response = await httpClient.get(
+        endpoint: '${EndPoints.getProductById}/$id',
+      );
 
-    if (response.statusCode == 200) {
-      return ProductDataModel.fromJson(
+      final productDataModel = ProductDataModel.fromJson(
         response.data,
       );
-    } else {
+
+      final ProductDataEntity productDataEntity = productDataModel.toEntity();
+
+      return productDataEntity;
+    } catch (e) {
       throw ServerException();
     }
   }
@@ -56,12 +58,11 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
   Future<ProductDataEntity> getProductsByIds({
     required List<int> productIds,
   }) async {
-    final response = await httpClient.post(
-      endpoint: EndPoints.getProductsByIds,
-      body: productIds,
-    );
-
-    if (response.statusCode == 200) {
+    try {
+      final HttpResponse response = await httpClient.post(
+        endpoint: EndPoints.getProductsByIds,
+        body: productIds,
+      );
       final productDataModel = ProductDataModel.fromJson(
         response.data,
       );
@@ -69,18 +70,18 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
       final ProductDataEntity productDataEntity = productDataModel.toEntity();
 
       return productDataEntity;
-    } else {
+    } catch (e) {
       throw ServerException();
     }
   }
 
   @override
   Future<ProductDataEntity> getDiscountedProducts() async {
-    final HttpResponse response = await httpClient.get(
-      endpoint: EndPoints.getDiscountedProducts,
-    );
+    try {
+      final HttpResponse response = await httpClient.get(
+        endpoint: EndPoints.getDiscountedProducts,
+      );
 
-    if (response.statusCode == 200) {
       final productDataModel = ProductDataModel.fromJson(
         response.data,
       );
@@ -88,7 +89,7 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
       final ProductDataEntity productDataEntity = productDataModel.toEntity();
 
       return productDataEntity;
-    } else {
+    } catch (e) {
       throw ServerException();
     }
   }
@@ -98,12 +99,12 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
     required String link,
     required SearchProductFilterParam? params,
   }) async {
-    final HttpResponse response = await httpClient.post(
-      endpoint: link,
-      body: params,
-    );
+    try {
+      final HttpResponse response = await httpClient.post(
+        endpoint: link,
+        body: params,
+      );
 
-    if (response.statusCode == 200) {
       final productDataModel = ProductDataModel.fromJson(
         response.data,
       );
@@ -111,7 +112,7 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
       final ProductDataEntity productDataEntity = productDataModel.toEntity();
 
       return productDataEntity;
-    } else {
+    } catch (e) {
       throw ServerException();
     }
   }

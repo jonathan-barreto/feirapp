@@ -1,11 +1,10 @@
+import 'package:feirapp/src/core/shared/constants/app_colors.dart';
+import 'package:feirapp/src/presenter/product/widgets/favorite_icon_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/app_assets.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
-import 'package:feirapp/src/core/shared/widgets/searche_empty_widget.dart';
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/presenter/product/controller/product_controller.dart';
 import 'package:feirapp/src/presenter/product/widgets/content_product_page_widget.dart';
-import 'package:feirapp/src/presenter/product/widgets/icon_image_widget.dart';
 
 class ProductPage extends StatefulWidget {
   final String id;
@@ -22,9 +21,6 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   final ProductController controller = getIt<ProductController>();
 
-  final String bookmarkFilled = AppAssets.bookmarkFilledIcon;
-  final String bookmark = AppAssets.bookmarkIcon;
-
   @override
   void initState() {
     super.initState();
@@ -33,23 +29,25 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return AnimatedBuilder(
       animation: controller,
       builder: (context, child) {
         return Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: theme.colorScheme.primary,
           appBar: AppBar(
+            backgroundColor: AppColors.primary,
+            iconTheme: theme.iconTheme.copyWith(
+              color: AppColors.white,
+            ),
             actions: [
               Visibility(
                 visible: !controller.loading && controller.product != null,
-                child: IconButton(
-                  onPressed: () => controller.saveProductToFavorites(
+                child: FavoriteIconWidget(
+                  isFavorite: controller.productIsFavorite,
+                  saveProductOnPressed: () => controller.saveProductToFavorites(
                     productId: widget.id,
-                  ),
-                  icon: IconImageWidget(
-                    image: controller.productIsFavorite
-                        ? bookmarkFilled
-                        : bookmark,
                   ),
                 ),
               ),
@@ -69,31 +67,12 @@ class _ProductPageState extends State<ProductPage> {
                 Visibility(
                   visible: !controller.loading,
                   child: Expanded(
-                    child: Column(
-                      children: [
-                        Visibility(
-                          visible: controller.product != null,
-                          child: Expanded(
-                            child: ContentProductPage(
-                              product: controller.product,
-                              quantity: '${controller.quantity}',
-                              // incrementQuantity: controller.incrementQuantity,
-                              // decrementQuantity: controller.decrementQuantity,
-                              incrementQuantity:
-                                  controller.getAllFavoriteProduct,
-                              decrementQuantity: controller.remove,
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: controller.product == null,
-                          child: const Expanded(
-                            child: SearchEmptyWidget(
-                              label: 'O produto não foi encontrado.',
-                            ),
-                          ),
-                        ),
-                      ],
+                    child: ContentProductPage(
+                      product: controller.product,
+                      productPrice: controller.productPrice ?? '',
+                      quantity: '${controller.quantity}',
+                      incrementQuantity: controller.incrementQuantity,
+                      decrementQuantity: controller.decrementQuantity,
                     ),
                   ),
                 ),
