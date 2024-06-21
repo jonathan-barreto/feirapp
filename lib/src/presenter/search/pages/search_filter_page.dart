@@ -120,9 +120,9 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
                           child: FilterCategoryContainerWidget(
                             categories: controller.categories,
                             onChange: (index) {
-                              final categorySelected = controller.radioChange(
-                                index: index,
-                              );
+                              // final categorySelected = controller.radioChange(
+                              //   index: index,
+                              // );
 
                               // widget.radioChange(categorySelected.category);
                             },

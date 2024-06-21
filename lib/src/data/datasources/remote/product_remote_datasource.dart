@@ -1,20 +1,23 @@
-import 'package:feirapp/src/data/model/product_data_model.dart';
-import 'package:feirapp/src/data/model/product_filter_param_model.dart';
-import 'package:feirapp/src/domain/params/product_filter_param_entity.dart';
+import 'package:feirapp/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/domain/params/search_product_filter_param.dart';
 
 abstract class ProductRemoteDatasource {
-  Future<ProductDataModel> getAllProducts({
-    required ProductFilterParamModel filter,
+  Future<ProductDataEntity> getAllProducts({
+    required SearchProductFilterParam filter,
   });
 
-  Future<ProductDataModel> getProductById({required String id});
+  Future<ProductDataEntity> getProductById({
+    required String id,
+  });
 
-  Future<ProductDataModel> getProductsByIds({required List<int> productIds});
+  Future<ProductDataEntity> getProductsByIds({
+    required List<int> productIds,
+  });
 
-  Future<ProductDataModel> getDiscountedProducts();
-
-  Future<ProductDataModel> getMoreProductsByLink({
+  Future<ProductDataEntity> getMoreProductsByLink({
     required String link,
-    required ProductFilterParamEntity? params,
+    required SearchProductFilterParam? params,
   });
+
+  Future<ProductDataEntity> getDiscountedProducts();
 }

@@ -18,6 +18,8 @@ class GetMoreProductsByLinkUsecase
     GetProductParamEntity params,
   ) async {
     return await repository.getMoreProductsByLink(
-        link: params.endpoint ?? '', params: params.productFilterParamEntity);
+      link: params.endpoint ?? '',
+      params: params.searchProductFilterParam,
+    );
   }
 }

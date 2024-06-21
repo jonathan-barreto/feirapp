@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 
 class ProductModel extends ProductEntity {
@@ -27,7 +29,35 @@ class ProductModel extends ProductEntity {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  factory ProductModel.fromEntity(ProductEntity entity) {
+    return ProductModel(
+      id: entity.id,
+      name: entity.name,
+      category: entity.category,
+      unit: entity.unit,
+      price: entity.price,
+      image: entity.image,
+      weight: entity.weight,
+      discount: entity.discount,
+      discountPrice: entity.discountPrice,
+    );
+  }
+
+  ProductEntity toEntity() {
+    return ProductEntity(
+      id: id,
+      name: name,
+      category: category,
+      unit: unit,
+      price: price,
+      image: image,
+      weight: weight,
+      discount: discount,
+      discountPrice: discountPrice,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = {};
 
     data['id'] = id;
@@ -41,5 +71,9 @@ class ProductModel extends ProductEntity {
     data['discount_price'] = discountPrice;
 
     return data;
+  }
+
+  String toJson() {
+    return jsonEncode(toMap());
   }
 }

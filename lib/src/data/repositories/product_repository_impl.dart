@@ -3,10 +3,8 @@ import 'package:feirapp/src/core/errors/exceptions.dart';
 import 'package:feirapp/src/core/errors/failure.dart';
 import 'package:feirapp/src/data/datasources/local/product_local_datasource.dart';
 import 'package:feirapp/src/data/datasources/remote/product_remote_datasource.dart';
-import 'package:feirapp/src/data/model/product_data_model.dart';
-import 'package:feirapp/src/data/model/product_filter_param_model.dart';
 import 'package:feirapp/src/domain/entities/product_data_entity.dart';
-import 'package:feirapp/src/domain/params/product_filter_param_entity.dart';
+import 'package:feirapp/src/domain/params/search_product_filter_param.dart';
 import 'package:feirapp/src/domain/repositories/product_repository.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
@@ -20,15 +18,11 @@ class ProductRepositoryImpl implements ProductRepository {
 
   @override
   Future<Either<Failure, ProductDataEntity>> getAllProducts({
-    required ProductFilterParamEntity params,
+    required SearchProductFilterParam params,
   }) async {
-    final ProductFilterParamModel filter = ProductFilterParamModel.fromEntity(
-      params,
-    );
-
     try {
-      final ProductDataModel result = await remoteDatasource.getAllProducts(
-        filter: filter,
+      final result = await remoteDatasource.getAllProducts(
+        filter: params,
       );
 
       return Right(result);
@@ -42,7 +36,7 @@ class ProductRepositoryImpl implements ProductRepository {
     required String id,
   }) async {
     try {
-      final ProductDataModel result = await remoteDatasource.getProductById(
+      final result = await remoteDatasource.getProductById(
         id: id,
       );
 
@@ -57,7 +51,7 @@ class ProductRepositoryImpl implements ProductRepository {
     required List<int> productIds,
   }) async {
     try {
-      final ProductDataModel result = await remoteDatasource.getProductsByIds(
+      final result = await remoteDatasource.getProductsByIds(
         productIds: productIds,
       );
 
@@ -82,7 +76,7 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<Either<Failure, ProductDataEntity>> getMoreProductsByLink({
     required String link,
-    required ProductFilterParamEntity? params,
+    required SearchProductFilterParam? params,
   }) async {
     try {
       final ProductDataEntity result =

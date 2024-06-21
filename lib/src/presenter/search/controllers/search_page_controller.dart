@@ -7,7 +7,7 @@ import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
 import 'package:feirapp/src/domain/params/get_product_param_entity.dart';
 import 'package:feirapp/src/domain/entities/product_data_entity.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
-import 'package:feirapp/src/domain/params/product_filter_param_entity.dart';
+import 'package:feirapp/src/domain/params/search_product_filter_param.dart';
 import 'package:feirapp/src/domain/usecases/get_all_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_more_products_by_link_usecase.dart';
 
@@ -23,7 +23,7 @@ class SearchPageController extends ChangeNotifier {
   late ScrollController scrollController;
   late TextEditingController textController;
 
-  late ProductFilterParamEntity productFilterParamEntity;
+  late SearchProductFilterParam searchFilterParam;
   FilterEntity? filterEntity;
 
   final DebounceService debounce = DebounceServiceImpl();
@@ -73,7 +73,7 @@ class SearchPageController extends ChangeNotifier {
     scrollController = ScrollController();
     textController = TextEditingController();
 
-    productFilterParamEntity = ProductFilterParamEntity();
+    searchFilterParam = SearchProductFilterParam();
 
     scrollController.addListener(() {
       final position = scrollController.position;
@@ -154,14 +154,14 @@ class SearchPageController extends ChangeNotifier {
       filters.orders,
     );
 
-    final ProductFilterParamEntity param = ProductFilterParamEntity(
+    final SearchProductFilterParam param = SearchProductFilterParam(
       category: categorySelected,
       order: orderSelected,
       minPrice: filters.currentRangeValues.start,
       maxPrice: filters.currentRangeValues.end,
     );
 
-    productFilterParamEntity = param;
+    searchFilterParam = param;
     filterEntity = filters;
     notifyListeners();
 
@@ -176,7 +176,7 @@ class SearchPageController extends ChangeNotifier {
     );
 
     final response = await getAllProductsUsecase.call(
-      productFilterParamEntity,
+      searchFilterParam,
     );
 
     response.fold((l) => hasError = true, (r) => productDataEntity = r);
@@ -202,7 +202,7 @@ class SearchPageController extends ChangeNotifier {
   }
 
   Future<void> searchByProductName({required String productName}) async {
-    productFilterParamEntity.name = productName;
+    searchFilterParam.name = productName;
 
     debounce(() async {
       await getProductByFilter();
@@ -214,7 +214,7 @@ class SearchPageController extends ChangeNotifier {
   }
 
   void clearOnPressed() {
-    productFilterParamEntity.name = '';
+    searchFilterParam.name = '';
     getProductByFilter();
   }
 }
