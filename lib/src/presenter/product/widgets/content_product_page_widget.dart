@@ -8,6 +8,7 @@ import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_cust
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/style_values.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
+import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 
 class ContentProductPage extends StatelessWidget {
   final ProductEntity? product;
@@ -101,15 +102,29 @@ class ContentProductPage extends StatelessWidget {
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Text(
-                                  '⭐ ⭐ ⭐ ⭐ ⭐',
-                                  style: textTheme.bodyMedium?.copyWith(
-                                    fontWeight: FontWeight.bold,
+                                Expanded(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      RatingStars(
+                                        value: 0,
+                                        onValueChanged: (v) {},
+                                        valueLabelVisibility: false,
+                                        maxValueVisibility: false,
+                                        starCount: 5,
+                                        starSpacing: 2,
+                                        starSize: StyleValues.large,
+                                        starOffColor: const Color(0xffe7e8ea),
+                                        starColor: Colors.yellow,
+                                      ),
+                                    ],
                                   ),
-                                ),
+                                )
                               ],
+                            ),
+                            const SizedBox(
+                              height: StyleValues.smaller,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
