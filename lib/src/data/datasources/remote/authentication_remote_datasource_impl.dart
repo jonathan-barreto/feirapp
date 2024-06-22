@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:feirapp/src/core/errors/exceptions.dart';
 import 'package:feirapp/src/core/http_client/http_client.dart';
 import 'package:feirapp/src/data/datasources/remote/authentication_remote_datasource.dart';
-import 'package:feirapp/src/data/model/login_data_model.dart';
+import 'package:feirapp/src/data/model/credential_data_model.dart';
 import 'package:feirapp/src/data/model/user_model.dart';
 import 'package:feirapp/src/domain/params/login_param.dart';
 
@@ -16,7 +16,7 @@ class AuthenticationRemoteDatasourceImpl
   });
 
   @override
-  Future<LoginDataModel> login({required LoginParam param}) async {
+  Future<CredentialDataModel> login({required LoginParam param}) async {
     final String json = jsonEncode(
       param.toJson(),
     );
@@ -27,7 +27,7 @@ class AuthenticationRemoteDatasourceImpl
     );
 
     if (response.statusCode == 200) {
-      return LoginDataModel.fromJson(
+      return CredentialDataModel.fromJson(
         response.data,
       );
     } else {

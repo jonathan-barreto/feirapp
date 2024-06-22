@@ -3,7 +3,7 @@ import 'package:feirapp/src/core/errors/failure.dart';
 import 'package:feirapp/src/core/usecase/usecase.dart';
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/domain/entities/current_user_entity.dart';
-import 'package:feirapp/src/domain/entities/login_entity.dart';
+import 'package:feirapp/src/domain/entities/credential_entity.dart';
 import 'package:feirapp/src/domain/entities/user_entity.dart';
 import 'package:feirapp/src/domain/usecases/get_user_credentials_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_user_usecase.dart';
@@ -22,7 +22,7 @@ class SplashController extends ChangeNotifier {
   final CurrentUserEntity currentUser = getIt<CurrentUserEntity>();
 
   Future<bool> getUser() async {
-    final LoginEntity? credentials = await _getCredentias();
+    final CredentialEntity? credentials = await _getCredentias();
 
     if (credentials != null) {
       final result = await getUserUsecase(NoParams());
@@ -33,15 +33,15 @@ class SplashController extends ChangeNotifier {
       currentUser.data = user;
     }
 
-    return user != null;
+    return currentUser.data != null;
   }
 
-  Future<LoginEntity?> _getCredentias() async {
-    final Either<Failure, LoginEntity> result = await getUserCredentialsUsecase(
+  Future<CredentialEntity?> _getCredentias() async {
+    final Either<Failure, CredentialEntity> result = await getUserCredentialsUsecase(
       NoParams(),
     );
 
-    LoginEntity? loginEntity;
+    CredentialEntity? loginEntity;
 
     result.fold((l) => null, (r) => loginEntity = r);
 

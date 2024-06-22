@@ -1,29 +1,31 @@
 import 'dart:convert';
 
-import 'package:feirapp/src/domain/entities/login_entity.dart';
+import 'package:feirapp/src/domain/entities/credential_entity.dart';
 
-class LoginModel extends LoginEntity {
-  LoginModel({
+
+
+class CredentialModel extends CredentialEntity {
+  CredentialModel({
     required super.acessToken,
     required super.tokenType,
   });
 
-  factory LoginModel.fromJson(Map<String, dynamic> json) {
-    return LoginModel(
+  factory CredentialModel.fromJson(Map<String, dynamic> json) {
+    return CredentialModel(
       acessToken: json['acess_token'],
       tokenType: json['token_type'],
     );
   }
 
-  factory LoginModel.fromEntity(LoginEntity entity) {
-    return LoginModel(
+  factory CredentialModel.fromEntity(CredentialEntity entity) {
+    return CredentialModel(
       acessToken: entity.acessToken,
       tokenType: entity.tokenType,
     );
   }
 
-  LoginEntity toEntity() {
-    return LoginEntity(
+  CredentialEntity toEntity() {
+    return CredentialEntity(
       acessToken: acessToken,
       tokenType: tokenType,
     );

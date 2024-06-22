@@ -130,7 +130,7 @@ class ContentProductPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Text(
-                                  '(0 Reviews)',
+                                  '(0 Notas)',
                                   style: textTheme.bodySmall?.copyWith(),
                                 ),
                               ],

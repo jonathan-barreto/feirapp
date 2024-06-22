@@ -1,8 +1,8 @@
-class LoginEntity {
+class CredentialEntity {
   final String acessToken;
   final String tokenType;
 
-  LoginEntity({
+  CredentialEntity({
     required this.acessToken,
     required this.tokenType,
   });

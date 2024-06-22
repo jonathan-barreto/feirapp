@@ -1,6 +1,6 @@
 import 'package:feirapp/src/domain/usecases/save_user_credentials_usecase.dart';
 import 'package:flutter/foundation.dart';
-import 'package:feirapp/src/domain/entities/login_data_entity.dart';
+import 'package:feirapp/src/domain/entities/credential_data_entity.dart';
 import 'package:feirapp/src/domain/params/login_param.dart';
 import 'package:feirapp/src/domain/usecases/login_usecase.dart';
 
@@ -19,7 +19,7 @@ class LoginController extends ChangeNotifier {
   bool loading = false;
 
   bool hasError = false;
-  LoginDataEntity? loginDataEntity;
+  CredentialDataEntity? loginDataEntity;
 
   void showLoading() {
     loading = true;

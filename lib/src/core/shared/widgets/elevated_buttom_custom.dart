@@ -22,7 +22,7 @@ class ElevatedButtonCustom extends StatelessWidget {
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
-              StyleValues.normal,
+              StyleValues.small,
             ),
           ),
         ),

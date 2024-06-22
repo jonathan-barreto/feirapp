@@ -4,8 +4,8 @@ import 'package:feirapp/src/core/errors/failure.dart';
 import 'package:feirapp/src/data/datasources/local/authentication_local_datasource.dart';
 import 'package:feirapp/src/data/datasources/remote/authentication_remote_datasource.dart';
 import 'package:feirapp/src/data/model/user_model.dart';
-import 'package:feirapp/src/domain/entities/login_data_entity.dart';
-import 'package:feirapp/src/domain/entities/login_entity.dart';
+import 'package:feirapp/src/domain/entities/credential_data_entity.dart';
+import 'package:feirapp/src/domain/entities/credential_entity.dart';
 import 'package:feirapp/src/domain/entities/user_entity.dart';
 import 'package:feirapp/src/domain/params/login_param.dart';
 import 'package:feirapp/src/domain/repositories/authentication_repository.dart';
@@ -20,11 +20,11 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   });
 
   @override
-  Future<Either<Failure, LoginDataEntity>> login({
+  Future<Either<Failure, CredentialDataEntity>> login({
     required LoginParam param,
   }) async {
     try {
-      final LoginDataEntity result = await remoteDatasource.login(
+      final CredentialDataEntity result = await remoteDatasource.login(
         param: param,
       );
 
@@ -36,7 +36,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
 
   @override
   Future<Either<Failure, bool>> saveUserCredentials({
-    required LoginEntity param,
+    required CredentialEntity param,
   }) async {
     try {
       final credentialsSaves = await localDatasource.saveUserCredentials(
@@ -50,12 +50,12 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  Future<Either<Failure, LoginEntity>> getUserCredentials() async {
+  Future<Either<Failure, CredentialEntity>> getUserCredentials() async {
     try {
-      final loginModel = await localDatasource.getUserCredentials();
-      final LoginEntity loginEntity = loginModel.toEntity();
+      final credentialModel = await localDatasource.getUserCredentials();
+      final CredentialEntity credentialEntity = credentialModel.toEntity();
 
-      return Right(loginEntity);
+      return Right(credentialEntity);
     } catch (e) {
       return Left(ServerFailure());
     }
