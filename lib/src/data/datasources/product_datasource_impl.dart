@@ -1,15 +1,15 @@
 import 'package:feirapp/src/core/errors/exceptions.dart';
 import 'package:feirapp/src/core/http_client/http_client.dart';
-import 'package:feirapp/src/core/shared/constants/endpoints.dart';
-import 'package:feirapp/src/data/datasources/remote/product_remote_datasource.dart';
+import 'package:feirapp/src/core/shared/constants/app_endpoints.dart';
+import 'package:feirapp/src/data/datasources/product_datasource.dart';
 import 'package:feirapp/src/data/model/product_data_model.dart';
 import 'package:feirapp/src/domain/entities/product_data_entity.dart';
 import 'package:feirapp/src/domain/params/search_product_filter_param.dart';
 
-class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
+class ProductDatasourceImpl implements ProductDatasource {
   final HttpClient httpClient;
 
-  ProductRemoteDatasourceImpl({
+  ProductDatasourceImpl({
     required this.httpClient,
   });
 
@@ -19,7 +19,7 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
   }) async {
     try {
       final HttpResponse response = await httpClient.post(
-        endpoint: EndPoints.getAllProducts,
+        endpoint: AppEndpoints.getAllProducts,
         body: filter.toJson(),
       );
 
@@ -39,7 +39,7 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
   Future<ProductDataEntity> getProductById({required String id}) async {
     try {
       final HttpResponse response = await httpClient.get(
-        endpoint: '${EndPoints.getProductById}/$id',
+        endpoint: '${AppEndpoints.getProductById}/$id',
       );
 
       final productDataModel = ProductDataModel.fromJson(
@@ -60,7 +60,7 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
   }) async {
     try {
       final HttpResponse response = await httpClient.post(
-        endpoint: EndPoints.getProductsByIds,
+        endpoint: AppEndpoints.getProductsByIds,
         body: productIds,
       );
       final productDataModel = ProductDataModel.fromJson(
@@ -79,7 +79,7 @@ class ProductRemoteDatasourceImpl implements ProductRemoteDatasource {
   Future<ProductDataEntity> getDiscountedProducts() async {
     try {
       final HttpResponse response = await httpClient.get(
-        endpoint: EndPoints.getDiscountedProducts,
+        endpoint: AppEndpoints.getDiscountedProducts,
       );
 
       final productDataModel = ProductDataModel.fromJson(

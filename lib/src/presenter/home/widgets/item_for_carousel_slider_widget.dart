@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 
 class ItemForCarouselSlider extends StatelessWidget {
   final String image;
@@ -13,13 +13,13 @@ class ItemForCarouselSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(
-        StyleValues.small,
+        AppStyleValues.small,
       ),
       child: SizedBox(
         width: double.infinity,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(
-            StyleValues.normal,
+            AppStyleValues.normal,
           ),
           child: Image.asset(
             image,

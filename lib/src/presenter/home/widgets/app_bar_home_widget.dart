@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 
 class AppBarHomeWidget extends StatelessWidget {
   final String name;
@@ -21,11 +21,11 @@ class AppBarHomeWidget extends StatelessWidget {
       height: screenHeight * 0.1,
       color: themeData.appBarTheme.backgroundColor,
       padding: const EdgeInsets.symmetric(
-        horizontal: StyleValues.small,
+        horizontal: AppStyleValues.small,
       ),
       child: Padding(
         padding: const EdgeInsets.all(
-          StyleValues.small,
+          AppStyleValues.small,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

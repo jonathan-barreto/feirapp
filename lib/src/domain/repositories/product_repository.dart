@@ -22,13 +22,4 @@ abstract class ProductRepository {
     required String link,
     required SearchProductFilterParam? params,
   });
-
-  Either<Failure, List<String>?> getAllFavoriteProducts({required String key});
-
-  Future<Either<Failure, bool?>> setProductToFavorite({
-    required String key,
-    required List<String> products,
-  });
-
-  Either<Failure, void> removeKey({required String key});
 }

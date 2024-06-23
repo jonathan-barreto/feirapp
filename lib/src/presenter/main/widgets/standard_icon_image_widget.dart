@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 
 class StandardIconImageWidget extends StatelessWidget {
   final String imagePath;
@@ -26,11 +26,11 @@ class StandardIconImageWidget extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       padding: const EdgeInsets.all(
-        StyleValues.smaller,
+        AppStyleValues.smaller,
       ),
       child: Image.asset(
         imagePath,
-        width: StyleValues.large,
+        width: AppStyleValues.large,
         color: isEqualIndexes ? AppColors.white : AppColors.black,
       ),
     );

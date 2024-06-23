@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 
 class ContainerOptionLoginWidget extends StatelessWidget {
   final String imagePath;
@@ -12,8 +12,8 @@ class ContainerOptionLoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: StyleValues.extraLarge * 1.2,
-      width: StyleValues.extraLarge * 1.2,
+      height: AppStyleValues.extraLarge * 1.2,
+      width: AppStyleValues.extraLarge * 1.2,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -24,7 +24,7 @@ class ContainerOptionLoginWidget extends StatelessWidget {
           )
         ],
         borderRadius: BorderRadius.circular(
-          StyleValues.small,
+          AppStyleValues.small,
         ),
       ),
       child: Column(
@@ -32,7 +32,7 @@ class ContainerOptionLoginWidget extends StatelessWidget {
         children: [
           Image.asset(
             imagePath,
-            width: StyleValues.large,
+            width: AppStyleValues.large,
           )
         ],
       ),

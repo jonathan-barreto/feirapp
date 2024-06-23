@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/core/shared/widgets/email_text_field_custom_widget.dart';
 
 class EmailFieldWidget extends StatelessWidget {
@@ -16,7 +16,7 @@ class EmailFieldWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: StyleValues.small,
+        horizontal: AppStyleValues.small,
       ),
       child: Column(
         children: [
@@ -29,10 +29,10 @@ class EmailFieldWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: StyleValues.small,
+            height: AppStyleValues.small,
           ),
           SizedBox(
-            height: StyleValues.extraLarge * 2,
+            height: AppStyleValues.extraLarge * 2,
             child: EmailTextFieldCustom(
               onChanged: (value) => onChanged(value),
             ),

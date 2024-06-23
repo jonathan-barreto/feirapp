@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 
 class ActionButtonWidget extends StatelessWidget {
   final bool isAdd;
@@ -20,7 +20,7 @@ class ActionButtonWidget extends StatelessWidget {
         onTap: onPressed,
         child: Padding(
           padding: const EdgeInsets.all(
-            StyleValues.normal,
+            AppStyleValues.normal,
           ),
           child: Container(
             width: double.infinity,
@@ -31,7 +31,7 @@ class ActionButtonWidget extends StatelessWidget {
             ),
             child: Icon(
               isAdd ? Icons.add : Icons.remove,
-              size: StyleValues.largeMedium,
+              size: AppStyleValues.largeMedium,
               color: isAdd ? colorScheme.primary : colorScheme.secondary,
             ),
           ),

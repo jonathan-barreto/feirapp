@@ -1,5 +1,5 @@
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:flutter/material.dart';
 
 class EmailTextFieldCustom extends StatefulWidget {
@@ -54,7 +54,7 @@ class _EmailTextFieldCustomState extends State<EmailTextFieldCustom> {
         isDense: true,
         prefixIcon: const Icon(
           Icons.email_outlined,
-          size: StyleValues.large,
+          size: AppStyleValues.large,
           color: AppColors.darkGrey,
         ),
         suffixIcon: Visibility(

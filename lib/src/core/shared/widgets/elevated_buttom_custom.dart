@@ -1,5 +1,5 @@
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:flutter/material.dart';
 
 class ElevatedButtonCustom extends StatelessWidget {
@@ -22,7 +22,7 @@ class ElevatedButtonCustom extends StatelessWidget {
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
-              StyleValues.small,
+              AppStyleValues.small,
             ),
           ),
         ),

@@ -30,7 +30,7 @@ class CredentialDataModel extends CredentialDataEntity {
   CredentialDataEntity toEntity() {
     return CredentialDataEntity(
       data: CredentialEntity(
-        acessToken: credentialModel.acessToken,
+        accessToken: credentialModel.accessToken,
         tokenType: credentialModel.tokenType,
       ),
       message: message,

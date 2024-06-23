@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:flutter/material.dart';
 
 class ProductUnitAndWeightWidget extends StatelessWidget {
@@ -22,7 +22,7 @@ class ProductUnitAndWeightWidget extends StatelessWidget {
           child: Text(
             productUnit,
             style: textTheme.bodySmall?.copyWith(
-              fontSize: StyleValues.smaller,
+              fontSize: AppStyleValues.smaller,
             ),
           ),
         ),
@@ -32,7 +32,7 @@ class ProductUnitAndWeightWidget extends StatelessWidget {
             '(Aprox. $productWeight)',
             maxLines: 1,
             style: textTheme.bodySmall?.copyWith(
-              fontSize: StyleValues.smaller,
+              fontSize: AppStyleValues.smaller,
             ),
           ),
         ),

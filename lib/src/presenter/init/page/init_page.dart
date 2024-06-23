@@ -2,7 +2,7 @@ import 'package:feirapp/src/presenter/login/page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_assets.dart';
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/presenter/init/controller/init_controller.dart';
 import 'package:flutter/scheduler.dart';
@@ -56,7 +56,7 @@ class _InitPageState extends State<InitPage> {
                       Text(
                         'FEIRAPP',
                         style: themeData.textTheme.bodyLarge?.copyWith(
-                          fontSize: StyleValues.extraLarge,
+                          fontSize: AppStyleValues.extraLarge,
                           fontWeight: FontWeight.w900,
                           color: AppColors.primary,
                         ),
@@ -71,7 +71,7 @@ class _InitPageState extends State<InitPage> {
                   child: GestureDetector(
                     onTap: goToLoginPage,
                     child: Container(
-                      width: StyleValues.extraLarge * 1.5,
+                      width: AppStyleValues.extraLarge * 1.5,
                       decoration: const BoxDecoration(
                         color: AppColors.primary,
                         shape: BoxShape.circle,
@@ -79,7 +79,7 @@ class _InitPageState extends State<InitPage> {
                       child: const Icon(
                         Icons.arrow_forward_sharp,
                         color: AppColors.white,
-                        size: StyleValues.large * 1.5,
+                        size: AppStyleValues.large * 1.5,
                       ),
                     ),
                   ),

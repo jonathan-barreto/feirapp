@@ -1,5 +1,5 @@
 import 'package:feirapp/src/core/shared/constants/app_assets.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/presenter/product/widgets/icon_image_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class FavoriteIconWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: StyleValues.small,
+        horizontal: AppStyleValues.small,
       ),
       child: IconButton(
         onPressed: saveProductOnPressed,

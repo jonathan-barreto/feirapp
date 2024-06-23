@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 
 class LoginDividerRowWidget extends StatelessWidget {
   const LoginDividerRowWidget({super.key});
@@ -10,7 +10,7 @@ class LoginDividerRowWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: StyleValues.small,
+        horizontal: AppStyleValues.small,
       ),
       child: Row(
         children: [
@@ -19,7 +19,7 @@ class LoginDividerRowWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: StyleValues.normal,
+              horizontal: AppStyleValues.normal,
             ),
             child: Text(
               'Ou',

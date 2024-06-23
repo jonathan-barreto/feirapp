@@ -1,5 +1,5 @@
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -48,7 +48,7 @@ class _PasswordTextFieldCustomState extends State<PasswordTextFieldCustom> {
         isDense: true,
         prefixIcon: const Icon(
           Icons.lock_outline_rounded,
-          size: StyleValues.large,
+          size: AppStyleValues.large,
           color: AppColors.darkGrey,
         ),
         suffixIcon: IconButton(

@@ -1,7 +1,7 @@
 import 'package:feirapp/src/presenter/search/pages/filter_page.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/core/shared/widgets/card_product_widget.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/di/di.dart';
@@ -89,7 +89,7 @@ class _SearchPageState extends State<SearchPage> {
                           SliverList.list(
                             children: [
                               Container(
-                                height: StyleValues.extraLarge * 2,
+                                height: AppStyleValues.extraLarge * 2,
                                 color: AppColors.white,
                                 child: SearchBarWidget(
                                   textController: controller.textController,
@@ -128,15 +128,15 @@ class _SearchPageState extends State<SearchPage> {
                               visible: controller.products.isNotEmpty,
                               sliver: SliverPadding(
                                 padding: const EdgeInsets.all(
-                                  StyleValues.small,
+                                  AppStyleValues.small,
                                 ),
                                 sliver: SliverGrid.builder(
                                   itemCount: controller.products.length,
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
-                                    mainAxisSpacing: StyleValues.small,
-                                    crossAxisSpacing: StyleValues.small,
+                                    mainAxisSpacing: AppStyleValues.small,
+                                    crossAxisSpacing: AppStyleValues.small,
                                     childAspectRatio: (itemWidth / itemHeight),
                                   ),
                                   itemBuilder: (context, index) {

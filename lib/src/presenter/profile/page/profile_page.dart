@@ -3,6 +3,7 @@ import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_cust
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/presenter/profile/controller/profile_controller.dart';
 import 'package:feirapp/src/presenter/profile/widget/profile_page_content_widget.dart';
+import 'package:feirapp/src/presenter/splash/page/splash_page.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -14,6 +15,23 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final ProfileController controller = getIt<ProfileController>();
+
+  Future<void> logout() async {
+    final bool hasError = await controller.logout();
+
+    if (mounted) {
+      if (hasError == false) {
+        // controller.hideLoading();
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SplashPage(),
+          ),
+        );
+      }
+    }
+  }
 
   @override
   void initState() {
@@ -32,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Visibility(
                 visible: controller.loading == false,
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: logout,
                   icon: const Icon(
                     Icons.exit_to_app,
                   ),

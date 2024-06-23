@@ -1,5 +1,5 @@
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -26,17 +26,17 @@ class AppTheme {
       textTheme: TextTheme(
         bodySmall: GoogleFonts.poppins(
           letterSpacing: 0,
-          fontSize: StyleValues.normal,
+          fontSize: AppStyleValues.normal,
           color: AppColors.darkGrey,
         ),
         bodyMedium: GoogleFonts.poppins(
           letterSpacing: 0,
-          fontSize: StyleValues.medium,
+          fontSize: AppStyleValues.medium,
           color: AppColors.darkGrey,
         ),
         bodyLarge: GoogleFonts.poppins(
           letterSpacing: 0,
-          fontSize: StyleValues.large,
+          fontSize: AppStyleValues.large,
           color: AppColors.darkGrey,
         ),
       ),

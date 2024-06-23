@@ -1,5 +1,5 @@
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/domain/entities/filter_entity.dart';
@@ -74,17 +74,17 @@ class _FilterPageState extends State<FilterPage> {
                         flex: 10,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: StyleValues.small,
+                            horizontal: AppStyleValues.small,
                           ),
                           child: Column(
                             children: [
                               const SizedBox(
-                                height: StyleValues.small,
+                                height: AppStyleValues.small,
                               ),
                               FilterDividerWidget(
                                 label: 'Categoria',
                                 child: Wrap(
-                                  spacing: StyleValues.normal,
+                                  spacing: AppStyleValues.normal,
                                   children:
                                       store.categories.asMap().entries.map((e) {
                                     return FilterButtonForSelectionWidget(
@@ -100,12 +100,12 @@ class _FilterPageState extends State<FilterPage> {
                                 ),
                               ),
                               const SizedBox(
-                                height: StyleValues.extraLarge,
+                                height: AppStyleValues.extraLarge,
                               ),
                               FilterDividerWidget(
                                 label: 'Ordem',
                                 child: Wrap(
-                                  spacing: StyleValues.normal,
+                                  spacing: AppStyleValues.normal,
                                   children:
                                       store.orders.asMap().entries.map((e) {
                                     return FilterButtonForSelectionWidget(
@@ -121,7 +121,7 @@ class _FilterPageState extends State<FilterPage> {
                                 ),
                               ),
                               const SizedBox(
-                                height: StyleValues.extraLarge,
+                                height: AppStyleValues.extraLarge,
                               ),
                               FilterDividerWidget(
                                 label: 'Preço',
@@ -129,7 +129,7 @@ class _FilterPageState extends State<FilterPage> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                        horizontal: StyleValues.normal,
+                                        horizontal: AppStyleValues.normal,
                                       ),
                                       child: Row(
                                         children: [
@@ -140,7 +140,7 @@ class _FilterPageState extends State<FilterPage> {
                                             ),
                                           ),
                                           const SizedBox(
-                                            width: StyleValues.normal,
+                                            width: AppStyleValues.normal,
                                           ),
                                           Expanded(
                                             child: FilterPriceContainerWidget(
@@ -172,7 +172,7 @@ class _FilterPageState extends State<FilterPage> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: StyleValues.small,
+                            horizontal: AppStyleValues.small,
                           ),
                           child: Row(
                             children: [
@@ -184,7 +184,7 @@ class _FilterPageState extends State<FilterPage> {
                                 ),
                               ),
                               const SizedBox(
-                                width: StyleValues.small,
+                                width: AppStyleValues.small,
                               ),
                               Expanded(
                                 child: FilterElevatedButton(
@@ -232,16 +232,16 @@ class FilterPriceContainerWidget extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: StyleValues.extraSmall,
+          height: AppStyleValues.extraSmall,
         ),
         Container(
           width: double.maxFinite,
-          height: StyleValues.extraLarge,
+          height: AppStyleValues.extraLarge,
           decoration: BoxDecoration(
             color: AppColors.white,
             border: Border.all(color: AppColors.darkGrey),
             borderRadius: BorderRadius.circular(
-              StyleValues.small,
+              AppStyleValues.small,
             ),
           ),
           child: Center(
@@ -285,7 +285,7 @@ class FilterButtonForSelectionWidget extends StatelessWidget {
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
-              StyleValues.small,
+              AppStyleValues.small,
             ),
           ),
         ),

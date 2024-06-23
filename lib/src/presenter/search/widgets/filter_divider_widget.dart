@@ -1,4 +1,4 @@
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -34,13 +34,13 @@ class FilterDividerWidget extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: StyleValues.small,
+          height: AppStyleValues.small,
         ),
         const Divider(
-          thickness: StyleValues.extraSmall,
+          thickness: AppStyleValues.extraSmall,
         ),
         const SizedBox(
-          height: StyleValues.small,
+          height: AppStyleValues.small,
         ),
         Column(
           children: [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/core/shared/enums/filter_order_enum.dart';
 import 'package:feirapp/src/core/shared/enums/product_category_enum.dart';
 import 'package:feirapp/src/core/shared/widgets/base_widget_for_bottom_modal.dart';
@@ -85,10 +85,10 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
             color: Theme.of(context).colorScheme.primary,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(
-                StyleValues.normal,
+                AppStyleValues.normal,
               ),
               topRight: Radius.circular(
-                StyleValues.normal,
+                AppStyleValues.normal,
               ),
             ),
           ),
@@ -148,7 +148,7 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(
-                    StyleValues.small,
+                    AppStyleValues.small,
                   ),
                   child: Row(
                     children: [
@@ -165,7 +165,7 @@ class _SearchFilterPageState extends State<SearchFilterPage> {
                         ),
                       ),
                       const SizedBox(
-                        width: StyleValues.small,
+                        width: AppStyleValues.small,
                       ),
                       Expanded(
                         child: SizedBox(

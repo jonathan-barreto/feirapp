@@ -2,31 +2,29 @@ import 'dart:convert';
 
 import 'package:feirapp/src/domain/entities/credential_entity.dart';
 
-
-
 class CredentialModel extends CredentialEntity {
   CredentialModel({
-    required super.acessToken,
+    required super.accessToken,
     required super.tokenType,
   });
 
   factory CredentialModel.fromJson(Map<String, dynamic> json) {
     return CredentialModel(
-      acessToken: json['acess_token'],
+      accessToken: json['acess_token'],
       tokenType: json['token_type'],
     );
   }
 
   factory CredentialModel.fromEntity(CredentialEntity entity) {
     return CredentialModel(
-      acessToken: entity.acessToken,
+      accessToken: entity.accessToken,
       tokenType: entity.tokenType,
     );
   }
 
   CredentialEntity toEntity() {
     return CredentialEntity(
-      acessToken: acessToken,
+      accessToken: accessToken,
       tokenType: tokenType,
     );
   }
@@ -34,7 +32,7 @@ class CredentialModel extends CredentialEntity {
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = {};
 
-    data['acess_token'] = acessToken;
+    data['acess_token'] = accessToken;
     data['token_type'] = tokenType;
 
     return data;

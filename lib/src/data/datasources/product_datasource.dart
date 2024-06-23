@@ -1,7 +1,7 @@
 import 'package:feirapp/src/domain/entities/product_data_entity.dart';
 import 'package:feirapp/src/domain/params/search_product_filter_param.dart';
 
-abstract class ProductRemoteDatasource {
+abstract class ProductDatasource {
   Future<ProductDataEntity> getAllProducts({
     required SearchProductFilterParam filter,
   });

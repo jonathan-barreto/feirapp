@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_assets.dart';
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 
 class LoginTitleWidget extends StatelessWidget {
   const LoginTitleWidget({super.key});
@@ -13,7 +13,7 @@ class LoginTitleWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: StyleValues.small,
+        horizontal: AppStyleValues.small,
       ),
       child: Column(
         children: [
@@ -26,16 +26,16 @@ class LoginTitleWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                width: StyleValues.normal,
+                width: AppStyleValues.normal,
               ),
               Image.asset(
                 AppAssets.estrelasIcon,
-                width: StyleValues.extraLarge,
+                width: AppStyleValues.extraLarge,
               )
             ],
           ),
           const SizedBox(
-            height: StyleValues.small,
+            height: AppStyleValues.small,
           ),
           Row(
             children: [

@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
-import 'package:feirapp/src/core/shared/constants/endpoints.dart';
+import 'package:feirapp/src/core/shared/constants/app_endpoints.dart';
 import 'package:feirapp/src/core/shared/extensions/string_converter_to_brl_extension.dart';
 import 'package:feirapp/src/core/shared/extensions/upper_case_first_letter_extension.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 
@@ -36,14 +36,14 @@ class ContentProductPage extends StatelessWidget {
           flex: 5,
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: StyleValues.small,
+              horizontal: AppStyleValues.small,
             ),
             child: Column(
               children: [
                 Expanded(
                   flex: 2,
                   child: CachedNetworkImage(
-                    imageUrl: '${EndPoints.baseUrlImage}${product?.image}',
+                    imageUrl: '${AppEndpoints.baseApiImage}${product?.image}',
                     errorWidget: (context, url, error) => const Icon(
                       Icons.error,
                     ),
@@ -114,7 +114,7 @@ class ContentProductPage extends StatelessWidget {
                                         maxValueVisibility: false,
                                         starCount: 5,
                                         starSpacing: 2,
-                                        starSize: StyleValues.large,
+                                        starSize: AppStyleValues.large,
                                         starOffColor: const Color(0xffe7e8ea),
                                         starColor: Colors.yellow,
                                       ),
@@ -124,7 +124,7 @@ class ContentProductPage extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(
-                              height: StyleValues.smaller,
+                              height: AppStyleValues.smaller,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -149,10 +149,10 @@ class ContentProductPage extends StatelessWidget {
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(
-                StyleValues.large,
+                AppStyleValues.large,
               ),
               topRight: Radius.circular(
-                StyleValues.large,
+                AppStyleValues.large,
               ),
             ),
             child: Container(
@@ -176,14 +176,14 @@ class ContentProductPage extends StatelessWidget {
                       children: [
                         Container(
                           width: double.infinity,
-                          height: StyleValues.extraLarge * 1.5,
+                          height: AppStyleValues.extraLarge * 1.5,
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: AppColors.white,
-                              width: StyleValues.extraSmall,
+                              width: AppStyleValues.extraSmall,
                             ),
                             borderRadius: BorderRadius.circular(
-                              StyleValues.normal,
+                              AppStyleValues.normal,
                             ),
                           ),
                           child: Row(
@@ -229,7 +229,7 @@ class ContentProductPage extends StatelessWidget {
                           shape: MaterialStatePropertyAll(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
-                                StyleValues.normal,
+                                AppStyleValues.normal,
                               ),
                             ),
                           ),

@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 
 class PriceContainerWidget extends StatelessWidget {
   final String value;
@@ -16,21 +16,21 @@ class PriceContainerWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: StyleValues.smaller,
+        horizontal: AppStyleValues.smaller,
       ),
       child: Container(
-        height: StyleValues.extraLarge,
+        height: AppStyleValues.extraLarge,
         decoration: BoxDecoration(
           border: Border.all(),
           borderRadius: BorderRadius.circular(
-            StyleValues.small,
+            AppStyleValues.small,
           ),
         ),
         child: Row(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: StyleValues.smaller,
+                horizontal: AppStyleValues.smaller,
               ),
               child: Text(
                 'R\$',

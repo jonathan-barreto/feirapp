@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -19,7 +19,7 @@ class ProfileRowOptionWidget extends StatelessWidget {
       onTap: () {},
       child: Padding(
         padding: const EdgeInsets.all(
-          StyleValues.medium,
+          AppStyleValues.medium,
         ),
         child: Row(
           children: [

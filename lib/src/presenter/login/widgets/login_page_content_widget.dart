@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/presenter/login/widgets/email_field_widget.dart';
 import 'package:feirapp/src/presenter/login/widgets/login_button.dart';
 import 'package:feirapp/src/presenter/login/widgets/login_row_options_widget.dart';
@@ -33,7 +33,7 @@ class LoginPageContentWidget extends StatelessWidget {
               children: [
                 const LoginTitleWidget(),
                 const SizedBox(
-                  height: StyleValues.large,
+                  height: AppStyleValues.large,
                 ),
                 EmailFieldWidget(
                   onChanged: (value) => emailOnChanged(value),
@@ -43,21 +43,21 @@ class LoginPageContentWidget extends StatelessWidget {
                 ),
                 const LoginRowOptionsWidget(),
                 const SizedBox(
-                  height: StyleValues.large,
+                  height: AppStyleValues.large,
                 ),
                 LoginButton(
                   onPressed: loginOnPressed,
                 ),
                 // const SizedBox(
-                //   height: StyleValues.large,
+                //   height: AppStyleValues.large,
                 // ),
                 // const LoginDividerRowWidget(),
                 // const SizedBox(
-                //   height: StyleValues.large,
+                //   height: AppStyleValues.large,
                 // ),
                 // const RowLoginOptionsWidget(),
                 // const SizedBox(
-                //   height: StyleValues.large,
+                //   height: AppStyleValues.large,
                 // ),
               ],
             ),
@@ -70,7 +70,7 @@ class LoginPageContentWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: StyleValues.small,
+          height: AppStyleValues.small,
         ),
       ],
     );

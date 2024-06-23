@@ -3,10 +3,10 @@ import 'package:feirapp/src/core/errors/failure.dart';
 import 'package:feirapp/src/core/usecase/usecase.dart';
 import 'package:feirapp/src/domain/entities/credential_data_entity.dart';
 import 'package:feirapp/src/domain/params/login_param.dart';
-import 'package:feirapp/src/domain/repositories/authentication_repository.dart';
+import 'package:feirapp/src/domain/repositories/auth_repository.dart';
 
 class LoginUsecase implements Usecase<CredentialDataEntity, LoginParam> {
-  final AuthenticationRepository repository;
+  final AuthRepository repository;
 
   LoginUsecase({
     required this.repository,

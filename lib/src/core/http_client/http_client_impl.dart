@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:feirapp/src/core/http_client/http_client.dart';
 import 'package:feirapp/src/core/local_storage/local_storage.dart';
-import 'package:feirapp/src/core/shared/constants/endpoints.dart';
+import 'package:feirapp/src/core/shared/constants/app_endpoints.dart';
+import 'package:feirapp/src/core/shared/constants/app_storage_keys.dart';
 import 'package:feirapp/src/data/model/credential_model.dart';
 
 class HttpClientImpl implements HttpClient {
@@ -12,29 +13,34 @@ class HttpClientImpl implements HttpClient {
   HttpClientImpl({
     required this.localStorage,
   }) {
-    final json = localStorage.getString(key: 'credentials');
+    dio = Dio(
+      BaseOptions(
+        baseUrl: AppEndpoints.baseApi,
+        headers: {},
+      ),
+    );
 
-    String? authorization;
+    initialize();
+  }
 
-    if (json != null) {
+  late final Dio dio;
+
+  void initialize() async {
+    final String json = await localStorage.getString(
+      key: AppStorageKeys.credential,
+    );
+
+    if (json.isNotEmpty) {
       final CredentialModel credentials = CredentialModel.fromJson(
         jsonDecode(json),
       );
 
-      authorization = '${credentials.tokenType} ${credentials.acessToken}';
+      final authorization =
+          '${credentials.tokenType} ${credentials.accessToken}';
+
+      dio.options.headers['authorization'] = authorization;
     }
-
-    dio = Dio(
-      BaseOptions(
-        baseUrl: EndPoints.baseUrl,
-        headers: {
-          'authorization': authorization,
-        },
-      ),
-    );
   }
-
-  late final Dio dio;
 
   @override
   Future<HttpResponse> get({required String endpoint}) async {

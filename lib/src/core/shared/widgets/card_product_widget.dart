@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:feirapp/src/core/shared/constants/endpoints.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_endpoints.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/core/shared/widgets/add_to_cart_button_widget.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/core/shared/widgets/product_price_widget.dart';
@@ -39,7 +39,7 @@ class CardProductWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: themeData.colorScheme.primary,
           borderRadius: BorderRadius.circular(
-            StyleValues.small,
+            AppStyleValues.small,
           ),
         ),
         child: Column(
@@ -47,8 +47,8 @@ class CardProductWidget extends StatelessWidget {
           children: [
             Expanded(
               child: CachedNetworkImage(
-                width: StyleValues.extraLarge * 3,
-                imageUrl: '${EndPoints.baseUrlImage}${product.image}',
+                width: AppStyleValues.extraLarge * 3,
+                imageUrl: '${AppEndpoints.baseApiImage}${product.image}',
                 errorWidget: (context, url, error) => const Icon(Icons.error),
                 progressIndicatorBuilder: (context, url, downloadProgress) {
                   return const CircularProgressIndicatorCustom();
@@ -58,7 +58,7 @@ class CardProductWidget extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: StyleValues.small,
+                  horizontal: AppStyleValues.small,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

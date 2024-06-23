@@ -1,26 +1,33 @@
-import 'package:feirapp/src/data/datasources/local/authentication_local_datasource.dart';
-import 'package:feirapp/src/data/datasources/local/authentication_local_datasource_impl.dart';
+import 'package:get_it/get_it.dart';
+
+import 'package:feirapp/src/domain/usecases/remove_user_credential_usecase.dart';
+import 'package:feirapp/src/data/datasources/credential_datasource.dart';
+import 'package:feirapp/src/data/datasources/credential_datasource_impl.dart';
+import 'package:feirapp/src/data/repositories/credential_repository_impl.dart';
+import 'package:feirapp/src/data/repositories/local_product_repository_impl.dart';
 import 'package:feirapp/src/domain/entities/current_user_entity.dart';
+import 'package:feirapp/src/domain/repositories/credential_repository.dart';
+import 'package:feirapp/src/domain/repositories/local_product_repository.dart';
 import 'package:feirapp/src/domain/usecases/get_user_credentials_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_user_usecase.dart';
+import 'package:feirapp/src/domain/usecases/logout_usecase.dart';
 import 'package:feirapp/src/domain/usecases/save_user_credentials_usecase.dart';
 import 'package:feirapp/src/presenter/profile/controller/profile_controller.dart';
 import 'package:feirapp/src/presenter/search/stores/filter_store.dart';
 import 'package:feirapp/src/presenter/splash/controller/splash_controller.dart';
-import 'package:get_it/get_it.dart';
 import 'package:feirapp/src/core/http_client/http_client.dart';
 import 'package:feirapp/src/core/http_client/http_client_impl.dart';
 import 'package:feirapp/src/core/local_storage/local_storage.dart';
-import 'package:feirapp/src/core/local_storage/shared_preferences_local_storage_impl.dart';
-import 'package:feirapp/src/data/datasources/local/product_local_datasource.dart';
-import 'package:feirapp/src/data/datasources/local/product_local_datasource_impl.dart';
-import 'package:feirapp/src/data/datasources/remote/authentication_remote_datasource.dart';
-import 'package:feirapp/src/data/datasources/remote/authentication_remote_datasource_impl.dart';
-import 'package:feirapp/src/data/datasources/remote/product_remote_datasource.dart';
-import 'package:feirapp/src/data/datasources/remote/product_remote_datasource_impl.dart';
-import 'package:feirapp/src/data/repositories/authentication_repository_impl.dart';
+import 'package:feirapp/src/core/local_storage/local_storage_impl.dart';
+import 'package:feirapp/src/data/datasources/local_product_datasource.dart';
+import 'package:feirapp/src/data/datasources/local_product_datasource_impl.dart';
+import 'package:feirapp/src/data/datasources/auth_datasource.dart';
+import 'package:feirapp/src/data/datasources/auth_datasource_impl.dart';
+import 'package:feirapp/src/data/datasources/product_datasource.dart';
+import 'package:feirapp/src/data/datasources/product_datasource_impl.dart';
+import 'package:feirapp/src/data/repositories/auth_repository_impl.dart';
 import 'package:feirapp/src/data/repositories/product_repository_impl.dart';
-import 'package:feirapp/src/domain/repositories/authentication_repository.dart';
+import 'package:feirapp/src/domain/repositories/auth_repository.dart';
 import 'package:feirapp/src/domain/repositories/product_repository.dart';
 import 'package:feirapp/src/domain/usecases/get_all_favorite_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_all_products_usecase.dart';
@@ -29,7 +36,6 @@ import 'package:feirapp/src/domain/usecases/get_more_products_by_link_usecase.da
 import 'package:feirapp/src/domain/usecases/get_product_by_id_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_by_ids_usecase.dart';
 import 'package:feirapp/src/domain/usecases/login_usecase.dart';
-import 'package:feirapp/src/domain/usecases/remove_key_usecase.dart';
 import 'package:feirapp/src/domain/usecases/set_product_to_favorite_usecase.dart';
 import 'package:feirapp/src/presenter/init/controller/init_controller.dart';
 import 'package:feirapp/src/presenter/login/controller/login_controller.dart';
@@ -47,7 +53,7 @@ Future<void> init() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   getIt.registerFactory<LocalStorage>(
-    () => SharedPreferencesLocalStorage(
+    () => LocalStorageImpl(
       prefs: prefs,
     ),
   );
@@ -60,38 +66,52 @@ Future<void> init() async {
   );
 
   // Datasources
-  getIt.registerFactory<ProductRemoteDatasource>(
-    () => ProductRemoteDatasourceImpl(httpClient: getIt<HttpClient>()),
-  );
-
-  getIt.registerFactory<ProductLocalDatasource>(
-    () => ProductLocalDatasourceImpl(storage: getIt<LocalStorage>()),
-  );
-
-  getIt.registerFactory<AuthenticationLocalDatasource>(
-    () => AuthenticationLocalDatasourceImpl(
-      storage: getIt<LocalStorage>(),
-    ),
-  );
-
-  getIt.registerFactory<AuthenticationRemoteDatasource>(
-    () => AuthenticationRemoteDatasourceImpl(
+  getIt.registerFactory<AuthDatasource>(
+    () => AuthDatasourceImpl(
       httpClient: getIt<HttpClient>(),
     ),
   );
 
-  // Repositories
-  getIt.registerFactory<ProductRepository>(
-    () => ProductRepositoryImpl(
-      remoteDatasource: getIt<ProductRemoteDatasource>(),
-      localDatasource: getIt<ProductLocalDatasource>(),
+  getIt.registerFactory<CredentialDatasource>(
+    () => CredentialDatasourceImpl(
+      storage: getIt<LocalStorage>(),
     ),
   );
 
-  getIt.registerFactory<AuthenticationRepository>(
-    () => AuthenticationRepositoryImpl(
-      remoteDatasource: getIt<AuthenticationRemoteDatasource>(),
-      localDatasource: getIt<AuthenticationLocalDatasource>(),
+  getIt.registerFactory<ProductDatasource>(
+    () => ProductDatasourceImpl(
+      httpClient: getIt<HttpClient>(),
+    ),
+  );
+
+  getIt.registerFactory<LocalProductDatasource>(
+    () => LocalProductDatasourceImpl(
+      storage: getIt<LocalStorage>(),
+    ),
+  );
+
+  // Repositories
+  getIt.registerFactory<AuthRepository>(
+    () => AuthRepositoryImpl(
+      datasource: getIt<AuthDatasource>(),
+    ),
+  );
+
+  getIt.registerFactory<CredentialRepository>(
+    () => CredentialRepositoryImpl(
+      datasource: getIt<CredentialDatasource>(),
+    ),
+  );
+
+  getIt.registerFactory<ProductRepository>(
+    () => ProductRepositoryImpl(
+      datasource: getIt<ProductDatasource>(),
+    ),
+  );
+
+  getIt.registerFactory<LocalProductRepository>(
+    () => LocalProductRepositoryImpl(
+      datasource: getIt<LocalProductDatasource>(),
     ),
   );
 
@@ -128,43 +148,49 @@ Future<void> init() async {
 
   getIt.registerFactory<GetAllFavoriteProductUsecase>(
     () => GetAllFavoriteProductUsecase(
-      repository: getIt<ProductRepository>(),
+      repository: getIt<LocalProductRepository>(),
     ),
   );
 
   getIt.registerFactory<SetProductToFavoriteUsecase>(
     () => SetProductToFavoriteUsecase(
-      repository: getIt<ProductRepository>(),
-    ),
-  );
-
-  getIt.registerFactory<RemoveKeyUsecase>(
-    () => RemoveKeyUsecase(
-      repository: getIt<ProductRepository>(),
+      repository: getIt<LocalProductRepository>(),
     ),
   );
 
   getIt.registerFactory<LoginUsecase>(
     () => LoginUsecase(
-      repository: getIt<AuthenticationRepository>(),
+      repository: getIt<AuthRepository>(),
     ),
   );
 
-  getIt.registerFactory<SaveUserCredentialsUsecase>(
-    () => SaveUserCredentialsUsecase(
-      repository: getIt<AuthenticationRepository>(),
+  getIt.registerFactory<GetUserCredentialUsecase>(
+    () => GetUserCredentialUsecase(
+      repository: getIt<CredentialRepository>(),
     ),
   );
 
-  getIt.registerFactory<GetUserCredentialsUsecase>(
-    () => GetUserCredentialsUsecase(
-      repository: getIt<AuthenticationRepository>(),
+  getIt.registerFactory<SaveUserCredentialUsecase>(
+    () => SaveUserCredentialUsecase(
+      repository: getIt<CredentialRepository>(),
+    ),
+  );
+
+  getIt.registerFactory<RemoveUserCredentialUsecase>(
+    () => RemoveUserCredentialUsecase(
+      repository: getIt<CredentialRepository>(),
     ),
   );
 
   getIt.registerFactory<GetUserUsecase>(
     () => GetUserUsecase(
-      repository: getIt<AuthenticationRepository>(),
+      repository: getIt<AuthRepository>(),
+    ),
+  );
+
+  getIt.registerFactory<LogoutUsecase>(
+    () => LogoutUsecase(
+      repository: getIt<AuthRepository>(),
     ),
   );
 
@@ -193,7 +219,6 @@ Future<void> init() async {
       getProductByIdUsecase: getIt<GetProductByIdUsecase>(),
       getAllFavoriteProductUsecase: getIt<GetAllFavoriteProductUsecase>(),
       setProductToFavoriteUsecase: getIt<SetProductToFavoriteUsecase>(),
-      removeKeyUsecase: getIt<RemoveKeyUsecase>(),
     ),
   );
 
@@ -204,27 +229,31 @@ Future<void> init() async {
   getIt.registerFactory<LoginController>(
     () => LoginController(
       loginUsecase: getIt<LoginUsecase>(),
-      saveUserCredentialsUsecase: getIt<SaveUserCredentialsUsecase>(),
+      saveUserCredentialsUsecase: getIt<SaveUserCredentialUsecase>(),
     ),
   );
 
   getIt.registerFactory<SplashController>(
     () => SplashController(
       getUserUsecase: getIt<GetUserUsecase>(),
-      getUserCredentialsUsecase: getIt<GetUserCredentialsUsecase>(),
+      getUserCredentialsUsecase: getIt<GetUserCredentialUsecase>(),
     ),
   );
 
   getIt.registerFactory<ProfileController>(
-    () => ProfileController(),
+    () => ProfileController(
+      logoutUsecase: getIt<LogoutUsecase>(),
+      removeUserCredentialUsecase: getIt<RemoveUserCredentialUsecase>(),
+    ),
   );
 
   getIt.registerFactory<FilterStore>(
     () => FilterStore(),
   );
 
-  //
+  // Singleton's
   getIt.registerLazySingleton<CurrentUserEntity>(
     () => CurrentUserEntity(),
   );
+
 }

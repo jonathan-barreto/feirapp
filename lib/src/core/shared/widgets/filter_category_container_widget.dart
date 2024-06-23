@@ -1,4 +1,4 @@
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -19,14 +19,14 @@ class FilterCategoryContainerWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: StyleValues.normal,
+        horizontal: AppStyleValues.normal,
       ),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(
-            StyleValues.smaller,
+            AppStyleValues.smaller,
           ),
         ),
         child: ListView.builder(
@@ -39,7 +39,7 @@ class FilterCategoryContainerWidget extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: StyleValues.small,
+                      horizontal: AppStyleValues.small,
                     ),
                     child: Text(
                       categories[index].title,

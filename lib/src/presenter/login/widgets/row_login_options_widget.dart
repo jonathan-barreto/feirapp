@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_assets.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/presenter/login/widgets/container_option_login_widget.dart';
 
 class RowLoginOptionsWidget extends StatelessWidget {
@@ -15,13 +15,13 @@ class RowLoginOptionsWidget extends StatelessWidget {
           imagePath: AppAssets.appleImage,
         ),
         SizedBox(
-          width: StyleValues.extraLarge,
+          width: AppStyleValues.extraLarge,
         ),
         ContainerOptionLoginWidget(
           imagePath: AppAssets.googleImage,
         ),
         SizedBox(
-          width: StyleValues.extraLarge,
+          width: AppStyleValues.extraLarge,
         ),
         ContainerOptionLoginWidget(
           imagePath: AppAssets.facebookImage,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/core/shared/enums/filter_order_enum.dart';
 
 class FilterOrderWidget extends StatelessWidget {
@@ -19,7 +19,7 @@ class FilterOrderWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: StyleValues.normal,
+        horizontal: AppStyleValues.normal,
       ),
       child: Column(
         children: [
@@ -28,7 +28,7 @@ class FilterOrderWidget extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: StyleValues.small,
+                    horizontal: AppStyleValues.small,
                   ),
                   child: Text(
                     'Crescente ',
@@ -51,7 +51,7 @@ class FilterOrderWidget extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: StyleValues.small,
+                    horizontal: AppStyleValues.small,
                   ),
                   child: Text(
                     'Decrescente',

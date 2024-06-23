@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/presenter/search/widgets/price_container_widget.dart';
 
 class RangePriceContainerWidget extends StatelessWidget {
@@ -18,7 +18,7 @@ class RangePriceContainerWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: StyleValues.smaller,
+        horizontal: AppStyleValues.smaller,
       ),
       child: Column(
         children: [
@@ -33,7 +33,7 @@ class RangePriceContainerWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: StyleValues.normal,
+            height: AppStyleValues.normal,
           ),
           Row(
             children: [

@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:flutter/material.dart';
 
 class ProductPriceWidget extends StatelessWidget {
@@ -65,12 +65,12 @@ class ProductPriceWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                width: StyleValues.small,
+                width: AppStyleValues.small,
               ),
               AutoSizeText(
                 getPriceFormated(value: price),
                 style: textTheme.bodySmall?.copyWith(
-                  fontSize: StyleValues.small,
+                  fontSize: AppStyleValues.small,
                   decoration: TextDecoration.lineThrough,
                 ),
               ),

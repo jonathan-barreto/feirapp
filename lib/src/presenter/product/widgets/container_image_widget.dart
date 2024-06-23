@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:feirapp/src/core/shared/constants/endpoints.dart';
-import 'package:feirapp/src/core/shared/constants/style_values.dart';
+import 'package:feirapp/src/core/shared/constants/app_endpoints.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 
 class ContainerImageWidget extends StatelessWidget {
@@ -17,7 +17,7 @@ class ContainerImageWidget extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.all(
-        StyleValues.normal,
+        AppStyleValues.normal,
       ),
       child: Container(
         width: double.infinity,
@@ -25,12 +25,12 @@ class ContainerImageWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.circular(
-            StyleValues.small,
+            AppStyleValues.small,
           ),
         ),
         child: CachedNetworkImage(
-          width: StyleValues.extraLarge * 3,
-          imageUrl: '${EndPoints.baseUrlImage}$imageUrl',
+          width: AppStyleValues.extraLarge * 3,
+          imageUrl: '${AppEndpoints.baseApiImage}$imageUrl',
           errorWidget: (context, url, error) => const Icon(Icons.error),
           progressIndicatorBuilder: (context, url, downloadProgress) {
             return const CircularProgressIndicatorCustom();

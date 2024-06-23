@@ -1,9 +1,9 @@
 class CredentialEntity {
-  final String acessToken;
-  final String tokenType;
+  String? accessToken;
+  String? tokenType;
 
   CredentialEntity({
-    required this.acessToken,
-    required this.tokenType,
+    this.accessToken,
+    this.tokenType,
   });
 }

@@ -6,7 +6,7 @@ import 'package:feirapp/src/domain/usecases/login_usecase.dart';
 
 class LoginController extends ChangeNotifier {
   final LoginUsecase loginUsecase;
-  final SaveUserCredentialsUsecase saveUserCredentialsUsecase;
+  final SaveUserCredentialUsecase saveUserCredentialsUsecase;
 
   LoginController({
     required this.loginUsecase,
