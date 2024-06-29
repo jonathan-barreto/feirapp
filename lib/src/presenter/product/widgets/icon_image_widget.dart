@@ -14,7 +14,7 @@ class IconImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.primary,
         shape: BoxShape.circle,
       ),
       padding: const EdgeInsets.all(
@@ -23,7 +23,7 @@ class IconImageWidget extends StatelessWidget {
       child: Image.asset(
         image,
         width: AppStyleValues.large,
-        color: AppColors.primary,
+        color: AppColors.white,
       ),
     );
   }

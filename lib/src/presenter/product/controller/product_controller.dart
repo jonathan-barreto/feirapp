@@ -1,26 +1,30 @@
-import 'package:feirapp/src/core/usecase/usecase.dart';
+import 'package:dartz/dartz.dart';
+import 'package:feirapp/src/core/errors/failure.dart';
+import 'package:feirapp/src/domain/usecases/get_if_product_is_favorite_usecase.dart';
+import 'package:feirapp/src/domain/usecases/remove_product_to_favorite_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/services/debounce_service.dart';
 import 'package:feirapp/src/core/shared/services/debounce_service_impl.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
-import 'package:feirapp/src/domain/params/set_product_to_favorite_param.dart';
-import 'package:feirapp/src/domain/usecases/get_all_favorite_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_product_by_id_usecase.dart';
-
-import 'package:feirapp/src/domain/usecases/set_product_to_favorite_usecase.dart';
+import 'package:feirapp/src/domain/usecases/save_product_to_favorite_usecase.dart';
 
 class ProductController extends ChangeNotifier {
   final GetProductByIdUsecase getProductByIdUsecase;
-  final GetAllFavoriteProductUsecase getAllFavoriteProductUsecase;
-  final SetProductToFavoriteUsecase setProductToFavoriteUsecase;
+  final SaveProductToFavoriteUsecase saveProductToFavoriteUsecase;
+  final GetIfProductIsFavoriteUsecase getIfProductIsFavoriteUsecase;
+  final RemoveProductToFavoritesUsecase removeProductToFavoritesUsecase;
 
   ProductController({
     required this.getProductByIdUsecase,
-    required this.getAllFavoriteProductUsecase,
-    required this.setProductToFavoriteUsecase,
+    required this.saveProductToFavoriteUsecase,
+    required this.getIfProductIsFavoriteUsecase,
+    required this.removeProductToFavoritesUsecase,
   });
 
   final DebounceService debounce = DebounceServiceImpl();
+
+  String productId = '';
 
   bool loading = true;
   bool hasError = false;
@@ -41,32 +45,29 @@ class ProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void chengeProductIsFavorite({required bool value}) {
-    productIsFavorite = value;
+  Future<void> init({required String id}) async {
+    showLoading();
+
+    productId = id;
+
+    await checkIfProductIsFavorite();
+
+    await getProduct();
+
+    hideLoading();
+  }
+
+  Future<void> checkIfProductIsFavorite() async {
+    final result = await getIfProductIsFavoriteUsecase(
+      productId,
+    );
+
+    result.fold((l) => null, (r) => productIsFavorite = r);
+
     notifyListeners();
   }
 
-  Future<void> checkIfIsFavoriteProduct({required String productId}) async {
-    final List<String>? favoriteProducts = await getAllFavoriteProduct();
-
-    final isFavorite = favoriteProducts?.contains(productId) ?? false;
-
-    chengeProductIsFavorite(value: isFavorite);
-  }
-
-  Future<void> getProduct({required String productId}) async {
-    showLoading();
-
-    checkIfIsFavoriteProduct(
-      productId: productId,
-    );
-
-    await Future.delayed(
-      const Duration(
-        seconds: 1,
-      ),
-    );
-
+  Future<void> getProduct() async {
     final response = await getProductByIdUsecase.call(
       productId,
     );
@@ -74,116 +75,38 @@ class ProductController extends ChangeNotifier {
     response.fold((l) => hasError = true, (r) => product = r.products.first);
 
     productPrice = product?.discountPrice ?? product?.price;
-
-    hideLoading();
-  }
-
-  void _minusOrPlusProductPrice({bool isMinus = false}) {
-    final double productPrintDouble = double.parse(
-      '$productPrice',
-    );
-
-    final double price = double.parse(
-      product?.discountPrice ?? (product?.price ?? ''),
-    );
-
-    late final double finalValue;
-
-    if (isMinus) {
-      finalValue = productPrintDouble - price;
-    } else {
-      finalValue = productPrintDouble + price;
-    }
-
-    productPrice = '$finalValue';
   }
 
   void incrementQuantity() {
     quantity = quantity + 1;
-
-    _minusOrPlusProductPrice();
-
     notifyListeners();
   }
 
   void decrementQuantity() {
     if (quantity > 1) {
       quantity = quantity - 1;
-
-      _minusOrPlusProductPrice(
-        isMinus: true,
-      );
     }
 
     notifyListeners();
   }
 
-  Future<void> _setStringList({required List<String> products}) async {
-    final SetProductToFavoriteParam params = SetProductToFavoriteParam(
-      key: 'favorite-products',
-      products: products,
+  Future<void> saveProductToFavorites() async {
+    final Either<Failure, bool> result = await saveProductToFavoriteUsecase(
+      productId,
     );
 
-    final response = await setProductToFavoriteUsecase.call(params);
+    result.fold((l) => null, (r) => null);
 
-    response.fold((l) => hasError = true, (r) => null);
+    checkIfProductIsFavorite();
   }
 
-  List<String> removeProductId({
-    required List<String> favoriteProducts,
-    required String productIdToRemove,
-  }) {
-    final productIndex = favoriteProducts.indexWhere((element) {
-      return element == productIdToRemove;
-    });
-
-    favoriteProducts.removeAt(productIndex);
-
-    return favoriteProducts;
-  }
-
-  Future<void> saveProductToFavorites({required String productId}) async {
-    final List<String>? favoriteProducts = await getAllFavoriteProduct();
-
-    if (favoriteProducts == null) {
-      _setStringList(products: [productId]);
-
-      chengeProductIsFavorite(value: true);
-
-      return;
-    }
-
-    // final bool productIsFavorite = favoriteProducts.contains(
-    //   productId,
-    // );
-
-    // if (productIsFavorite == true) {
-    //   final List<String> newFavoriteProducts = removeProductId(
-    //     favoriteProducts: favoriteProducts,
-    //     productIdToRemove: productId,
-    //   );
-
-    //   _setStringList(list: newFavoriteProducts);
-
-    //   chengeProductIsFavorite(value: false);
-    // } else {
-    //   favoriteProducts.add(productId);
-
-    //   _setStringList(list: favoriteProducts);
-
-    //   chengeProductIsFavorite(value: true);
-    // }
-  }
-
-  Future<List<String>?> getAllFavoriteProduct() async {
-    List<String>? favoriteProducts;
-
-    final response = await getAllFavoriteProductUsecase.call(
-      NoParams(),
+  Future<void> removeProductToFavorites() async {
+    final result = await removeProductToFavoritesUsecase(
+      productId,
     );
 
-    response.fold((l) => hasError = true, (r) => favoriteProducts = r);
+    result.fold((l) => null, (r) => null);
 
-    return favoriteProducts;
+    checkIfProductIsFavorite();
   }
 }

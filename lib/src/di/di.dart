@@ -1,5 +1,6 @@
+import 'package:feirapp/src/domain/usecases/get_if_product_is_favorite_usecase.dart';
+import 'package:feirapp/src/domain/usecases/remove_product_to_favorite_usecase.dart';
 import 'package:get_it/get_it.dart';
-
 import 'package:feirapp/src/domain/usecases/remove_user_credential_usecase.dart';
 import 'package:feirapp/src/data/datasources/credential_datasource.dart';
 import 'package:feirapp/src/data/datasources/credential_datasource_impl.dart';
@@ -29,14 +30,13 @@ import 'package:feirapp/src/data/repositories/auth_repository_impl.dart';
 import 'package:feirapp/src/data/repositories/product_repository_impl.dart';
 import 'package:feirapp/src/domain/repositories/auth_repository.dart';
 import 'package:feirapp/src/domain/repositories/product_repository.dart';
-import 'package:feirapp/src/domain/usecases/get_all_favorite_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_all_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_discounted_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_more_products_by_link_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_product_by_id_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_by_ids_usecase.dart';
 import 'package:feirapp/src/domain/usecases/login_usecase.dart';
-import 'package:feirapp/src/domain/usecases/set_product_to_favorite_usecase.dart';
+import 'package:feirapp/src/domain/usecases/save_product_to_favorite_usecase.dart';
 import 'package:feirapp/src/presenter/init/controller/init_controller.dart';
 import 'package:feirapp/src/presenter/login/controller/login_controller.dart';
 import 'package:feirapp/src/presenter/product/controller/product_controller.dart';
@@ -146,14 +146,8 @@ Future<void> init() async {
     ),
   );
 
-  getIt.registerFactory<GetAllFavoriteProductUsecase>(
-    () => GetAllFavoriteProductUsecase(
-      repository: getIt<LocalProductRepository>(),
-    ),
-  );
-
-  getIt.registerFactory<SetProductToFavoriteUsecase>(
-    () => SetProductToFavoriteUsecase(
+  getIt.registerFactory<SaveProductToFavoriteUsecase>(
+    () => SaveProductToFavoriteUsecase(
       repository: getIt<LocalProductRepository>(),
     ),
   );
@@ -194,6 +188,18 @@ Future<void> init() async {
     ),
   );
 
+  getIt.registerFactory<GetIfProductIsFavoriteUsecase>(
+    () => GetIfProductIsFavoriteUsecase(
+      repository: getIt<LocalProductRepository>(),
+    ),
+  );
+
+  getIt.registerFactory<RemoveProductToFavoritesUsecase>(
+    () => RemoveProductToFavoritesUsecase(
+      repository: getIt<LocalProductRepository>(),
+    ),
+  );
+
   // Controllers
   getIt.registerFactory<MainController>(() => MainController());
 
@@ -217,8 +223,9 @@ Future<void> init() async {
   getIt.registerFactory<ProductController>(
     () => ProductController(
       getProductByIdUsecase: getIt<GetProductByIdUsecase>(),
-      getAllFavoriteProductUsecase: getIt<GetAllFavoriteProductUsecase>(),
-      setProductToFavoriteUsecase: getIt<SetProductToFavoriteUsecase>(),
+      saveProductToFavoriteUsecase: getIt<SaveProductToFavoriteUsecase>(),
+      getIfProductIsFavoriteUsecase: getIt<GetIfProductIsFavoriteUsecase>(),
+      removeProductToFavoritesUsecase: getIt<RemoveProductToFavoritesUsecase>(),
     ),
   );
 
@@ -255,5 +262,4 @@ Future<void> init() async {
   getIt.registerLazySingleton<CurrentUserEntity>(
     () => CurrentUserEntity(),
   );
-
 }

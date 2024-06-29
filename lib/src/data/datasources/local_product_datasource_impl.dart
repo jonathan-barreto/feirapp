@@ -11,7 +11,7 @@ class LocalProductDatasourceImpl implements LocalProductDatasource {
   });
 
   @override
-  Future<List<String>> getSavedProductsInFavorites() async {
+  Future<List<String>> getFavoriteProducts() async {
     try {
       return await storage.getStringList(
         key: AppStorageKeys.favotireProducts,
@@ -22,11 +22,58 @@ class LocalProductDatasourceImpl implements LocalProductDatasource {
   }
 
   @override
-  Future<bool> saveProductToFavorites({required List<String> products}) async {
+  Future<bool> saveProductToFavorites({required String productId}) async {
     try {
+      final List<String> favotireProducts = await getFavoriteProducts();
+
+      if (favotireProducts.isEmpty) {
+        favotireProducts.add(productId);
+      } else {
+        if (favotireProducts.contains(productId) == false) {
+          favotireProducts.add(productId);
+        }
+      }
+
       return await storage.setStringList(
         key: AppStorageKeys.favotireProducts,
-        values: products,
+        values: favotireProducts,
+      );
+    } catch (e) {
+      throw StorageException();
+    }
+  }
+
+  @override
+  Future<bool> getIfProductIsFavorite({required String productId}) async {
+    try {
+      final List<String> favotireProducts = await getFavoriteProducts();
+
+      final bool productIsFavotire = favotireProducts.contains(
+        productId,
+      );
+
+      return productIsFavotire;
+    } catch (e) {
+      throw StorageException();
+    }
+  }
+
+  @override
+  Future<bool> removeProductToFavorites({required String productId}) async {
+    try {
+      final List<String> favotireProducts = await getFavoriteProducts();
+
+      final int productIndex = favotireProducts.indexWhere((element) {
+        return element.contains(productId);
+      });
+
+      favotireProducts.removeAt(
+        productIndex,
+      );
+
+      return await storage.setStringList(
+        key: AppStorageKeys.favotireProducts,
+        values: favotireProducts,
       );
     } catch (e) {
       throw StorageException();

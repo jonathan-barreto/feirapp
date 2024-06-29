@@ -1,4 +1,3 @@
-import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/presenter/product/widgets/favorite_icon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
@@ -24,7 +23,10 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
     super.initState();
-    controller.getProduct(productId: widget.id);
+
+    controller.init(
+      id: widget.id,
+    );
   }
 
   @override
@@ -37,18 +39,13 @@ class _ProductPageState extends State<ProductPage> {
         return Scaffold(
           backgroundColor: theme.colorScheme.primary,
           appBar: AppBar(
-            backgroundColor: AppColors.primary,
-            iconTheme: theme.iconTheme.copyWith(
-              color: AppColors.white,
-            ),
             actions: [
               Visibility(
                 visible: !controller.loading && controller.product != null,
                 child: FavoriteIconWidget(
                   isFavorite: controller.productIsFavorite,
-                  saveProductOnPressed: () => controller.saveProductToFavorites(
-                    productId: widget.id,
-                  ),
+                  saveProductOnPressed: controller.saveProductToFavorites,
+                  removeProductOnPressed: controller.removeProductToFavorites,
                 ),
               ),
             ],

@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 class FavoriteIconWidget extends StatelessWidget {
   final bool isFavorite;
   final VoidCallback saveProductOnPressed;
+  final VoidCallback removeProductOnPressed;
 
   const FavoriteIconWidget({
     super.key,
     required this.isFavorite,
     required this.saveProductOnPressed,
+    required this.removeProductOnPressed,
   });
 
   @override
@@ -23,7 +25,7 @@ class FavoriteIconWidget extends StatelessWidget {
         horizontal: AppStyleValues.small,
       ),
       child: IconButton(
-        onPressed: saveProductOnPressed,
+        onPressed: isFavorite ? removeProductOnPressed : saveProductOnPressed,
         icon: IconImageWidget(
           image: isFavorite ? bookmarkFilled : bookmark,
         ),

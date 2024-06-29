@@ -3,15 +3,15 @@ import 'package:feirapp/src/core/errors/failure.dart';
 import 'package:feirapp/src/core/usecase/usecase.dart';
 import 'package:feirapp/src/domain/repositories/local_product_repository.dart';
 
-class GetAllFavoriteProductUsecase implements Usecase<List<String>?, NoParams> {
+class RemoveProductToFavoritesUsecase implements Usecase<bool, String> {
   final LocalProductRepository repository;
 
-  GetAllFavoriteProductUsecase({
+  RemoveProductToFavoritesUsecase({
     required this.repository,
   });
 
   @override
-  Future<Either<Failure, List<String>?>> call(NoParams noParams) async {
-    return repository.getSavedProductsInFavorites();
+  Future<Either<Failure, bool>> call(String params) async {
+    return repository.removeProductToFavorites(productId: params);
   }
 }

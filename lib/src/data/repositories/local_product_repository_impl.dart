@@ -12,10 +12,24 @@ class LocalProductRepositoryImpl implements LocalProductRepository {
   });
 
   @override
-  Future<Either<Failure, List<String>>> getSavedProductsInFavorites() async {
+  Future<Either<Failure, List<String>>> getFavoriteProducts() async {
     try {
-      final List<String> result =
-          await datasource.getSavedProductsInFavorites();
+      return Right(
+        await datasource.getFavoriteProducts(),
+      );
+    } on StorageException {
+      return Left(StorageFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> saveProductToFavorites({
+    required String productId,
+  }) async {
+    try {
+      final bool result = await datasource.saveProductToFavorites(
+        productId: productId,
+      );
 
       return Right(result);
     } on StorageException {
@@ -24,12 +38,27 @@ class LocalProductRepositoryImpl implements LocalProductRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> saveProductToFavorites({
-    required List<String> products,
+  Future<Either<Failure, bool>> getIfProductIsFavorite({
+    required String productId,
   }) async {
     try {
-      final bool result = await datasource.saveProductToFavorites(
-        products: products,
+      final bool result = await datasource.getIfProductIsFavorite(
+        productId: productId,
+      );
+
+      return Right(result);
+    } on StorageException {
+      return Left(StorageFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> removeProductToFavorites({
+    required String productId,
+  }) async {
+    try {
+      final bool result = await datasource.removeProductToFavorites(
+        productId: productId,
       );
 
       return Right(result);
