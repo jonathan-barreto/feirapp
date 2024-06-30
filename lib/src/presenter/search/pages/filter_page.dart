@@ -67,7 +67,7 @@ class _FilterPageState extends State<FilterPage> {
           ),
           body: SafeArea(
             child: store.loading
-                ? const CircularProgressIndicatorCustom()
+                ? const StandardLoadingWidget()
                 : Column(
                     children: [
                       Expanded(

@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                 Visibility(
                   visible: controller.loading == true,
                   child: const Expanded(
-                    child: CircularProgressIndicatorCustom(),
+                    child: StandardLoadingWidget(),
                   ),
                 ),
                 Visibility(

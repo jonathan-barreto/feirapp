@@ -24,6 +24,24 @@ class AppTheme {
       ),
       cardColor: AppColors.white,
       textTheme: TextTheme(
+        titleLarge: GoogleFonts.poppins(
+          letterSpacing: 0,
+          fontSize: AppStyleValues.extraLarge,
+          color: AppColors.darkGrey,
+          fontWeight: FontWeight.bold,
+        ),
+        titleMedium: GoogleFonts.poppins(
+          letterSpacing: 0,
+          fontSize: AppStyleValues.largeMedium,
+          color: AppColors.darkGrey,
+          fontWeight: FontWeight.bold,
+        ),
+        titleSmall: GoogleFonts.poppins(
+          letterSpacing: 0,
+          fontSize: AppStyleValues.large,
+          color: AppColors.darkGrey,
+          fontWeight: FontWeight.bold,
+        ),
         bodySmall: GoogleFonts.poppins(
           letterSpacing: 0,
           fontSize: AppStyleValues.normal,

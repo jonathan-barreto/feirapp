@@ -77,17 +77,53 @@ class ProductController extends ChangeNotifier {
     productPrice = product?.discountPrice ?? product?.price;
   }
 
+  double getProductPrice() {
+    final standardPrice = product?.discountPrice ?? product?.price;
+
+    if (standardPrice != null) {
+      return double.parse(standardPrice);
+    } else {
+      return 0;
+    }
+  }
+
+  void incrementProductPrice() {
+    final double price = double.parse(productPrice ?? '');
+    final double standardPrice = getProductPrice();
+
+    productPrice = '${price + standardPrice}';
+  }
+
+  void decrementProductPrice() {
+    final double price = double.parse(productPrice ?? '');
+    final double standardPrice = getProductPrice();
+
+    productPrice = '${price - standardPrice}';
+  }
+
   void incrementQuantity() {
     quantity = quantity + 1;
+
+    incrementProductPrice();
+
     notifyListeners();
   }
 
   void decrementQuantity() {
     if (quantity > 1) {
       quantity = quantity - 1;
+      decrementProductPrice();
     }
 
     notifyListeners();
+  }
+
+  Future<void> saveOrRemoveProductToFavorites() async {
+    if (productIsFavorite == false) {
+      await saveProductToFavorites();
+    } else {
+      await removeProductToFavorites();
+    }
   }
 
   Future<void> saveProductToFavorites() async {

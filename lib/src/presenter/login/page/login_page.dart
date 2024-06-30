@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                         visible: controller.loading,
                         child: const Expanded(
                           child: Center(
-                            child: CircularProgressIndicatorCustom(),
+                            child: StandardLoadingWidget(),
                           ),
                         ),
                       ),

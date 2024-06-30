@@ -74,7 +74,7 @@ class _SearchPageState extends State<SearchPage> {
                 visible: controller.pageLoading == true,
                 child: const Expanded(
                   child: Center(
-                    child: CircularProgressIndicatorCustom(),
+                    child: StandardLoadingWidget(),
                   ),
                 ),
               ),
@@ -118,7 +118,7 @@ class _SearchPageState extends State<SearchPage> {
                             visible: controller.productLoading == true,
                             sliver: const SliverFillRemaining(
                               child: Center(
-                                child: CircularProgressIndicatorCustom(),
+                                child: StandardLoadingWidget(),
                               ),
                             ),
                           ),

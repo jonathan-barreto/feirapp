@@ -51,7 +51,7 @@ class CardProductWidget extends StatelessWidget {
                 imageUrl: '${AppEndpoints.baseApiImage}${product.image}',
                 errorWidget: (context, url, error) => const Icon(Icons.error),
                 progressIndicatorBuilder: (context, url, downloadProgress) {
-                  return const CircularProgressIndicatorCustom();
+                  return const StandardLoadingWidget();
                 },
               ),
             ),

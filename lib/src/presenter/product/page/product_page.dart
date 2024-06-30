@@ -1,4 +1,3 @@
-import 'package:feirapp/src/presenter/product/widgets/favorite_icon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/di/di.dart';
@@ -38,18 +37,7 @@ class _ProductPageState extends State<ProductPage> {
       builder: (context, child) {
         return Scaffold(
           backgroundColor: theme.colorScheme.primary,
-          appBar: AppBar(
-            actions: [
-              Visibility(
-                visible: !controller.loading && controller.product != null,
-                child: FavoriteIconWidget(
-                  isFavorite: controller.productIsFavorite,
-                  saveProductOnPressed: controller.saveProductToFavorites,
-                  removeProductOnPressed: controller.removeProductToFavorites,
-                ),
-              ),
-            ],
-          ),
+          appBar: AppBar(),
           body: SafeArea(
             child: Column(
               children: [
@@ -57,7 +45,7 @@ class _ProductPageState extends State<ProductPage> {
                   visible: controller.loading,
                   child: const Expanded(
                     child: Center(
-                      child: CircularProgressIndicatorCustom(),
+                      child: StandardLoadingWidget(),
                     ),
                   ),
                 ),
@@ -65,11 +53,13 @@ class _ProductPageState extends State<ProductPage> {
                   visible: !controller.loading,
                   child: Expanded(
                     child: ContentProductPage(
+                      isFavorite: controller.productIsFavorite,
+                      saveOnPressed: controller.saveOrRemoveProductToFavorites,
                       product: controller.product,
                       productPrice: controller.productPrice ?? '',
                       quantity: '${controller.quantity}',
-                      incrementQuantity: controller.incrementQuantity,
-                      decrementQuantity: controller.decrementQuantity,
+                      increment: controller.incrementQuantity,
+                      decrement: controller.decrementQuantity,
                     ),
                   ),
                 ),

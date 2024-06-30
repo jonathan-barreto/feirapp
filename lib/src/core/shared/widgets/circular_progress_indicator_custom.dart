@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CircularProgressIndicatorCustom extends StatelessWidget {
+class StandardLoadingWidget extends StatelessWidget {
   final double? value;
 
-  const CircularProgressIndicatorCustom({
+  const StandardLoadingWidget({
     super.key,
     this.value,
   });

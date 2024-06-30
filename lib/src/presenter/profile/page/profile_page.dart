@@ -65,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Visibility(
                   visible: controller.loading == true,
                   child: const Expanded(
-                    child: CircularProgressIndicatorCustom(),
+                    child: StandardLoadingWidget(),
                   ),
                 ),
                 Visibility(
