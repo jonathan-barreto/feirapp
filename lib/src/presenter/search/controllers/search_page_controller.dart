@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/services/debounce_service.dart';
 import 'package:feirapp/src/core/shared/services/debounce_service_impl.dart';
 import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
-import 'package:feirapp/src/domain/params/get_product_param_entity.dart';
+import 'package:feirapp/src/domain/params/get_product_param.dart';
 import 'package:feirapp/src/domain/entities/product_data_entity.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/params/search_product_filter_param.dart';
@@ -101,7 +101,7 @@ class SearchPageController extends ChangeNotifier {
         url: link ?? '',
       );
 
-      final getMoreProductsParam = GetProductParamEntity(
+      final getMoreProductsParam = GetProductParam(
         endpoint: endPoint,
       );
 

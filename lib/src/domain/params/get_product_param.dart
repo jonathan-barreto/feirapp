@@ -1,10 +1,10 @@
 import 'package:feirapp/src/domain/params/search_product_filter_param.dart';
 
-class GetProductParamEntity {
+class GetProductParam {
   String? endpoint;
   SearchProductFilterParam? searchProductFilterParam;
 
-  GetProductParamEntity({
+  GetProductParam({
     this.endpoint,
     this.searchProductFilterParam,
   });
