@@ -23,6 +23,7 @@ class FavoriteContainerWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppStyleValues.smaller,
+        vertical: AppStyleValues.small,
       ),
       child: Container(
         width: double.infinity,
@@ -32,6 +33,14 @@ class FavoriteContainerWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(
             AppStyleValues.small,
           ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.mediumGrey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 1),
+            ),
+          ],
         ),
         child: Row(
           children: [

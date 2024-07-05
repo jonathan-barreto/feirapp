@@ -39,7 +39,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
       animation: controller,
       builder: (context, child) {
         return Scaffold(
-          backgroundColor: AppColors.white,
+          // backgroundColor: AppColors.white,
           appBar: AppBar(
             title: Text(
               'Favoritos',
