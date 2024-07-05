@@ -1,5 +1,7 @@
+import 'package:feirapp/src/domain/usecases/get_favorites_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_if_product_is_favorite_usecase.dart';
 import 'package:feirapp/src/domain/usecases/remove_product_to_favorite_usecase.dart';
+import 'package:feirapp/src/presenter/favorites/controller/favorites_controller.dart';
 import 'package:get_it/get_it.dart';
 import 'package:feirapp/src/domain/usecases/remove_user_credential_usecase.dart';
 import 'package:feirapp/src/data/datasources/credential_datasource.dart';
@@ -200,6 +202,12 @@ Future<void> init() async {
     ),
   );
 
+  getIt.registerFactory<GetFavoritesProductsUsecase>(
+    () => GetFavoritesProductsUsecase(
+      repository: getIt<LocalProductRepository>(),
+    ),
+  );
+
   // Controllers
   getIt.registerFactory<MainController>(() => MainController());
 
@@ -251,6 +259,13 @@ Future<void> init() async {
     () => ProfileController(
       logoutUsecase: getIt<LogoutUsecase>(),
       removeUserCredentialUsecase: getIt<RemoveUserCredentialUsecase>(),
+    ),
+  );
+
+  getIt.registerFactory<FavoritesController>(
+    () => FavoritesController(
+      getFavoritesProductsUsecase: getIt<GetFavoritesProductsUsecase>(),
+      getProductsByIdsUsecase: getIt<GetProductsByIdsUsecase>(),
     ),
   );
 

@@ -1,3 +1,4 @@
+import 'package:feirapp/src/presenter/favorites/page/favorites_page.dart';
 import 'package:feirapp/src/presenter/profile/page/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_assets.dart';
@@ -9,7 +10,7 @@ class MainController extends ChangeNotifier {
 
   final List<Widget> widgets = [
     const HomePage(),
-    Container(),
+    const FavoritesPage(),
     const SearchPage(),
     Container(),
     const ProfilePage(),

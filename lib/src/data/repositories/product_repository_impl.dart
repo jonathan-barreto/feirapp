@@ -3,6 +3,7 @@ import 'package:feirapp/src/core/errors/exceptions.dart';
 import 'package:feirapp/src/core/errors/failure.dart';
 import 'package:feirapp/src/data/datasources/product_datasource.dart';
 import 'package:feirapp/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/domain/params/get_products_by_ids_param.dart';
 import 'package:feirapp/src/domain/params/search_product_filter_param.dart';
 import 'package:feirapp/src/domain/repositories/product_repository.dart';
 
@@ -45,7 +46,7 @@ class ProductRepositoryImpl implements ProductRepository {
 
   @override
   Future<Either<Failure, ProductDataEntity>> getProductsByIds({
-    required List<int> productIds,
+    required GetProductsByIdsParam productIds,
   }) async {
     try {
       final result = await datasource.getProductsByIds(

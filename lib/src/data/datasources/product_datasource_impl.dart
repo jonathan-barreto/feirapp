@@ -4,6 +4,7 @@ import 'package:feirapp/src/core/shared/constants/app_endpoints.dart';
 import 'package:feirapp/src/data/datasources/product_datasource.dart';
 import 'package:feirapp/src/data/model/product_data_model.dart';
 import 'package:feirapp/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/domain/params/get_products_by_ids_param.dart';
 import 'package:feirapp/src/domain/params/search_product_filter_param.dart';
 
 class ProductDatasourceImpl implements ProductDatasource {
@@ -56,13 +57,14 @@ class ProductDatasourceImpl implements ProductDatasource {
 
   @override
   Future<ProductDataEntity> getProductsByIds({
-    required List<int> productIds,
+    required GetProductsByIdsParam productIds,
   }) async {
     try {
       final HttpResponse response = await httpClient.post(
         endpoint: AppEndpoints.getProductsByIds,
-        body: productIds,
+        body: productIds.toJson(),
       );
+
       final productDataModel = ProductDataModel.fromJson(
         response.data,
       );
@@ -71,7 +73,7 @@ class ProductDatasourceImpl implements ProductDatasource {
 
       return productDataEntity;
     } catch (e) {
-      throw ServerException();
+      throw ServerException(message: 'Aconteceu um erro!');
     }
   }
 

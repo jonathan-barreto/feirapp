@@ -1,3 +1,15 @@
-class ServerException implements Exception {}
+class ServerException implements Exception {
+  final String? message;
 
-class StorageException implements Exception {}
+  ServerException({
+    this.message,
+  });
+}
+
+class StorageException implements Exception {
+  final String? message;
+
+  StorageException({
+    this.message,
+  });
+}
