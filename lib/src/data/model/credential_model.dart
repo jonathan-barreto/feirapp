@@ -8,11 +8,20 @@ class CredentialModel extends CredentialEntity {
     required super.tokenType,
   });
 
-  factory CredentialModel.fromJson(Map<String, dynamic> json) {
+  factory CredentialModel.fromMap(Map<String, dynamic> map) {
     return CredentialModel(
-      accessToken: json['acess_token'],
-      tokenType: json['token_type'],
+      accessToken: map['acess_token'],
+      tokenType: map['token_type'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    final Map<String, dynamic> map = {};
+
+    map['acess_token'] = accessToken;
+    map['token_type'] = tokenType;
+
+    return map;
   }
 
   factory CredentialModel.fromEntity(CredentialEntity entity) {
@@ -27,15 +36,6 @@ class CredentialModel extends CredentialEntity {
       accessToken: accessToken,
       tokenType: tokenType,
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = {};
-
-    data['acess_token'] = accessToken;
-    data['token_type'] = tokenType;
-
-    return data;
   }
 
   String toJson() {

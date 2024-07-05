@@ -24,7 +24,7 @@ class ProductDatasourceImpl implements ProductDatasource {
         body: filter.toJson(),
       );
 
-      final productDataModel = ProductDataModel.fromJson(
+      final productDataModel = ProductDataModel.fromMap(
         response.data,
       );
 
@@ -43,7 +43,7 @@ class ProductDatasourceImpl implements ProductDatasource {
         endpoint: '${AppEndpoints.getProductById}/$id',
       );
 
-      final productDataModel = ProductDataModel.fromJson(
+      final productDataModel = ProductDataModel.fromMap(
         response.data,
       );
 
@@ -65,7 +65,7 @@ class ProductDatasourceImpl implements ProductDatasource {
         body: productIds.toJson(),
       );
 
-      final productDataModel = ProductDataModel.fromJson(
+      final productDataModel = ProductDataModel.fromMap(
         response.data,
       );
 
@@ -84,7 +84,7 @@ class ProductDatasourceImpl implements ProductDatasource {
         endpoint: AppEndpoints.getDiscountedProducts,
       );
 
-      final productDataModel = ProductDataModel.fromJson(
+      final productDataModel = ProductDataModel.fromMap(
         response.data,
       );
 
@@ -107,7 +107,7 @@ class ProductDatasourceImpl implements ProductDatasource {
         body: params,
       );
 
-      final productDataModel = ProductDataModel.fromJson(
+      final productDataModel = ProductDataModel.fromMap(
         response.data,
       );
 

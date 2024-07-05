@@ -12,11 +12,20 @@ class CredentialDataModel extends CredentialDataEntity {
     super.message,
   }) : super(data: credentialModel);
 
-  factory CredentialDataModel.fromJson(Map<String, dynamic> json) {
+  factory CredentialDataModel.fromMap(Map<String, dynamic> json) {
     return CredentialDataModel(
-      credentialModel: CredentialModel.fromJson(json['data']),
+      credentialModel: CredentialModel.fromMap(json['data']),
       message: json['message'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    final Map<String, dynamic> map = {};
+
+    map['data'] = credentialModel.toMap();
+    map['message'] = message;
+
+    return map;
   }
 
   factory CredentialDataModel.fromEntity(CredentialDataEntity entity) {
@@ -35,15 +44,6 @@ class CredentialDataModel extends CredentialDataEntity {
       ),
       message: message,
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> map = {};
-
-    map['data'] = credentialModel.toMap();
-    map['message'] = message;
-
-    return map;
   }
 
   String toJson() {

@@ -15,18 +15,34 @@ class ProductModel extends ProductEntity {
     super.discountPrice,
   });
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
+  factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
-      id: json['id'],
-      name: json['name'],
-      category: json['category'],
-      unit: json['unit'],
-      price: json['price'],
-      image: json['image'],
-      weight: json['weight'],
-      discount: json['discount'],
-      discountPrice: json['discount_price'],
+      id: map['id'],
+      name: map['name'],
+      category: map['category'],
+      unit: map['unit'],
+      price: map['price'],
+      image: map['image'],
+      weight: map['weight'],
+      discount: map['discount'],
+      discountPrice: map['discount_price'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    final Map<String, dynamic> map = {};
+
+    map['id'] = id;
+    map['name'] = name;
+    map['category'] = category;
+    map['unit'] = unit;
+    map['price'] = price;
+    map['image'] = image;
+    map['weight'] = weight;
+    map['discount'] = discount;
+    map['discount_price'] = discountPrice;
+
+    return map;
   }
 
   factory ProductModel.fromEntity(ProductEntity entity) {
@@ -55,22 +71,6 @@ class ProductModel extends ProductEntity {
       discount: discount,
       discountPrice: discountPrice,
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = {};
-
-    data['id'] = id;
-    data['name'] = name;
-    data['category'] = category;
-    data['unit'] = unit;
-    data['price'] = price;
-    data['image'] = image;
-    data['weight'] = weight;
-    data['discount'] = discount;
-    data['discount_price'] = discountPrice;
-
-    return data;
   }
 
   String toJson() {

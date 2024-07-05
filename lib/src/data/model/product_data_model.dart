@@ -11,15 +11,24 @@ class ProductDataModel extends ProductDataEntity {
     required super.link,
   }) : super(products: productsModel);
 
-  factory ProductDataModel.fromJson(Map<String, dynamic> json) {
-    final bool linksIsNotNull = json['next_page_url'] != null;
+  factory ProductDataModel.fromMap(Map<String, dynamic> map) {
+    final bool linksIsNotNull = map['next_page_url'] != null;
 
     return ProductDataModel(
-      productsModel: (json['data'] as List).map((e) {
-        return ProductModel.fromJson(e);
+      productsModel: (map['data'] as List).map((e) {
+        return ProductModel.fromMap(e);
       }).toList(),
-      link: linksIsNotNull ? json['next_page_url'] : null,
+      link: linksIsNotNull ? map['next_page_url'] : null,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    final Map<String, dynamic> map = {};
+
+    map['data'] = productsModel.map((e) => e.toJson()).toList();
+    map['links'] = link;
+
+    return map;
   }
 
   factory ProductDataModel.fromEntity(ProductDataEntity entity) {
@@ -36,15 +45,6 @@ class ProductDataModel extends ProductDataEntity {
       products: productsModel,
       link: link,
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = {};
-
-    data['data'] = productsModel.map((e) => e.toJson()).toList();
-    data['links'] = link;
-
-    return data;
   }
 
   String toJson() {

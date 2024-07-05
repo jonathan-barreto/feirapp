@@ -7,11 +7,19 @@ class LogoutModel extends LogoutEntity {
     required super.message,
   });
 
-  factory LogoutModel.fromJson(Map<String, dynamic> json) {
+  factory LogoutModel.fromMap(Map<String, dynamic> json) {
     return LogoutModel(
-    
       message: json['message'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    final Map<String, dynamic> map = {};
+
+    map['data'] = data;
+    map['message'] = message;
+
+    return map;
   }
 
   factory LogoutModel.fromEntity(LogoutEntity entity) {
@@ -24,15 +32,6 @@ class LogoutModel extends LogoutEntity {
     return LogoutEntity(
       message: message,
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> map = {};
-
-    map['data'] = data;
-    map['message'] = message;
-
-    return map;
   }
 
   String toJson() {

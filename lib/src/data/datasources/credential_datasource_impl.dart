@@ -21,7 +21,7 @@ class CredentialDatasourceImpl implements CredentialDatasource {
         key: AppStorageKeys.credential,
       );
 
-      final CredentialModel credentialModel = CredentialModel.fromJson(
+      final CredentialModel credentialModel = CredentialModel.fromMap(
         jsonDecode(
           json,
         ),

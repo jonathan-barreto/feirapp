@@ -35,7 +35,7 @@
 //   test('should return a valid model', () {
 //     final json = jsonDecode(productDataModelMock);
 
-//     final result = ProductDataModel.fromJson(json);
+//     final result = ProductDataModel.fromMap(json);
 
 //     expect(result, productDataModel);
 //   });

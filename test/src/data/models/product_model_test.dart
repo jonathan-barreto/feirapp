@@ -23,7 +23,7 @@
 //   test('should return a valid model', () {
 //     final json = jsonDecode(productModelMock);
 
-//     final result = ProductModel.fromJson(json);
+//     final result = ProductModel.fromMap(json);
 
 //     expect(result, productModel);
 //   });

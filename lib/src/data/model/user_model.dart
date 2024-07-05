@@ -14,14 +14,26 @@ class UserModel extends UserEntity {
     this.updatedAt,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
+  factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      id: json['id'],
-      name: json['name'],
-      numberContact: json['number_contact'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
+      id: map['id'],
+      name: map['name'],
+      numberContact: map['number_contact'],
+      createdAt: map['created_at'],
+      updatedAt: map['updated_at'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    final Map<String, dynamic> data = {};
+
+    data['id'] = id;
+    data['name'] = name;
+    data['numberContact'] = numberContact;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+
+    return data;
   }
 
   factory UserModel.fromEntity(UserEntity entity) {
@@ -38,18 +50,6 @@ class UserModel extends UserEntity {
       name: name,
       numberContact: numberContact,
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = {};
-
-    data['id'] = id;
-    data['name'] = name;
-    data['numberContact'] = numberContact;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-
-    return data;
   }
 
   String toJson() {

@@ -26,7 +26,7 @@ class AuthDatasourceImpl implements AuthDatasource {
         endpoint: AppEndpoints.getUser,
       );
 
-      final UserModel userModel = UserModel.fromJson(
+      final UserModel userModel = UserModel.fromMap(
         response.data['data'],
       );
 
@@ -49,7 +49,7 @@ class AuthDatasourceImpl implements AuthDatasource {
       );
 
       final CredentialDataModel credentialDataModel =
-          CredentialDataModel.fromJson(
+          CredentialDataModel.fromMap(
         response.data,
       );
 
@@ -66,7 +66,7 @@ class AuthDatasourceImpl implements AuthDatasource {
         endpoint: AppEndpoints.logout,
       );
 
-      final LogoutModel logoutModel = LogoutModel.fromJson(
+      final LogoutModel logoutModel = LogoutModel.fromMap(
         response.data,
       );
 

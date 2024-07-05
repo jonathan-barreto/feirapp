@@ -31,7 +31,7 @@ class HttpClientImpl implements HttpClient {
     );
 
     if (json.isNotEmpty) {
-      final CredentialModel credentials = CredentialModel.fromJson(
+      final CredentialModel credentials = CredentialModel.fromMap(
         jsonDecode(json),
       );
 

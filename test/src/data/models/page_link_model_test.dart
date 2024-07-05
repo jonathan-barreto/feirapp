@@ -19,7 +19,7 @@
 //   test('should return a valid model', () {
 //     final json = jsonDecode(pageLinkModelMock);
 
-//     final result = PageLinkModel.fromJson(json);
+//     final result = PageLinkModel.fromMap(json);
 
 //     expect(result, pageLinkModel);
 //   });
