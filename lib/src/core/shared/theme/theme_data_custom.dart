@@ -13,7 +13,7 @@ class AppTheme {
       ),
       scaffoldBackgroundColor: AppColors.lightGrey,
       colorScheme: const ColorScheme.light(
-        background: AppColors.lightGrey,
+        surface: AppColors.lightGrey,
         primary: AppColors.white,
         secondary: AppColors.darkGrey,
         onSecondary: AppColors.mediumGrey,
@@ -69,7 +69,7 @@ class AppTheme {
       ),
       elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(
+          backgroundColor: WidgetStatePropertyAll(
             AppColors.primary,
           ),
         ),

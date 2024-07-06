@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
+import 'package:flutter/material.dart';
 
 class ElevatedButtonCustomWidget extends StatelessWidget {
   final String label;
@@ -26,10 +26,10 @@ class ElevatedButtonCustomWidget extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(
+        backgroundColor: WidgetStatePropertyAll(
           isLight ? AppColors.white : Theme.of(context).primaryColor,
         ),
-        side: MaterialStatePropertyAll(
+        side: WidgetStatePropertyAll(
           BorderSide(
             color: Theme.of(context).primaryColor,
           ),

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
+import 'package:flutter/material.dart';
 
 class RegisterLineWidget extends StatelessWidget {
   final VoidCallback registerOnPressed;
@@ -22,7 +22,7 @@ class RegisterLineWidget extends StatelessWidget {
         ),
         InkWell(
           onTap: registerOnPressed,
-          overlayColor: const MaterialStatePropertyAll(
+          overlayColor: const WidgetStatePropertyAll(
             AppColors.white,
           ),
           child: Text(
