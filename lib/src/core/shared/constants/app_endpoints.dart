@@ -1,8 +1,6 @@
 class AppEndpoints {
-  // Url's base
-  static const String baseUrl = 'https://colt-light-shortly.ngrok-free.app';
-  static const String baseApi = '$baseUrl/api';
-  static const String baseApiImage = '$baseUrl/storage/images/';
+  static const String baseUrl = 'https://colt-light-shortly.ngrok-free.app/api';
+  static const String baseImage = '$baseUrl/image/';
 
   // Auth endpoints
   static const String login = '/user/login';

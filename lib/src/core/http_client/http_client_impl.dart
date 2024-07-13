@@ -15,7 +15,7 @@ class HttpClientImpl implements HttpClient {
   }) {
     dio = Dio(
       BaseOptions(
-        baseUrl: AppEndpoints.baseApi,
+        baseUrl: AppEndpoints.baseUrl,
         headers: {},
       ),
     );

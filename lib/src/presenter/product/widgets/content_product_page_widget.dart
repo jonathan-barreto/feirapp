@@ -40,7 +40,7 @@ class ContentProductPage extends StatelessWidget {
       children: [
         Expanded(
           child: CachedNetworkImage(
-            imageUrl: '${AppEndpoints.baseApiImage}${product?.image}',
+            imageUrl: '${AppEndpoints.baseImage}${product?.image}',
             errorWidget: (context, url, error) => const Icon(Icons.error),
             progressIndicatorBuilder: (context, url, downloadProgress) {
               return const StandardLoadingWidget();

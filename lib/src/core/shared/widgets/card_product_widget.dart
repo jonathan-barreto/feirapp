@@ -48,7 +48,7 @@ class CardProductWidget extends StatelessWidget {
             Expanded(
               child: CachedNetworkImage(
                 width: AppStyleValues.extraLarge * 3,
-                imageUrl: '${AppEndpoints.baseApiImage}${product.image}',
+                imageUrl: '${AppEndpoints.baseImage}${product.image}',
                 errorWidget: (context, url, error) => const Icon(Icons.error),
                 progressIndicatorBuilder: (context, url, downloadProgress) {
                   return const StandardLoadingWidget();
