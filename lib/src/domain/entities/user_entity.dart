@@ -1,11 +1,13 @@
 class UserEntity {
   final int id;
   final String name;
-  final String numberContact;
+  final String email;
+  final String whatsapp;
 
   UserEntity({
     required this.id,
     required this.name,
-    required this.numberContact,
+    required this.email,
+    required this.whatsapp,
   });
 }

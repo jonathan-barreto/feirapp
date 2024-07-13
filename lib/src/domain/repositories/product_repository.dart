@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:feirapp/src/core/errors/failure.dart';
 import 'package:feirapp/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/params/get_products_by_ids_param.dart';
 import 'package:feirapp/src/domain/params/search_product_filter_param.dart';
 
@@ -9,18 +10,18 @@ abstract class ProductRepository {
     required SearchProductFilterParam params,
   });
 
-  Future<Either<Failure, ProductDataEntity>> getProductById({
-    required String id,
-  });
-
-  Future<Either<Failure, ProductDataEntity>> getProductsByIds({
-    required GetProductsByIdsParam productIds,
-  });
-
-  Future<Either<Failure, ProductDataEntity>> getDiscountedProducts();
-
   Future<Either<Failure, ProductDataEntity>> getMoreProductsByLink({
     required String link,
     required SearchProductFilterParam? params,
   });
+
+  Future<Either<Failure, List<ProductEntity>>> getProductById({
+    required String id,
+  });
+
+  Future<Either<Failure, List<ProductEntity>>> getProductsByIds({
+    required GetProductsByIdsParam productIds,
+  });
+
+  Future<Either<Failure, List<ProductEntity>>> getProductsWithDiscount();
 }

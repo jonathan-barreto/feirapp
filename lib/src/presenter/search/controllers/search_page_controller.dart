@@ -20,201 +20,201 @@ class SearchPageController extends ChangeNotifier {
     required this.getMoreProductsByLinkUsecase,
   });
 
-  late ScrollController scrollController;
-  late TextEditingController textController;
+  // late ScrollController scrollController;
+  // late TextEditingController textController;
 
-  late SearchProductFilterParam searchFilterParam;
-  FilterEntity? filterEntity;
+  // late SearchProductFilterParam searchFilterParam;
+  // FilterEntity? filterEntity;
 
-  final DebounceService debounce = DebounceServiceImpl();
+  // final DebounceService debounce = DebounceServiceImpl();
 
-  bool hasError = false;
+  // bool hasError = false;
 
-  bool pageLoading = true;
-  bool productLoading = false;
-  bool loadingMoreProducts = false;
+  // bool pageLoading = true;
+  // bool productLoading = false;
+  // bool loadingMoreProducts = false;
 
-  String? link;
-  List<ProductEntity> products = [];
+  // String? link;
+  // List<ProductEntity> products = [];
 
-  void _showPageLoading() {
-    pageLoading = true;
-    notifyListeners();
-  }
+  // void _showPageLoading() {
+  //   pageLoading = true;
+  //   notifyListeners();
+  // }
 
-  void _hidePageLoading() {
-    pageLoading = false;
-    notifyListeners();
-  }
+  // void _hidePageLoading() {
+  //   pageLoading = false;
+  //   notifyListeners();
+  // }
 
-  void _showProductLoading() {
-    productLoading = true;
-    notifyListeners();
-  }
+  // void _showProductLoading() {
+  //   productLoading = true;
+  //   notifyListeners();
+  // }
 
-  void _hideProductLoading() {
-    productLoading = false;
-    notifyListeners();
-  }
+  // void _hideProductLoading() {
+  //   productLoading = false;
+  //   notifyListeners();
+  // }
 
-  void _showLoadingMoreProducts() {
-    loadingMoreProducts = true;
-    notifyListeners();
-  }
+  // void _showLoadingMoreProducts() {
+  //   loadingMoreProducts = true;
+  //   notifyListeners();
+  // }
 
-  void _hideLoadingMoreProducts() {
-    loadingMoreProducts = false;
-    notifyListeners();
-  }
+  // void _hideLoadingMoreProducts() {
+  //   loadingMoreProducts = false;
+  //   notifyListeners();
+  // }
 
   Future<void> init() async {
-    _showPageLoading();
+    // _showPageLoading();
 
-    scrollController = ScrollController();
-    textController = TextEditingController();
+    // scrollController = ScrollController();
+    // textController = TextEditingController();
 
-    searchFilterParam = SearchProductFilterParam();
+    // searchFilterParam = SearchProductFilterParam();
 
-    scrollController.addListener(() {
-      final position = scrollController.position;
+    // scrollController.addListener(() {
+    //   final position = scrollController.position;
 
-      if (position.pixels == position.maxScrollExtent) {
-        _getProductsByLink();
-      }
-    });
+    //   if (position.pixels == position.maxScrollExtent) {
+    //     _getProductsByLink();
+    //   }
+    // });
 
-    await getAllProducts();
+    // await getAllProducts();
   }
 
-  String _getEndPointByUrl({required String url}) {
-    final List<String> strings = url.split('/');
-    return '/${strings.last}';
-  }
+  // String _getEndPointByUrl({required String url}) {
+  //   final List<String> strings = url.split('/');
+  //   return '/${strings.last}';
+  // }
 
-  Future<void> _getProductsByLink() async {
-    ProductDataEntity? productDataEntity;
+  // Future<void> _getProductsByLink() async {
+  //   ProductDataEntity? productDataEntity;
 
-    _showLoadingMoreProducts();
+  //   _showLoadingMoreProducts();
 
-    if (link != null) {
-      final String endPoint = _getEndPointByUrl(
-        url: link ?? '',
-      );
+  //   if (link != null) {
+  //     final String endPoint = _getEndPointByUrl(
+  //       url: link ?? '',
+  //     );
 
-      final getMoreProductsParam = GetProductParam(
-        endpoint: endPoint,
-      );
+  //     final getMoreProductsParam = GetProductParam(
+  //       endpoint: endPoint,
+  //     );
 
-      final response = await getMoreProductsByLinkUsecase.call(
-        getMoreProductsParam,
-      );
+  //     final response = await getMoreProductsByLinkUsecase.call(
+  //       getMoreProductsParam,
+  //     );
 
-      response.fold((l) => hasError = true, (r) => productDataEntity = r);
+  //     response.fold((l) => hasError = true, (r) => productDataEntity = r);
 
-      products.addAll(
-        productDataEntity?.products ?? [],
-      );
+  //     products.addAll(
+  //       productDataEntity?.products ?? [],
+  //     );
 
-      link = productDataEntity?.link;
-    }
+  //     link = productDataEntity?.link;
+  //   }
 
-    _hideLoadingMoreProducts();
-  }
+  //   _hideLoadingMoreProducts();
+  // }
 
-  String getCategorySelected(List<CategoryTileEntity> categories) {
-    String category = '';
+  // String getCategorySelected(List<CategoryTileEntity> categories) {
+  //   String category = '';
 
-    for (int i = 0; i < categories.length; i++) {
-      if (categories[i].isSelected) {
-        category = categories[i].category;
-      }
-    }
+  //   for (int i = 0; i < categories.length; i++) {
+  //     if (categories[i].isSelected) {
+  //       category = categories[i].category;
+  //     }
+  //   }
 
-    return category;
-  }
+  //   return category;
+  // }
 
-  String getOrderSelected(List<OrderTileEntity> orders) {
-    String order = '';
+  // String getOrderSelected(List<OrderTileEntity> orders) {
+  //   String order = '';
 
-    for (int i = 0; i < orders.length; i++) {
-      if (orders[i].isSelected) {
-        order = orders[i].order;
-      }
-    }
+  //   for (int i = 0; i < orders.length; i++) {
+  //     if (orders[i].isSelected) {
+  //       order = orders[i].order;
+  //     }
+  //   }
 
-    return order;
-  }
+  //   return order;
+  // }
 
-  Future<void> setProductFilterParam({required FilterEntity filters}) async {
-    final String categorySelected = getCategorySelected(
-      filters.categories,
-    );
+  // Future<void> setProductFilterParam({required FilterEntity filters}) async {
+  //   final String categorySelected = getCategorySelected(
+  //     filters.categories,
+  //   );
 
-    final String orderSelected = getOrderSelected(
-      filters.orders,
-    );
+  //   final String orderSelected = getOrderSelected(
+  //     filters.orders,
+  //   );
 
-    final SearchProductFilterParam param = SearchProductFilterParam(
-      category: categorySelected,
-      order: orderSelected,
-      minPrice: filters.currentRangeValues.start,
-      maxPrice: filters.currentRangeValues.end,
-    );
+  //   final SearchProductFilterParam param = SearchProductFilterParam(
+  //     category: categorySelected,
+  //     order: orderSelected,
+  //     minPrice: filters.currentRangeValues.start,
+  //     maxPrice: filters.currentRangeValues.end,
+  //   );
 
-    searchFilterParam = param;
-    filterEntity = filters;
-    notifyListeners();
+  //   searchFilterParam = param;
+  //   filterEntity = filters;
+  //   notifyListeners();
 
-    getProductByFilter();
-  }
+  //   getProductByFilter();
+  // }
 
-  Future<void> getProducts() async {
-    ProductDataEntity? productDataEntity;
+  // Future<void> getProducts() async {
+  //   ProductDataEntity? productDataEntity;
 
-    await Future.delayed(
-      const Duration(seconds: 1),
-    );
+  //   await Future.delayed(
+  //     const Duration(seconds: 1),
+  //   );
 
-    final response = await getAllProductsUsecase.call(
-      searchFilterParam,
-    );
+  //   final response = await getAllProductsUsecase.call(
+  //     searchFilterParam,
+  //   );
 
-    response.fold((l) => hasError = true, (r) => productDataEntity = r);
+  //   response.fold((l) => hasError = true, (r) => productDataEntity = r);
 
-    products = productDataEntity?.products ?? [];
-    link = productDataEntity?.link;
-  }
+  //   products = productDataEntity?.products ?? [];
+  //   link = productDataEntity?.link;
+  // }
 
-  Future<void> getAllProducts() async {
-    _showPageLoading();
+  // Future<void> getAllProducts() async {
+  //   _showPageLoading();
 
-    await getProducts();
+  //   await getProducts();
 
-    _hidePageLoading();
-  }
+  //   _hidePageLoading();
+  // }
 
-  Future<void> getProductByFilter() async {
-    _showProductLoading();
+  // Future<void> getProductByFilter() async {
+  //   _showProductLoading();
 
-    await getProducts();
+  //   await getProducts();
 
-    _hideProductLoading();
-  }
+  //   _hideProductLoading();
+  // }
 
-  Future<void> searchByProductName({required String productName}) async {
-    searchFilterParam.name = productName;
+  // Future<void> searchByProductName({required String productName}) async {
+  //   searchFilterParam.name = productName;
 
-    debounce(() async {
-      await getProductByFilter();
-    });
-  }
+  //   debounce(() async {
+  //     await getProductByFilter();
+  //   });
+  // }
 
-  void checkSearchOnPressed() {
-    getProductByFilter();
-  }
+  // void checkSearchOnPressed() {
+  //   getProductByFilter();
+  // }
 
-  void clearOnPressed() {
-    searchFilterParam.name = '';
-    getProductByFilter();
-  }
+  // void clearOnPressed() {
+  //   searchFilterParam.name = '';
+  //   getProductByFilter();
+  // }
 }

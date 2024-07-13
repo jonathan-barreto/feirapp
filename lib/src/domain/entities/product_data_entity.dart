@@ -1,20 +1,11 @@
-import 'package:equatable/equatable.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 
-class ProductDataEntity extends Equatable {
+class ProductDataEntity {
   final List<ProductEntity> products;
-  final String? link;
+  final String? message;
 
-  const ProductDataEntity({
+  ProductDataEntity({
     required this.products,
-    required this.link,
+    required this.message,
   });
-
-  @override
-  List<Object?> get props {
-    return [
-      products,
-      link,
-    ];
-  }
 }

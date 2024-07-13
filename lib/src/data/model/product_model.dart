@@ -2,30 +2,50 @@ import 'dart:convert';
 
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 
-class ProductModel extends ProductEntity {
+class ProductModel {
+  final int id;
+  final String name;
+  final String price;
+  final String? discountPrice;
+  final String category;
+  final String unit;
+  final String? weight;
+  final String image;
+
   const ProductModel({
-    required super.id,
-    required super.name,
-    required super.category,
-    required super.unit,
-    required super.price,
-    required super.image,
-    super.weight,
-    super.discount,
-    super.discountPrice,
+    required this.id,
+    required this.name,
+    required this.price,
+    required this.discountPrice,
+    required this.category,
+    required this.unit,
+    required this.weight,
+    required this.image,
   });
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
       id: map['id'],
       name: map['name'],
+      price: map['price'],
+      discountPrice: map['discount_price'],
       category: map['category'],
       unit: map['unit'],
-      price: map['price'],
-      image: map['image'],
       weight: map['weight'],
-      discount: map['discount'],
-      discountPrice: map['discount_price'],
+      image: map['image'],
+    );
+  }
+
+  factory ProductModel.fromEntity(ProductEntity entity) {
+    return ProductModel(
+      id: entity.id,
+      name: entity.name,
+      price: entity.price,
+      discountPrice: entity.discountPrice,
+      category: entity.category,
+      unit: entity.unit,
+      weight: entity.weight,
+      image: entity.image,
     );
   }
 
@@ -34,42 +54,26 @@ class ProductModel extends ProductEntity {
 
     map['id'] = id;
     map['name'] = name;
+    map['price'] = price;
+    map['discount_price'] = discountPrice;
     map['category'] = category;
     map['unit'] = unit;
-    map['price'] = price;
-    map['image'] = image;
     map['weight'] = weight;
-    map['discount'] = discount;
-    map['discount_price'] = discountPrice;
+    map['image'] = image;
 
     return map;
-  }
-
-  factory ProductModel.fromEntity(ProductEntity entity) {
-    return ProductModel(
-      id: entity.id,
-      name: entity.name,
-      category: entity.category,
-      unit: entity.unit,
-      price: entity.price,
-      image: entity.image,
-      weight: entity.weight,
-      discount: entity.discount,
-      discountPrice: entity.discountPrice,
-    );
   }
 
   ProductEntity toEntity() {
     return ProductEntity(
       id: id,
       name: name,
+      price: price,
+      discountPrice: discountPrice,
       category: category,
       unit: unit,
-      price: price,
-      image: image,
       weight: weight,
-      discount: discount,
-      discountPrice: discountPrice,
+      image: image,
     );
   }
 

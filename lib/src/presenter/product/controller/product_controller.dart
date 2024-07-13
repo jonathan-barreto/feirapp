@@ -72,7 +72,7 @@ class ProductController extends ChangeNotifier {
       productId,
     );
 
-    response.fold((l) => hasError = true, (r) => product = r.products.first);
+    // response.fold((l) => hasError = true, (r) => product = r.products.first);
 
     productPrice = product?.discountPrice ?? product?.price;
   }

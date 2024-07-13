@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:feirapp/src/core/errors/failure.dart';
 import 'package:feirapp/src/core/usecase/usecase.dart';
-import 'package:feirapp/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/repositories/product_repository.dart';
 
-class GetProductByIdUsecase implements Usecase<ProductDataEntity, String> {
+class GetProductByIdUsecase implements Usecase<List<ProductEntity>, String> {
   final ProductRepository repository;
 
   GetProductByIdUsecase({
@@ -12,7 +12,7 @@ class GetProductByIdUsecase implements Usecase<ProductDataEntity, String> {
   });
 
   @override
-  Future<Either<Failure, ProductDataEntity>> call(String id) async {
+  Future<Either<Failure, List<ProductEntity>>> call(String id) async {
     return await repository.getProductById(id: id);
   }
 }

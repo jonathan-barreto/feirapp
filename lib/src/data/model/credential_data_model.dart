@@ -1,52 +1,18 @@
-import 'dart:convert';
-
 import 'package:feirapp/src/data/model/credential_model.dart';
-import 'package:feirapp/src/domain/entities/credential_data_entity.dart';
-import 'package:feirapp/src/domain/entities/credential_entity.dart';
 
-class CredentialDataModel extends CredentialDataEntity {
-  final CredentialModel credentialModel;
+class CredentialDataModel {
+  final CredentialModel? data;
+  final String? message;
 
   CredentialDataModel({
-    required this.credentialModel,
-    super.message,
-  }) : super(data: credentialModel);
+    required this.data,
+    required this.message,
+  });
 
-  factory CredentialDataModel.fromMap(Map<String, dynamic> json) {
+  factory CredentialDataModel.fromMap(Map<String, dynamic> map) {
     return CredentialDataModel(
-      credentialModel: CredentialModel.fromMap(json['data']),
-      message: json['message'],
+      data: map['data'] != null ? CredentialModel.fromMap(map['data']) : null,
+      message: map['message'],
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> map = {};
-
-    map['data'] = credentialModel.toMap();
-    map['message'] = message;
-
-    return map;
-  }
-
-  factory CredentialDataModel.fromEntity(CredentialDataEntity entity) {
-    return CredentialDataModel(
-      credentialModel: CredentialModel.fromEntity(
-        entity.data,
-      ),
-    );
-  }
-
-  CredentialDataEntity toEntity() {
-    return CredentialDataEntity(
-      data: CredentialEntity(
-        accessToken: credentialModel.accessToken,
-        tokenType: credentialModel.tokenType,
-      ),
-      message: message,
-    );
-  }
-
-  String toJson() {
-    return jsonEncode(toMap());
   }
 }

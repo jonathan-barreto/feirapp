@@ -3,6 +3,7 @@ import 'package:feirapp/src/core/errors/exceptions.dart';
 import 'package:feirapp/src/core/errors/failure.dart';
 import 'package:feirapp/src/data/datasources/product_datasource.dart';
 import 'package:feirapp/src/domain/entities/product_data_entity.dart';
+import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/params/get_products_by_ids_param.dart';
 import 'package:feirapp/src/domain/params/search_product_filter_param.dart';
 import 'package:feirapp/src/domain/repositories/product_repository.dart';
@@ -30,47 +31,6 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, ProductDataEntity>> getProductById({
-    required String id,
-  }) async {
-    try {
-      final result = await datasource.getProductById(
-        id: id,
-      );
-
-      return Right(result);
-    } on ServerException {
-      return Left(ServerFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, ProductDataEntity>> getProductsByIds({
-    required GetProductsByIdsParam productIds,
-  }) async {
-    try {
-      final result = await datasource.getProductsByIds(
-        productIds: productIds,
-      );
-
-      return Right(result);
-    } on ServerException {
-      return Left(ServerFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, ProductDataEntity>> getDiscountedProducts() async {
-    try {
-      final ProductDataEntity result = await datasource.getDiscountedProducts();
-
-      return Right(result);
-    } on ServerException {
-      return Left(ServerFailure());
-    }
-  }
-
-  @override
   Future<Either<Failure, ProductDataEntity>> getMoreProductsByLink({
     required String link,
     required SearchProductFilterParam? params,
@@ -82,8 +42,71 @@ class ProductRepositoryImpl implements ProductRepository {
       );
 
       return Right(result);
-    } on ServerException {
-      return Left(ServerFailure());
+    } on ServerException catch (e) {
+      return Left(
+        ServerFailure(
+          message: e.message,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ProductEntity>>> getProductById({
+    required String id,
+  }) async {
+    try {
+      final result = await datasource.getProductById(
+        id: id,
+      );
+
+      return Right(
+        result,
+      );
+    } on ServerException catch (e) {
+      return Left(
+        ServerFailure(
+          message: e.message,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ProductEntity>>> getProductsByIds({
+    required GetProductsByIdsParam productIds,
+  }) async {
+    try {
+      final result = await datasource.getProductsByIds(
+        productIds: productIds,
+      );
+
+      return Right(
+        result,
+      );
+    } on ServerException catch (e) {
+      return Left(
+        ServerFailure(
+          message: e.message,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ProductEntity>>> getProductsWithDiscount() async {
+    try {
+      final result = await datasource.getProductsWithDiscount();
+
+      return Right(
+        result,
+      );
+    } on ServerException catch (e) {
+      return Left(
+        ServerFailure(
+          message: e.message,
+        ),
+      );
     }
   }
 }

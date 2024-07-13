@@ -13,12 +13,12 @@
 
 // void main() {
 //   late ProductRepository repository;
-//   late GetDiscountedProductsUsecase usecase;
+//   late GetProductsWithDiscountUsecase usecase;
 
 //   setUp(() {
 //     repository = MockProductRepository();
 
-//     usecase = GetDiscountedProductsUsecase(
+//     usecase = GetProductsWithDiscountUsecase(
 //       repository: repository,
 //     );
 //   });

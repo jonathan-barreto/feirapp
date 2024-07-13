@@ -1,7 +1,7 @@
 import 'package:feirapp/src/core/usecase/usecase.dart';
 import 'package:feirapp/src/di/di.dart';
-import 'package:feirapp/src/domain/entities/current_user_entity.dart';
 import 'package:feirapp/src/domain/entities/credential_entity.dart';
+import 'package:feirapp/src/domain/entities/current_user_entity.dart';
 import 'package:feirapp/src/domain/entities/user_entity.dart';
 import 'package:feirapp/src/domain/usecases/get_user_credentials_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_user_usecase.dart';

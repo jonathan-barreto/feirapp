@@ -1,11 +1,12 @@
-import 'package:feirapp/src/presenter/splash/page/splash_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/presenter/login/controller/login_controller.dart';
 import 'package:feirapp/src/presenter/login/widgets/login_page_content_widget.dart';
+import 'package:feirapp/src/presenter/splash/page/splash_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -23,10 +24,16 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> login() async {
-    final bool hasLoginError = await controller.login();
+    final String? errorMessage = await controller.login();
 
     if (mounted) {
-      if (hasLoginError == false) {
+      if (errorMessage != null) {
+        AnimatedSnackBar.material(
+          errorMessage,
+          type: AnimatedSnackBarType.error,
+          mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+        ).show(context);
+      } else {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -34,8 +41,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
           (Route<dynamic> route) => false,
         );
-      } else {
-        controller.hideLoading();
       }
     }
   }

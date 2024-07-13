@@ -2,53 +2,54 @@ import 'dart:convert';
 
 import 'package:feirapp/src/domain/entities/user_entity.dart';
 
-class UserModel extends UserEntity {
-  String? createdAt;
-  String? updatedAt;
+class UserModel {
+  final int id;
+  final String name;
+  final String email;
+  final String whatsapp;
 
   UserModel({
-    required super.id,
-    required super.name,
-    required super.numberContact,
-    this.createdAt,
-    this.updatedAt,
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.whatsapp,
   });
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       id: map['id'],
       name: map['name'],
-      numberContact: map['number_contact'],
-      createdAt: map['created_at'],
-      updatedAt: map['updated_at'],
+      email: map['email'],
+      whatsapp: map['whatsapp'],
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = {};
-
-    data['id'] = id;
-    data['name'] = name;
-    data['numberContact'] = numberContact;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-
-    return data;
   }
 
   factory UserModel.fromEntity(UserEntity entity) {
     return UserModel(
       id: entity.id,
       name: entity.name,
-      numberContact: entity.numberContact,
+      email: entity.email,
+      whatsapp: entity.whatsapp,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    final Map<String, dynamic> map = {};
+
+    map['id'] = id;
+    map['name'] = name;
+    map['email'] = email;
+    map['whatsapp'] = whatsapp;
+
+    return map;
   }
 
   UserEntity toEntity() {
     return UserEntity(
       id: id,
       name: name,
-      numberContact: numberContact,
+      email: email,
+      whatsapp: whatsapp,
     );
   }
 

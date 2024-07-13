@@ -1,8 +1,9 @@
-import 'package:feirapp/src/domain/usecases/save_user_credentials_usecase.dart';
-import 'package:flutter/foundation.dart';
-import 'package:feirapp/src/domain/entities/credential_data_entity.dart';
+import 'package:feirapp/src/core/errors/failure.dart';
+import 'package:feirapp/src/domain/entities/credential_entity.dart';
 import 'package:feirapp/src/domain/params/login_param.dart';
 import 'package:feirapp/src/domain/usecases/login_usecase.dart';
+import 'package:feirapp/src/domain/usecases/save_user_credentials_usecase.dart';
+import 'package:flutter/foundation.dart';
 
 class LoginController extends ChangeNotifier {
   final LoginUsecase loginUsecase;
@@ -14,12 +15,9 @@ class LoginController extends ChangeNotifier {
   });
 
   String? email = kDebugMode ? 'jonathan777barreto@gmail.com' : null;
-  String? password = kDebugMode ? '92665401' : null;
+  String? password = kDebugMode ? '42526272' : null;
 
   bool loading = false;
-
-  bool hasError = false;
-  CredentialDataEntity? loginDataEntity;
 
   void showLoading() {
     loading = true;
@@ -31,34 +29,55 @@ class LoginController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> login() async {
+  Future<String?> login() async {
     showLoading();
 
-    if (kDebugMode || email != null && password != null) {
+    String? errorMessage;
+    CredentialEntity? credential;
+
+    if (email != null && password != null) {
       final LoginParam loginParam = LoginParam(
         email: email!,
         password: password!,
       );
 
-      final result = await loginUsecase.call(loginParam);
-      result.fold((l) => hasError = true, (r) => loginDataEntity = r);
+      final result = await loginUsecase.call(
+        loginParam,
+      );
+
+      result.fold((l) {
+        if (l is ServerFailure) {
+          errorMessage = l.message;
+        }
+      }, (r) => credential = r);
     }
 
-    await saveUserCredentials();
+    if (credential != null) {
+      await saveUserCredential(
+        credential: credential!,
+      );
+    }
 
-    return hasError;
+    hideLoading();
+
+    return errorMessage;
   }
 
-  Future<void> saveUserCredentials() async {
-    if (loginDataEntity?.data != null) {
-      final result = await saveUserCredentialsUsecase.call(
-        loginDataEntity!.data,
-      );
+  Future<String?> saveUserCredential({
+    required CredentialEntity credential,
+  }) async {
+    final result = await saveUserCredentialsUsecase.call(
+      credential,
+    );
 
-      result.fold(
-        (l) => hasError = true,
-        (r) => r == false ? hasError = true : hasError = false,
-      );
-    }
+    String? errorMessage;
+
+    result.fold((l) {
+      if (l is ServerFailure) {
+        errorMessage = l.message;
+      }
+    }, (r) => null);
+
+    return errorMessage;
   }
 }

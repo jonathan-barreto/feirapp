@@ -1,9 +1,9 @@
 class LogoutEntity {
-  final List? data;
-  final String message;
+  final dynamic data;
+  final String? message;
 
   LogoutEntity({
-    this.data,
+     this.data,
     required this.message,
   });
 }

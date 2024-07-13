@@ -1,24 +1,17 @@
-import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/usecase/usecase.dart';
-import 'package:feirapp/src/domain/entities/product_data_entity.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
-import 'package:feirapp/src/domain/usecases/get_discounted_products_usecase.dart';
+import 'package:feirapp/src/domain/usecases/get_products_with_discount_usecase.dart';
+import 'package:flutter/material.dart';
 
 class HomeController extends ChangeNotifier {
-  final GetDiscountedProductsUsecase getDiscountedProductsUsecase;
+  final GetProductsWithDiscountUsecase getProductsWithDiscountUsecase;
 
   HomeController({
-    required this.getDiscountedProductsUsecase,
+    required this.getProductsWithDiscountUsecase,
   });
 
   bool loading = true;
-  bool hasError = false;
-
   List<ProductEntity> products = [];
-
-  Future<void> init() async {
-    await getDiscountedProducts();
-  }
 
   void showLoading() {
     loading = true;
@@ -30,27 +23,26 @@ class HomeController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getDiscountedProducts() async {
-    ProductDataEntity? productDataEntity;
+  Future<void> init() async {
+    await getProductsWithDiscount();
+  }
 
+  Future<void> getProductsWithDiscount() async {
     showLoading();
 
     await Future.delayed(
-      const Duration(seconds: 1),
+      const Duration(
+        seconds: 1,
+      ),
     );
 
     final NoParams noParams = NoParams();
 
-    final response = await getDiscountedProductsUsecase.call(
+    final result = await getProductsWithDiscountUsecase.call(
       noParams,
     );
 
-    response.fold((l) => hasError = true, (r) => productDataEntity = r);
-
-    if (productDataEntity != null) {
-      products = productDataEntity?.products ?? [];
-      notifyListeners();
-    }
+    result.fold((l) => null, (r) => products = r);
 
     hideLoading();
   }
