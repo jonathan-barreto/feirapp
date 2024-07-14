@@ -58,31 +58,31 @@
 //     when(() => function()).thenThrow(ServerException());
 //   }
 
-//   test('sholud return product data model in getAllProducts', () async {
+//   test('sholud return product data model in getProducts', () async {
 //     setUpDataSourceToReturnProductDataModel(
-//       function: () => datasource.getAllProducts(),
+//       function: () => datasource.getProducts(),
 //     );
 
-//     final result = await repository.getAllProducts();
+//     final result = await repository.getProducts();
 
 //     expect(result, const Right(productDataModel));
 
 //     verify(() {
-//       datasource.getAllProducts();
+//       datasource.getProducts();
 //     }).called(1);
 //   });
 
-//   test('server failure in getAllProducts', () async {
+//   test('server failure in getProducts', () async {
 //     setUpDataSourceToThrowException(
-//       function: () => datasource.getAllProducts(),
+//       function: () => datasource.getProducts(),
 //     );
 
-//     final result = await repository.getAllProducts();
+//     final result = await repository.getProducts();
 
 //     expectLater(result, Left(ServerFailure()));
 
 //     verify(() {
-//       datasource.getAllProducts();
+//       datasource.getProducts();
 //     }).called(1);
 //   });
 

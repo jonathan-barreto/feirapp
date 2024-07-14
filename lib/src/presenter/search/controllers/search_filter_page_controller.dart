@@ -14,9 +14,7 @@ class SearchFilterPageController extends ChangeNotifier {
     FilterOrderEnum? order,
   }) {
     categories = categorieList;
-
     myOrder = order;
-
     currentRangeValues = RangeValues(start ?? 0, end ?? 100);
   }
 

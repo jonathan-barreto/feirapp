@@ -13,12 +13,12 @@
 
 // void main() {
 //   late ProductRepository repository;
-//   late GetAllProductsUsecase usecase;
+//   late getProductsUsecase usecase;
 
 //   setUp(() {
 //     repository = MockProductRepository();
 
-//     usecase = GetAllProductsUsecase(
+//     usecase = getProductsUsecase(
 //       repository: repository,
 //     );
 //   });
@@ -46,7 +46,7 @@
 
 //   test('should get product data entity from the repository', () async {
 //     when(() {
-//       return repository.getAllProducts();
+//       return repository.getProducts();
 //     }).thenAnswer((invocation) async {
 //       return const Right(productDataEntity);
 //     });
@@ -59,13 +59,13 @@
 //     );
 
 //     verify(() {
-//       return repository.getAllProducts();
+//       return repository.getProducts();
 //     }).called(1);
 //   });
 
 //   test('should return a ServerFailure when dont\'t succeed', () async {
 //     when(() {
-//       return repository.getAllProducts();
+//       return repository.getProducts();
 //     }).thenAnswer((invocation) async {
 //       return Left<Failure, ProductDataEntity>(ServerFailure());
 //     });
@@ -78,7 +78,7 @@
 //     );
 
 //     verify(() {
-//       return repository.getAllProducts();
+//       return repository.getProducts();
 //     }).called(1);
 //   });
 // }

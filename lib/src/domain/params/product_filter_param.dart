@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-class SearchProductFilterParam {
+class ProductsFilterParam {
   String? name;
   String? category;
   double? minPrice;
   double? maxPrice;
   String? order;
 
-  SearchProductFilterParam({
+  ProductsFilterParam({
     this.name,
     this.category,
     this.minPrice,

@@ -1,11 +1,11 @@
-import 'package:feirapp/src/domain/params/search_product_filter_param.dart';
+import 'package:feirapp/src/domain/params/product_filter_param.dart';
 
-class GetProductParam {
+class GetProductsParam {
   String? endpoint;
-  SearchProductFilterParam? searchProductFilterParam;
+  ProductsFilterParam? productsFilterParam;
 
-  GetProductParam({
+  GetProductsParam({
     this.endpoint,
-    this.searchProductFilterParam,
+    this.productsFilterParam,
   });
 }

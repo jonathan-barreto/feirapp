@@ -9,7 +9,7 @@ class AppEndpoints {
   static const String profile = '/user/profile';
 
   // Product endpoints
-  static const String getAllProducts = '/products';
+  static const String getProducts = '/products';
   static const String getProductById = '/product';
   static const String getProductsByIds = '/products-by-ids';
   static const String getProductsWithDiscount = '/products/with-discount';

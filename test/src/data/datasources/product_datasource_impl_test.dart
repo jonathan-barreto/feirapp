@@ -39,7 +39,7 @@
 //   test('should call the get melhod with correct url', () async {
 //     successMoc();
 
-//     await datasource.getAllProducts();
+//     await datasource.getProducts();
 
 //     verify(() {
 //       httpClient.get(endpoint: urlExpected);
@@ -68,7 +68,7 @@
 //       linksModel: pageLinkModel,
 //     );
 
-//     final result = await datasource.getAllProducts();
+//     final result = await datasource.getProducts();
 
 //     expect(result, productDataModel);
 //   });
@@ -83,7 +83,7 @@
 //       );
 //     });
 
-//     final result = datasource.getAllProducts();
+//     final result = datasource.getProducts();
 
 //     expect(() => result, throwsA(ServerException()));
 //   });

@@ -12,39 +12,36 @@ class HttpClientImpl implements HttpClient {
 
   HttpClientImpl({
     required this.localStorage,
-  }) {
-    dio = Dio(
-      BaseOptions(
-        baseUrl: AppEndpoints.baseUrl,
-        headers: {},
-      ),
-    );
+  });
 
-    initialize();
-  }
+  final Dio dio = Dio(
+    BaseOptions(
+      baseUrl: AppEndpoints.baseUrl,
+    ),
+  );
 
-  late final Dio dio;
-
-  void initialize() async {
+  Future<void> _setTokenInHeader() async {
     final String json = await localStorage.getString(
       key: AppStorageKeys.credential,
     );
 
     if (json.isNotEmpty) {
-      final CredentialModel credentials = CredentialModel.fromMap(
+      final CredentialModel credential = CredentialModel.fromMap(
         jsonDecode(json),
       );
 
-      final authorization =
-          '${credentials.tokenType} ${credentials.accessToken}';
-
+      final authorization = '${credential.tokenType} ${credential.accessToken}';
       dio.options.headers['authorization'] = authorization;
     }
   }
 
   @override
   Future<HttpResponse> get({required String endpoint}) async {
-    final Response response = await dio.get(endpoint);
+    await _setTokenInHeader();
+
+    final Response response = await dio.get(
+      endpoint,
+    );
 
     return HttpResponse(
       data: response.data,
@@ -57,6 +54,8 @@ class HttpClientImpl implements HttpClient {
     required String endpoint,
     required dynamic body,
   }) async {
+    await _setTokenInHeader();
+
     final Response response = await dio.post(
       endpoint,
       data: body,
