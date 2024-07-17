@@ -5,7 +5,7 @@ import 'package:feirapp/src/core/shared/widgets/card_product_widget.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/domain/entities/current_user_entity.dart';
-import 'package:feirapp/src/presenter/home/controllers/home_controller.dart';
+import 'package:feirapp/src/presenter/home/controller/home_controller.dart';
 import 'package:feirapp/src/presenter/home/widgets/app_bar_home_widget.dart';
 import 'package:flutter/material.dart';
 

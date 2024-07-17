@@ -19,11 +19,11 @@ import 'package:feirapp/src/domain/repositories/auth_repository.dart';
 import 'package:feirapp/src/domain/repositories/credential_repository.dart';
 import 'package:feirapp/src/domain/repositories/local_product_repository.dart';
 import 'package:feirapp/src/domain/repositories/product_repository.dart';
-import 'package:feirapp/src/domain/usecases/get_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_favorites_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_if_product_is_favorite_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_product_by_id_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_by_ids_usecase.dart';
+import 'package:feirapp/src/domain/usecases/get_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_with_discount_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_user_credentials_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_user_usecase.dart';
@@ -34,15 +34,14 @@ import 'package:feirapp/src/domain/usecases/remove_user_credential_usecase.dart'
 import 'package:feirapp/src/domain/usecases/save_product_to_favorite_usecase.dart';
 import 'package:feirapp/src/domain/usecases/save_user_credentials_usecase.dart';
 import 'package:feirapp/src/presenter/favorites/controller/favorites_controller.dart';
-import 'package:feirapp/src/presenter/home/controllers/home_controller.dart';
+import 'package:feirapp/src/presenter/filter/controller/filter_controller.dart';
+import 'package:feirapp/src/presenter/home/controller/home_controller.dart';
 import 'package:feirapp/src/presenter/init/controller/init_controller.dart';
 import 'package:feirapp/src/presenter/login/controller/login_controller.dart';
-import 'package:feirapp/src/presenter/main/controllers/main_controller.dart';
+import 'package:feirapp/src/presenter/main/controller/main_controller.dart';
 import 'package:feirapp/src/presenter/product/controller/product_controller.dart';
 import 'package:feirapp/src/presenter/profile/controller/profile_controller.dart';
-import 'package:feirapp/src/presenter/search/controllers/search_filter_page_controller.dart';
-import 'package:feirapp/src/presenter/search/controllers/search_page_controller.dart';
-import 'package:feirapp/src/presenter/search/stores/filter_store.dart';
+import 'package:feirapp/src/presenter/search/controller/search_page_controller.dart';
 import 'package:feirapp/src/presenter/splash/controller/splash_controller.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -216,10 +215,6 @@ Future<void> init() async {
     ),
   );
 
-  getIt.registerFactory<SearchFilterPageController>(
-    () => SearchFilterPageController(),
-  );
-
   getIt.registerFactory<ProductController>(
     () => ProductController(
       getProductByIdUsecase: getIt<GetProductByIdUsecase>(),
@@ -261,8 +256,8 @@ Future<void> init() async {
     ),
   );
 
-  getIt.registerFactory<FilterStore>(
-    () => FilterStore(),
+  getIt.registerFactory<FilterController>(
+    () => FilterController(),
   );
 
   // Singleton's

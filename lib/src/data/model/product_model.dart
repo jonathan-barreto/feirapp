@@ -2,25 +2,16 @@ import 'dart:convert';
 
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 
-class ProductModel {
-  final int id;
-  final String name;
-  final String price;
-  final String? discountPrice;
-  final String category;
-  final String unit;
-  final String? weight;
-  final String image;
-
+class ProductModel extends ProductEntity {
   const ProductModel({
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.discountPrice,
-    required this.category,
-    required this.unit,
-    required this.weight,
-    required this.image,
+    required super.id,
+    required super.name,
+    required super.price,
+    required super.discountPrice,
+    required super.category,
+    required super.unit,
+    required super.weight,
+    required super.image,
   });
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {

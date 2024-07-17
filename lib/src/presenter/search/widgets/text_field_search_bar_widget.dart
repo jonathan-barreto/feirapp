@@ -26,7 +26,7 @@ class _TextFieldSearchBarWidgetState extends State<TextFieldSearchBarWidget> {
     return Expanded(
       child: TextField(
         controller: widget.controller,
-        style: themeData.textTheme.bodySmall?.copyWith(),
+        style: themeData.textTheme.bodyMedium?.copyWith(),
         cursorColor: themeData.colorScheme.tertiary,
         decoration: InputDecoration(
           filled: true,
@@ -54,7 +54,7 @@ class _TextFieldSearchBarWidgetState extends State<TextFieldSearchBarWidget> {
               ),
             ),
           ),
-          hintStyle: themeData.textTheme.bodySmall,
+          hintStyle: themeData.textTheme.bodySmall?.copyWith(),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(),
           ),

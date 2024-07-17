@@ -1,7 +1,7 @@
 import 'package:feirapp/src/domain/entities/user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/di/di.dart';
-import 'package:feirapp/src/presenter/main/controllers/main_controller.dart';
+import 'package:feirapp/src/presenter/main/controller/main_controller.dart';
 import 'package:feirapp/src/presenter/main/widgets/standard_icon_image_widget.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';

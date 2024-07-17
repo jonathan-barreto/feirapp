@@ -1,6 +1,6 @@
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/presenter/init/page/init_page.dart';
-import 'package:feirapp/src/presenter/main/pages/main_page.dart';
+import 'package:feirapp/src/presenter/main/page/main_page.dart';
 import 'package:feirapp/src/presenter/splash/controller/splash_controller.dart';
 import 'package:flutter/material.dart';
 

@@ -1,9 +1,9 @@
 import 'package:feirapp/src/core/shared/services/debounce_service.dart';
 import 'package:feirapp/src/core/shared/services/debounce_service_impl.dart';
 import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
-import 'package:feirapp/src/domain/entities/filter_entity.dart';
 import 'package:feirapp/src/domain/entities/order_tile_entity.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
+import 'package:feirapp/src/domain/entities/selected_filters_entity.dart';
 import 'package:feirapp/src/domain/params/get_product_param.dart';
 import 'package:feirapp/src/domain/params/product_filter_param.dart';
 import 'package:feirapp/src/domain/usecases/get_products_usecase.dart';
@@ -16,17 +16,17 @@ class SearchPageController extends ChangeNotifier {
     required this.getProductsUsecase,
   });
 
-  late ScrollController scrollController;
-  late TextEditingController textController;
-  late ProductsFilterParam searchFilterParam;
-
   final DebounceService debounce = DebounceServiceImpl();
+  final ScrollController scrollController = ScrollController();
+  final TextEditingController textController = TextEditingController();
   final GetProductsParam getProductsParam = GetProductsParam();
 
-  FilterEntity? filterEntity;
+  ProductsFilterParam searchFilterParam = ProductsFilterParam();
+  SelectedFiltersEntity? selectedFiltersEntity;
 
   bool loading = false;
   bool loadingMoreProducts = false;
+  bool loadingBodyProducts = false;
 
   List<ProductEntity> products = [];
 
@@ -37,6 +37,16 @@ class SearchPageController extends ChangeNotifier {
 
   void _hideLoading() {
     loading = false;
+    notifyListeners();
+  }
+
+  void _showLoadingBodyProducts() {
+    loadingBodyProducts = true;
+    notifyListeners();
+  }
+
+  void _hideLoadingBodyProducts() {
+    loadingBodyProducts = false;
     notifyListeners();
   }
 
@@ -53,12 +63,9 @@ class SearchPageController extends ChangeNotifier {
   Future<void> init() async {
     _showLoading();
 
-    scrollController = ScrollController();
-    textController = TextEditingController();
-    searchFilterParam = ProductsFilterParam();
-
     scrollController.addListener(() {
       final position = scrollController.position;
+
       if (position.pixels == position.maxScrollExtent) {
         _getProductsByLink();
       }
@@ -125,7 +132,9 @@ class SearchPageController extends ChangeNotifier {
     return order;
   }
 
-  Future<void> setProductsFilterParam({required FilterEntity filters}) async {
+  Future<void> setProductsFilterParam({
+    required SelectedFiltersEntity filters,
+  }) async {
     final String categorySelected = getCategorySelected(
       filters.categories,
     );
@@ -142,18 +151,18 @@ class SearchPageController extends ChangeNotifier {
     );
 
     searchFilterParam = param;
-    filterEntity = filters;
+    selectedFiltersEntity = filters;
     notifyListeners();
 
     getProductByFilter();
   }
 
   Future<void> getProductByFilter() async {
-    _showLoading();
+    _showLoadingBodyProducts();
+    
+    await _standardGetProducts();
 
-    await getProducts();
-
-    _hideLoading();
+    _hideLoadingBodyProducts();
   }
 
   Future<void> searchByProductName({required String productName}) async {

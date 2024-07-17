@@ -2,13 +2,10 @@ import 'dart:convert';
 
 import 'package:feirapp/src/domain/entities/credential_entity.dart';
 
-class CredentialModel {
-  final String? accessToken;
-  final String? tokenType;
-
+class CredentialModel extends CredentialEntity {
   CredentialModel({
-    required this.accessToken,
-    required this.tokenType,
+    required super.accessToken,
+    required super.tokenType,
   });
 
   factory CredentialModel.fromMap(Map<String, dynamic> map) {

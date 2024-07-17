@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
-import 'package:feirapp/src/presenter/search/widgets/filter_button_widget.dart';
+import 'package:feirapp/src/presenter/filter/widgets/filter_button_widget.dart';
 import 'package:feirapp/src/presenter/search/widgets/text_field_search_bar_widget.dart';
 
 class SearchBarWidget extends StatelessWidget {

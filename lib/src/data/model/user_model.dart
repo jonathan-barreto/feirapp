@@ -2,17 +2,12 @@ import 'dart:convert';
 
 import 'package:feirapp/src/domain/entities/user_entity.dart';
 
-class UserModel {
-  final int id;
-  final String name;
-  final String email;
-  final String whatsapp;
-
+class UserModel extends UserEntity {
   UserModel({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.whatsapp,
+    required super.id,
+    required super.name,
+    required super.email,
+    required super.whatsapp,
   });
 
   factory UserModel.fromMap(Map<String, dynamic> map) {

@@ -1,10 +1,10 @@
 import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
-import 'package:feirapp/src/domain/entities/filter_entity.dart';
 import 'package:feirapp/src/domain/entities/order_tile_entity.dart';
+import 'package:feirapp/src/domain/entities/selected_filters_entity.dart';
 import 'package:flutter/material.dart';
 
-class FilterStore extends ChangeNotifier {
-  FilterEntity? filterEntity;
+class FilterController extends ChangeNotifier {
+  SelectedFiltersEntity? selectedFiltersEntity;
 
   List<CategoryTileEntity> categories = [
     CategoryTileEntity(
@@ -60,7 +60,7 @@ class FilterStore extends ChangeNotifier {
     notifyListeners();
   }
 
-  void init({FilterEntity? filter}) {
+  void init({SelectedFiltersEntity? filter}) {
     _showLoading();
 
     if (filter != null) {
@@ -72,14 +72,14 @@ class FilterStore extends ChangeNotifier {
     _hideLoading();
   }
 
-  FilterEntity getFilterEntity() {
-    final FilterEntity filterEntity = FilterEntity(
+  SelectedFiltersEntity getSelectedFilters() {
+    final SelectedFiltersEntity selectedFiltersEntity = SelectedFiltersEntity(
       categories: categories,
       orders: orders,
       currentRangeValues: currentRangeValues,
     );
 
-    return filterEntity;
+    return selectedFiltersEntity;
   }
 
   void setCategoryIsSelected({required int index}) {

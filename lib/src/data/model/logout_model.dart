@@ -2,13 +2,10 @@ import 'dart:convert';
 
 import 'package:feirapp/src/domain/entities/logout_entity.dart';
 
-class LogoutModel {
-  final dynamic data;
-  final String? message;
-
+class LogoutModel extends LogoutEntity {
   LogoutModel({
-    required this.data,
-    required this.message,
+    required super.data,
+    required super.message,
   });
 
   factory LogoutModel.fromMap(Map<String, dynamic> map) {

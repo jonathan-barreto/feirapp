@@ -5,7 +5,6 @@ import 'package:feirapp/src/core/shared/constants/app_messages.dart';
 import 'package:feirapp/src/data/datasources/product_datasource.dart';
 import 'package:feirapp/src/data/model/product_data_model.dart';
 import 'package:feirapp/src/data/model/products_and_pagination_data_model.dart';
-import 'package:feirapp/src/domain/entities/product_data_entity.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/entities/products_and_pagination_entity.dart';
 import 'package:feirapp/src/domain/params/get_product_param.dart';
@@ -46,30 +45,6 @@ class ProductDatasourceImpl implements ProductDatasource {
     }
   }
 
-  // @override
-  // Future<ProductsAndPaginationEntity> getMoreProductsByLink({
-  //   required String link,
-  //   required ProductsFilterParam? params,
-  // }) async {
-  //   // try {
-  //   //   final HttpResponse response = await httpClient.post(
-  //   //     endpoint: link,
-  //   //     body: params,
-  //   //   );
-
-  //   //   final productDataModel = ProductDataModel.fromMap(
-  //   //     response.data,
-  //   //   );
-
-  //   //   final ProductDataEntity productDataEntity = productDataModel.toEntity();
-
-  //   //   return productDataEntity;
-  //   // } catch (e) {
-  //   //   throw ServerException();
-  //   // }
-  //   throw ServerException();
-  // }
-
   @override
   Future<List<ProductEntity>> getProductsWithDiscount() async {
     try {
@@ -82,8 +57,7 @@ class ProductDatasourceImpl implements ProductDatasource {
       );
 
       if (productDataModel.data != null) {
-        final ProductDataEntity productDataEntity = productDataModel.toEntity();
-        return productDataEntity.products;
+        return productDataModel.data?.map((e) => e.toEntity()).toList() ?? [];
       }
 
       throw ServerException(
