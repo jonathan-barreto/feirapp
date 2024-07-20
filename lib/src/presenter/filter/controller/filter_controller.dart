@@ -1,46 +1,46 @@
-import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
-import 'package:feirapp/src/domain/entities/order_tile_entity.dart';
+import 'package:feirapp/src/domain/entities/category_entity.dart';
+import 'package:feirapp/src/domain/entities/order_entity.dart';
 import 'package:feirapp/src/domain/entities/selected_filters_entity.dart';
 import 'package:flutter/material.dart';
 
 class FilterController extends ChangeNotifier {
   SelectedFiltersEntity? selectedFiltersEntity;
 
-  List<CategoryTileEntity> categories = [
-    CategoryTileEntity(
+  List<CategoryEntity> categories = [
+    CategoryEntity(
       title: 'Todos',
       category: '',
       isSelected: true,
     ),
-    CategoryTileEntity(
+    CategoryEntity(
       title: 'Frutas',
       category: 'fruta',
     ),
-    CategoryTileEntity(
+    CategoryEntity(
       title: 'Verduras',
       category: 'verdura',
     ),
-    CategoryTileEntity(
+    CategoryEntity(
       title: 'Vegetais',
       category: 'vegetal',
     ),
-    CategoryTileEntity(
+    CategoryEntity(
       title: 'Temperos',
       category: 'tempero',
     ),
   ];
 
-  List<OrderTileEntity> orders = [
-    OrderTileEntity(
+  List<OrderEntity> orders = [
+    OrderEntity(
       title: 'Padrão',
       order: '',
       isSelected: true,
     ),
-    OrderTileEntity(
+    OrderEntity(
       title: 'Crescente',
       order: 'asc',
     ),
-    OrderTileEntity(
+    OrderEntity(
       title: 'Decrescente',
       order: 'desc',
     ),

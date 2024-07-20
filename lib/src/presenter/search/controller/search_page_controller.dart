@@ -1,7 +1,7 @@
 import 'package:feirapp/src/core/shared/services/debounce_service.dart';
 import 'package:feirapp/src/core/shared/services/debounce_service_impl.dart';
-import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
-import 'package:feirapp/src/domain/entities/order_tile_entity.dart';
+import 'package:feirapp/src/domain/entities/category_entity.dart';
+import 'package:feirapp/src/domain/entities/order_entity.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/entities/selected_filters_entity.dart';
 import 'package:feirapp/src/domain/params/get_product_param.dart';
@@ -19,9 +19,8 @@ class SearchPageController extends ChangeNotifier {
   final DebounceService debounce = DebounceServiceImpl();
   final ScrollController scrollController = ScrollController();
   final TextEditingController textController = TextEditingController();
-  final GetProductsParam getProductsParam = GetProductsParam();
 
-  ProductsFilterParam searchFilterParam = ProductsFilterParam();
+  final GetProductsParam getProductsParam = GetProductsParam();
   SelectedFiltersEntity? selectedFiltersEntity;
 
   bool loading = false;
@@ -75,7 +74,7 @@ class SearchPageController extends ChangeNotifier {
   }
 
   Future<void> _standardGetProducts() async {
-    final result = await getProductsUsecase.call(
+    final result = await getProductsUsecase(
       getProductsParam,
     );
 
@@ -108,7 +107,7 @@ class SearchPageController extends ChangeNotifier {
     _hideLoadingMoreProducts();
   }
 
-  String getCategorySelected(List<CategoryTileEntity> categories) {
+  String getCategorySelected(List<CategoryEntity> categories) {
     String category = '';
 
     for (int i = 0; i < categories.length; i++) {
@@ -120,7 +119,7 @@ class SearchPageController extends ChangeNotifier {
     return category;
   }
 
-  String getOrderSelected(List<OrderTileEntity> orders) {
+  String getOrderSelected(List<OrderEntity> orders) {
     String order = '';
 
     for (int i = 0; i < orders.length; i++) {
@@ -150,7 +149,8 @@ class SearchPageController extends ChangeNotifier {
       maxPrice: filters.currentRangeValues.end,
     );
 
-    searchFilterParam = param;
+    getProductsParam.productsFilterParam = param;
+
     selectedFiltersEntity = filters;
     notifyListeners();
 
@@ -159,14 +159,14 @@ class SearchPageController extends ChangeNotifier {
 
   Future<void> getProductByFilter() async {
     _showLoadingBodyProducts();
-    
+
     await _standardGetProducts();
 
     _hideLoadingBodyProducts();
   }
 
   Future<void> searchByProductName({required String productName}) async {
-    searchFilterParam.name = productName;
+    getProductsParam.productsFilterParam?.name = productName;
 
     debounce(() async {
       await getProductByFilter();
@@ -178,7 +178,7 @@ class SearchPageController extends ChangeNotifier {
   }
 
   void clearOnPressed() {
-    searchFilterParam.name = '';
+    getProductsParam.productsFilterParam?.name = '';
     getProductByFilter();
   }
 }

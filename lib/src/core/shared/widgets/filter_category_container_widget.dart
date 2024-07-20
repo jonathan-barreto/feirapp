@@ -1,9 +1,9 @@
 import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
-import 'package:feirapp/src/domain/entities/category_tile_entity.dart';
+import 'package:feirapp/src/domain/entities/category_entity.dart';
 import 'package:flutter/material.dart';
 
 class FilterCategoryContainerWidget extends StatelessWidget {
-  final List<CategoryTileEntity> categories;
+  final List<CategoryEntity> categories;
   final void Function(int) onChange;
 
   const FilterCategoryContainerWidget({

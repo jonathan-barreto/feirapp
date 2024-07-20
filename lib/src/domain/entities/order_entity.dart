@@ -1,11 +1,11 @@
-class CategoryTileEntity {
+class OrderEntity {
   final String title;
-  final String category;
+  final String order;
   bool isSelected;
 
-  CategoryTileEntity({
+  OrderEntity({
     required this.title,
-    required this.category,
+    required this.order,
     this.isSelected = false,
   });
 }
