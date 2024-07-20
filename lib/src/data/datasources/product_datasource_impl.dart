@@ -18,34 +18,6 @@ class ProductDatasourceImpl implements ProductDatasource {
   });
 
   @override
-  Future<ProductsAndPaginationEntity> getProducts({
-    required GetProductsParam param,
-  }) async {
-    try {
-      final HttpResponse response = await httpClient.post(
-        endpoint: param.endpoint ?? AppEndpoints.getProducts,
-        body: param.productsFilterParam?.toJson(),
-      );
-
-      final productsAndPagination = ProductsAndPaginationDataModel.fromMap(
-        response.data,
-      );
-
-      if (productsAndPagination.data != null) {
-        return productsAndPagination.data!.toEntity();
-      }
-
-      throw ServerException(
-        message: productsAndPagination.message,
-      );
-    } catch (e) {
-      throw ServerException(
-        message: e is ServerException ? e.message : AppMessages.serverError,
-      );
-    }
-  }
-
-  @override
   Future<List<ProductEntity>> getProductsWithDiscount() async {
     try {
       final HttpResponse response = await httpClient.get(
@@ -68,6 +40,41 @@ class ProductDatasourceImpl implements ProductDatasource {
         message: e is ServerException ? e.message : AppMessages.serverError,
       );
     }
+  }
+
+  @override
+  Future<ProductsAndPaginationEntity> getProducts({
+    required GetProductsParam param,
+  }) async {
+    try {
+      final HttpResponse response = await httpClient.post(
+        endpoint: AppEndpoints.getProducts,
+        body: param.productsFilterParam?.toJson(),
+      );
+
+      final productsAndPagination = ProductsAndPaginationDataModel.fromMap(
+        response.data,
+      );
+
+      if (productsAndPagination.data != null) {
+        return productsAndPagination.data!.toEntity();
+      }
+
+      throw ServerException(
+        message: productsAndPagination.message,
+      );
+    } catch (e) {
+      throw ServerException(
+        message: e is ServerException ? e.message : AppMessages.serverError,
+      );
+    }
+  }
+
+  @override
+  Future<ProductsAndPaginationEntity> getMoreProductsByLink({
+    required String link,
+  }) async {
+    throw ServerException();
   }
 
   @override
