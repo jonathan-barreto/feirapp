@@ -4,8 +4,9 @@ import 'package:feirapp/src/core/errors/failure.dart';
 import 'package:feirapp/src/data/datasources/product_datasource.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/entities/products_and_pagination_entity.dart';
-import 'package:feirapp/src/domain/params/get_product_param.dart';
+
 import 'package:feirapp/src/domain/params/get_products_by_ids_param.dart';
+import 'package:feirapp/src/domain/params/product_filter_param.dart';
 import 'package:feirapp/src/domain/repositories/product_repository.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
@@ -17,11 +18,26 @@ class ProductRepositoryImpl implements ProductRepository {
 
   @override
   Future<Either<Failure, ProductsAndPaginationEntity>> getProducts({
-    required GetProductsParam params,
+    required ProductsFilterParam params,
   }) async {
     try {
       final result = await datasource.getProducts(
         param: params,
+      );
+
+      return Right(result);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ProductsAndPaginationEntity>> getMoreProductsByLink({
+    required String url,
+  }) async {
+    try {
+      final result = await datasource.getMoreProductsByLink(
+        url: url,
       );
 
       return Right(result);

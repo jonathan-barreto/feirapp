@@ -21,6 +21,7 @@ import 'package:feirapp/src/domain/repositories/local_product_repository.dart';
 import 'package:feirapp/src/domain/repositories/product_repository.dart';
 import 'package:feirapp/src/domain/usecases/get_favorites_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_if_product_is_favorite_usecase.dart';
+import 'package:feirapp/src/domain/usecases/get_more_products_by_link_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_product_by_id_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_by_ids_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_usecase.dart';
@@ -128,6 +129,12 @@ Future<void> init() async {
     ),
   );
 
+  getIt.registerFactory<GetMoreProductsByLinkUsecase>(
+    () => GetMoreProductsByLinkUsecase(
+      repository: getIt<ProductRepository>(),
+    ),
+  );
+
   getIt.registerFactory<GetProductsByIdsUsecase>(
     () => GetProductsByIdsUsecase(
       repository: getIt<ProductRepository>(),
@@ -212,6 +219,7 @@ Future<void> init() async {
   getIt.registerFactory<SearchPageController>(
     () => SearchPageController(
       getProductsUsecase: getIt<GetProductsUsecase>(),
+      getMoreProductsByLinkUsecase: getIt<GetMoreProductsByLinkUsecase>(),
     ),
   );
 

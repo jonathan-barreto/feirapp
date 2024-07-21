@@ -1,17 +1,17 @@
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/entities/products_and_pagination_entity.dart';
-import 'package:feirapp/src/domain/params/get_product_param.dart';
 import 'package:feirapp/src/domain/params/get_products_by_ids_param.dart';
+import 'package:feirapp/src/domain/params/product_filter_param.dart';
 
 abstract class ProductDatasource {
   Future<List<ProductEntity>> getProductsWithDiscount();
 
   Future<ProductsAndPaginationEntity> getProducts({
-    required GetProductsParam param,
+    required ProductsFilterParam param,
   });
 
   Future<ProductsAndPaginationEntity> getMoreProductsByLink({
-    required String link,
+    required String url,
   });
 
   Future<List<ProductEntity>> getProductById({

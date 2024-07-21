@@ -4,23 +4,25 @@ import 'package:feirapp/src/domain/entities/category_entity.dart';
 import 'package:feirapp/src/domain/entities/order_entity.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/entities/selected_filters_entity.dart';
-import 'package:feirapp/src/domain/params/get_product_param.dart';
 import 'package:feirapp/src/domain/params/product_filter_param.dart';
+import 'package:feirapp/src/domain/usecases/get_more_products_by_link_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_usecase.dart';
 import 'package:flutter/material.dart';
 
 class SearchPageController extends ChangeNotifier {
   final GetProductsUsecase getProductsUsecase;
+  final GetMoreProductsByLinkUsecase getMoreProductsByLinkUsecase;
 
   SearchPageController({
     required this.getProductsUsecase,
+    required this.getMoreProductsByLinkUsecase,
   });
 
   final DebounceService debounce = DebounceServiceImpl();
   final ScrollController scrollController = ScrollController();
   final TextEditingController textController = TextEditingController();
 
-  final GetProductsParam getProductsParam = GetProductsParam();
+  ProductsFilterParam productsFilterParam = ProductsFilterParam();
   SelectedFiltersEntity? selectedFiltersEntity;
 
   bool loading = false;
@@ -28,6 +30,7 @@ class SearchPageController extends ChangeNotifier {
   bool loadingBodyProducts = false;
 
   List<ProductEntity> products = [];
+  String? nextPageUrl;
 
   void _showLoading() {
     loading = true;
@@ -73,23 +76,17 @@ class SearchPageController extends ChangeNotifier {
     await getProducts();
   }
 
-  Future<void> _standardGetProducts() async {
+  Future<void> getProducts() async {
+    _showLoading();
+
     final result = await getProductsUsecase(
-      getProductsParam,
+      productsFilterParam,
     );
 
     result.fold((l) => null, (r) {
       products.addAll(r.products);
-      getProductsParam.endpoint = _getEndPointByUrl(
-        url: r.nextPageUrl ?? '',
-      );
+      nextPageUrl = r.nextPageUrl;
     });
-  }
-
-  Future<void> getProducts() async {
-    _showLoading();
-
-    await _standardGetProducts();
 
     _hideLoading();
   }
@@ -102,7 +99,16 @@ class SearchPageController extends ChangeNotifier {
   Future<void> _getProductsByLink() async {
     _showLoadingMoreProducts();
 
-    await _standardGetProducts();
+    final String url = _getEndPointByUrl(
+      url: nextPageUrl ?? '',
+    );
+
+    final result = await getMoreProductsByLinkUsecase(url);
+
+    result.fold((l) => null, (r) {
+      products.addAll(r.products);
+      nextPageUrl = r.nextPageUrl;
+    });
 
     _hideLoadingMoreProducts();
   }
@@ -149,7 +155,7 @@ class SearchPageController extends ChangeNotifier {
       maxPrice: filters.currentRangeValues.end,
     );
 
-    getProductsParam.productsFilterParam = param;
+    productsFilterParam = param;
 
     selectedFiltersEntity = filters;
     notifyListeners();
@@ -160,13 +166,22 @@ class SearchPageController extends ChangeNotifier {
   Future<void> getProductByFilter() async {
     _showLoadingBodyProducts();
 
-    await _standardGetProducts();
+    final result = await getProductsUsecase(
+      productsFilterParam,
+    );
+
+    products = [];
+
+    result.fold((l) => null, (r) {
+      products.addAll(r.products);
+      nextPageUrl = r.nextPageUrl;
+    });
 
     _hideLoadingBodyProducts();
   }
 
   Future<void> searchByProductName({required String productName}) async {
-    getProductsParam.productsFilterParam?.name = productName;
+    productsFilterParam.name = productName;
 
     debounce(() async {
       await getProductByFilter();
@@ -178,7 +193,7 @@ class SearchPageController extends ChangeNotifier {
   }
 
   void clearOnPressed() {
-    getProductsParam.productsFilterParam?.name = '';
+    productsFilterParam.name = '';
     getProductByFilter();
   }
 }

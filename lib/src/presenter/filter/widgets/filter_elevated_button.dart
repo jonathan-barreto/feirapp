@@ -18,8 +18,8 @@ class FilterElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final double screenHeight = MediaQuery.of(context).size.height;
-    const whiteColor = WidgetStatePropertyAll(AppColors.white);
-    const grenColor = WidgetStatePropertyAll(AppColors.primary);
+    const whiteColor = MaterialStatePropertyAll(AppColors.white);
+    const grenColor = MaterialStatePropertyAll(AppColors.primary);
 
     return SizedBox(
       height: screenHeight * 0.06,
@@ -27,12 +27,12 @@ class FilterElevatedButton extends StatelessWidget {
         onPressed: onPressed,
         style: ButtonStyle(
           backgroundColor: isBorded ? whiteColor : grenColor,
-          side: const WidgetStatePropertyAll(
+          side: const MaterialStatePropertyAll(
             BorderSide(
               color: AppColors.primary,
             ),
           ),
-          shape: WidgetStatePropertyAll(
+          shape: MaterialStatePropertyAll(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(
                 AppStyleValues.small,

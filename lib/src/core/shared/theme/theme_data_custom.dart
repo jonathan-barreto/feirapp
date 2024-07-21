@@ -69,7 +69,7 @@ class AppTheme {
       ),
       elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: WidgetStatePropertyAll(
+          backgroundColor: MaterialStatePropertyAll(
             AppColors.primary,
           ),
         ),

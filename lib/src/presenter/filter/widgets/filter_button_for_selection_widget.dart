@@ -16,8 +16,8 @@ class FilterButtonForSelectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const ligthGrey = WidgetStatePropertyAll(AppColors.lightGrey);
-    const green = WidgetStatePropertyAll(AppColors.primary);
+    const ligthGrey = MaterialStatePropertyAll(AppColors.lightGrey);
+    const green = MaterialStatePropertyAll(AppColors.primary);
 
     final ThemeData theme = Theme.of(context);
 
@@ -25,14 +25,17 @@ class FilterButtonForSelectionWidget extends StatelessWidget {
       onPressed: onPressed,
       style: ButtonStyle(
         backgroundColor: isSelected ? green : ligthGrey,
-        elevation: const WidgetStatePropertyAll(0),
-        shape: WidgetStatePropertyAll(
+        elevation: const MaterialStatePropertyAll(0),
+        shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               AppStyleValues.small,
             ),
           ),
         ),
+        // shape: MaterialStateProperty(
+
+        // ),
       ),
       child: Text(
         label,

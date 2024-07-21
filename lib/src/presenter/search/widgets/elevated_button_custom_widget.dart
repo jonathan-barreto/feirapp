@@ -26,10 +26,10 @@ class ElevatedButtonCustomWidget extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(
+        backgroundColor: MaterialStatePropertyAll(
           isLight ? AppColors.white : Theme.of(context).primaryColor,
         ),
-        side: WidgetStatePropertyAll(
+        side: MaterialStatePropertyAll(
           BorderSide(
             color: Theme.of(context).primaryColor,
           ),

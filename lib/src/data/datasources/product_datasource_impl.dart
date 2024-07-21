@@ -7,8 +7,8 @@ import 'package:feirapp/src/data/model/product_data_model.dart';
 import 'package:feirapp/src/data/model/products_and_pagination_data_model.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/entities/products_and_pagination_entity.dart';
-import 'package:feirapp/src/domain/params/get_product_param.dart';
 import 'package:feirapp/src/domain/params/get_products_by_ids_param.dart';
+import 'package:feirapp/src/domain/params/product_filter_param.dart';
 
 class ProductDatasourceImpl implements ProductDatasource {
   final HttpClient httpClient;
@@ -44,12 +44,12 @@ class ProductDatasourceImpl implements ProductDatasource {
 
   @override
   Future<ProductsAndPaginationEntity> getProducts({
-    required GetProductsParam param,
+    required ProductsFilterParam param,
   }) async {
     try {
       final HttpResponse response = await httpClient.post(
         endpoint: AppEndpoints.getProducts,
-        body: param.productsFilterParam?.toJson(),
+        body: param.toJson(),
       );
 
       final productsAndPagination = ProductsAndPaginationDataModel.fromMap(
@@ -72,9 +72,30 @@ class ProductDatasourceImpl implements ProductDatasource {
 
   @override
   Future<ProductsAndPaginationEntity> getMoreProductsByLink({
-    required String link,
+    required String url,
   }) async {
-    throw ServerException();
+    try {
+      final HttpResponse response = await httpClient.post(
+        endpoint: url,
+        body: null,
+      );
+
+      final productsAndPagination = ProductsAndPaginationDataModel.fromMap(
+        response.data,
+      );
+
+      if (productsAndPagination.data != null) {
+        return productsAndPagination.data!.toEntity();
+      }
+
+      throw ServerException(
+        message: productsAndPagination.message,
+      );
+    } catch (e) {
+      throw ServerException(
+        message: e is ServerException ? e.message : AppMessages.serverError,
+      );
+    }
   }
 
   @override

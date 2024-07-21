@@ -22,7 +22,7 @@ class RegisterLineWidget extends StatelessWidget {
         ),
         InkWell(
           onTap: registerOnPressed,
-          overlayColor: const WidgetStatePropertyAll(
+          overlayColor: const MaterialStatePropertyAll(
             AppColors.white,
           ),
           child: Text(
