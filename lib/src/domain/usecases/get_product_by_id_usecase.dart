@@ -4,7 +4,7 @@ import 'package:feirapp/src/core/usecase/usecase.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/domain/repositories/product_repository.dart';
 
-class GetProductByIdUsecase implements Usecase<List<ProductEntity>, String> {
+class GetProductByIdUsecase implements Usecase<ProductEntity, String> {
   final ProductRepository repository;
 
   GetProductByIdUsecase({
@@ -12,7 +12,7 @@ class GetProductByIdUsecase implements Usecase<List<ProductEntity>, String> {
   });
 
   @override
-  Future<Either<Failure, List<ProductEntity>>> call(String id) async {
+  Future<Either<Failure, ProductEntity>> call(String id) async {
     return await repository.getProductById(id: id);
   }
 }

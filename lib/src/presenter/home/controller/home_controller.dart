@@ -30,12 +30,6 @@ class HomeController extends ChangeNotifier {
   Future<void> getProductsWithDiscount() async {
     showLoading();
 
-    await Future.delayed(
-      const Duration(
-        seconds: 1,
-      ),
-    );
-
     final NoParams noParams = NoParams();
 
     final result = await getProductsWithDiscountUsecase.call(

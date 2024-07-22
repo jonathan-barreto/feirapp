@@ -14,7 +14,7 @@ abstract class ProductDatasource {
     required String url,
   });
 
-  Future<List<ProductEntity>> getProductById({
+  Future<ProductEntity> getProductById({
     required String id,
   });
 

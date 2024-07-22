@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/constants/app_endpoints.dart';
 import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
-import 'package:feirapp/src/core/shared/extensions/string_converter_to_brl_extension.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/core/shared/widgets/text_on_the_left_widget.dart';
 import 'package:feirapp/src/presenter/product/widgets/increment_or_decrement_quantity_widget.dart';
+import 'package:feirapp/src/presenter/product/widgets/price_and_weight_widget.dart';
 import 'package:feirapp/src/presenter/product/widgets/product_category_and_rating_stars_widget.dart';
 import 'package:feirapp/src/presenter/product/widgets/save_and_add_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -73,11 +72,10 @@ class ContentProductPage extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                            child: TextOnTheLeftWidget(
-                              text: productPrice.converterToBRL(),
-                              style: theme.textTheme.titleSmall?.copyWith(
-                                color: AppColors.primary,
-                              ),
+                            flex: 2,
+                            child: PriceAndWeightWidget(
+                              productPrice: productPrice,
+                              productWeight: product?.weight,
                             ),
                           ),
                           IncrementOrDecrementQuantityWidget(

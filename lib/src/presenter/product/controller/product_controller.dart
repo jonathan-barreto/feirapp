@@ -68,11 +68,11 @@ class ProductController extends ChangeNotifier {
   }
 
   Future<void> getProduct() async {
-    final response = await getProductByIdUsecase.call(
+    final result = await getProductByIdUsecase.call(
       productId,
     );
 
-    // response.fold((l) => hasError = true, (r) => product = r.products.first);
+    result.fold((l) => hasError = true, (r) => product = r);
 
     productPrice = product?.discountPrice ?? product?.price;
   }

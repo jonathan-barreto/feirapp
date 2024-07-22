@@ -33,14 +33,6 @@ class FavoriteContainerWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(
             AppStyleValues.small,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.mediumGrey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 1),
-            ),
-          ],
         ),
         child: Row(
           children: [

@@ -15,7 +15,7 @@ abstract class ProductRepository {
     required String url,
   });
 
-  Future<Either<Failure, List<ProductEntity>>> getProductById({
+  Future<Either<Failure, ProductEntity>> getProductById({
     required String id,
   });
 

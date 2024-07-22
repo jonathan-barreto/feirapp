@@ -35,10 +35,6 @@ class MainController extends ChangeNotifier {
     loading = true;
     notifyListeners();
 
-    await Future.delayed(
-      const Duration(seconds: 1),
-    );
-
     loading = false;
     notifyListeners();
   }

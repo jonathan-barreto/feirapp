@@ -99,45 +99,55 @@ class ProductDatasourceImpl implements ProductDatasource {
   }
 
   @override
-  Future<List<ProductEntity>> getProductById({required String id}) async {
-    // try {
-    //   final HttpResponse response = await httpClient.get(
-    //     endpoint: '${AppEndpoints.getProductById}/$id',
-    //   );
+  Future<ProductEntity> getProductById({required String id}) async {
+    try {
+      final HttpResponse response = await httpClient.get(
+        endpoint: '${AppEndpoints.getProductById}/$id',
+      );
 
-    //   final productDataModel = ProductDataModel.fromMap(
-    //     response.data,
-    //   );
+      final productDataModel = ProductDataModel.fromMap(
+        response.data,
+      );
 
-    //   final ProductDataEntity productDataEntity = productDataModel.toEntity();
+      if (productDataModel.data != null) {
+        return productDataModel.data!.first.toEntity();
+      }
 
-    //   return productDataEntity;
-    // } catch (e) {
-    //   throw ServerException();
-    // }
-    throw ServerException();
+      throw ServerException(
+        message: productDataModel.message,
+      );
+    } catch (e) {
+      throw ServerException(
+        message: e is ServerException ? e.message : AppMessages.serverError,
+      );
+    }
   }
 
   @override
   Future<List<ProductEntity>> getProductsByIds({
     required GetProductsByIdsParam productIds,
   }) async {
-    // try {
-    //   final HttpResponse response = await httpClient.post(
-    //     endpoint: AppEndpoints.getProductsByIds,
-    //     body: productIds.toJson(),
-    //   );
+    try {
+      final HttpResponse response = await httpClient.post(
+        endpoint: AppEndpoints.getProductsByIds,
+        body: productIds.toJson(),
+      );
 
-    //   final productDataModel = ProductDataModel.fromMap(
-    //     response.data,
-    //   );
+      final ProductDataModel productDataModel = ProductDataModel.fromMap(
+        response.data,
+      );
 
-    //   final ProductDataEntity productDataEntity = productDataModel.toEntity();
+      if (productDataModel.data != null) {
+        return productDataModel.data?.map((e) => e.toEntity()).toList() ?? [];
+      }
 
-    //   return productDataEntity;
-    // } catch (e) {
-    //   throw ServerException(message: 'Aconteceu um erro!');
-    // }
-    throw ServerException();
+      throw ServerException(
+        message: productDataModel.message,
+      );
+    } catch (e) {
+      throw ServerException(
+        message: e is ServerException ? e.message : AppMessages.serverError,
+      );
+    }
   }
 }

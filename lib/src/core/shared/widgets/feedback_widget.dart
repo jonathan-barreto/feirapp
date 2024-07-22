@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:feirapp/src/core/shared/constants/app_assets.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:flutter/material.dart';
 
 class FeedbackWidget extends StatelessWidget {
@@ -19,6 +20,7 @@ class FeedbackWidget extends StatelessWidget {
       children: [
         Image.asset(
           AppAssets.melanciaImage,
+          width: AppStyleValues.extraLarge * 5,
         ),
         AutoSizeText(
           feedbackMessage,

@@ -36,12 +36,6 @@ class ProfileController extends ChangeNotifier {
   Future<void> init() async {
     showLoading();
 
-    await Future.delayed(
-      const Duration(
-        seconds: 1,
-      ),
-    );
-
     final CurrentUserEntity currentUserEntity = getIt<CurrentUserEntity>();
     user = currentUserEntity.data;
 

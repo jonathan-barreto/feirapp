@@ -79,11 +79,11 @@ class FavoritesController extends ChangeNotifier {
       param,
     );
 
-    // result.fold((l) {
-    //   if (l is ServerFailure) {
-    //     errorMessage = l.message;
-    //   }
-    // }, (r) => products = r.products);
+    result.fold((l) {
+      if (l is ServerFailure) {
+        errorMessage = l.message;
+      }
+    }, (r) => products = r);
 
     return errorMessage;
   }

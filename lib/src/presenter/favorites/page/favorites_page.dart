@@ -1,5 +1,6 @@
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
+import 'package:feirapp/src/core/shared/widgets/feedback_widget.dart';
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/presenter/favorites/controller/favorites_controller.dart';
 import 'package:feirapp/src/presenter/favorites/widgets/favorites_page_content_widget.dart';
@@ -39,7 +40,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
       animation: controller,
       builder: (context, child) {
         return Scaffold(
-          // backgroundColor: AppColors.white,
+          backgroundColor: AppColors.white,
           appBar: AppBar(
             title: Text(
               'Favoritos',
@@ -61,13 +62,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   visible: !controller.loading,
                   child: Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Visibility(
                           visible: controller.products == null,
-                          child: Expanded(
-                            child: Container(
-                              color: Colors.redAccent,
-                            ),
+                          child: const FeedbackWidget(
+                            feedbackMessage: 'Nenhum produto foi salvo.',
                           ),
                         ),
                         Visibility(

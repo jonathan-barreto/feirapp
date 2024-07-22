@@ -13,8 +13,9 @@ class FavoritesPageContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
+      child: ListView.separated(
         itemCount: products.length,
+        separatorBuilder: (context, index) => const Divider(),
         itemBuilder: (context, index) {
           final product = products[index];
 

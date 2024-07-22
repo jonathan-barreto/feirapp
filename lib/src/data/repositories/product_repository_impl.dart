@@ -47,7 +47,7 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, List<ProductEntity>>> getProductById({
+  Future<Either<Failure, ProductEntity>> getProductById({
     required String id,
   }) async {
     try {
