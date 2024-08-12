@@ -118,7 +118,7 @@ class FavoritesController extends ChangeNotifier {
     if (productsIds != null && productsIds!.isNotEmpty) {
       getProductsByIds();
     } else {
-      products = [];
+      products = null;
     }
 
     hideFilterLoading();
@@ -177,6 +177,10 @@ class FavoritesController extends ChangeNotifier {
 
     if (productIndex != null && products != null) {
       products?.removeAt(productIndex);
+    }
+
+    if ((products?.isEmpty ?? false)) {
+      products = null;
     }
 
     notifyListeners();

@@ -64,7 +64,7 @@ class _SearchPageState extends State<SearchPage> {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: theme.primaryColor,
-            elevation: 1,
+            elevation: 10,
             title: Text(
               'PRODUTOS',
               style: theme.textTheme.titleSmall?.copyWith(

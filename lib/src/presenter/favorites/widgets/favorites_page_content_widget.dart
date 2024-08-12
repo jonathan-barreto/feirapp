@@ -2,12 +2,11 @@ import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/core/shared/widgets/feedback_widget.dart';
-import 'package:feirapp/src/core/shared/widgets/input/widget/input_widget.dart';
+import 'package:feirapp/src/core/shared/widgets/input_and_filter_button_widget.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/presenter/favorites/widgets/favorite_container_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FavoritesPageContentWidget extends StatelessWidget {
   final List<ProductEntity> products;
@@ -30,54 +29,9 @@ class FavoritesPageContentWidget extends StatelessWidget {
         slivers: [
           SliverList.list(
             children: [
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppStyleValues.small,
-                  vertical: AppStyleValues.normal,
-                ),
-                decoration: const BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(
-                      AppStyleValues.normal,
-                    ),
-                    bottomRight: Radius.circular(
-                      AppStyleValues.normal,
-                    ),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: InputWidget(
-                        onChanged: (String? value) {},
-                      ),
-                    ),
-                    const SizedBox(
-                      width: AppStyleValues.small,
-                    ),
-                    GestureDetector(
-                      onTap: openFilter,
-                      child: Container(
-                        width: AppStyleValues.extraLarge * 1.5,
-                        height: AppStyleValues.extraLarge * 1.5,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(
-                            AppStyleValues.normal,
-                          ),
-                        ),
-                        child: Center(
-                          child: FaIcon(
-                            FontAwesomeIcons.list,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              InputAndFilterButtonWidget(
+                openFilterOnPressed: openFilter,
+                onChanged: (value) {},
               ),
               const SizedBox(
                 height: AppStyleValues.small,
@@ -94,7 +48,7 @@ class FavoritesPageContentWidget extends StatelessWidget {
             visible: filterLoading == false && products.isEmpty,
             sliver: const SliverFillRemaining(
               child: FeedbackWidget(
-                feedbackMessage: 'Nenhum produco foi encontrado.',
+                feedbackMessage: 'Nenhum produdo foi encontrado.',
               ),
             ),
           ),

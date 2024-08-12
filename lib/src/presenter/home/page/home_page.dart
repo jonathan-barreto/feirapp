@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.primaryColor,
-        elevation: 1,
+        elevation: 10,
         title: Text(
           'FEIRAPP',
           style: theme.textTheme.titleSmall?.copyWith(

@@ -90,54 +90,54 @@ class LocalProductDatasourceImpl implements LocalProductDatasource {
       case '':
         break;
       case 'asc':
-        filteredProducts.sort((a, b) {
-          final ProductModel productA = ProductModel.fromMap(
-            jsonDecode(
-              a,
-            ),
-          );
+        // filteredProducts.sort((a, b) {
+        //   final ProductModel productA = ProductModel.fromMap(
+        //     jsonDecode(
+        //       a,
+        //     ),
+        //   );
 
-          final ProductModel productB = ProductModel.fromMap(
-            jsonDecode(
-              b,
-            ),
-          );
+        //   final ProductModel productB = ProductModel.fromMap(
+        //     jsonDecode(
+        //       b,
+        //     ),
+        //   );
 
-          final double priceA = double.parse(
-            productA.discountPrice ?? productB.price,
-          );
+        //   final double priceA = double.parse(
+        //     productA.discountPrice ?? productB.price,
+        //   );
 
-          final double priceB = double.parse(
-            productA.discountPrice ?? productB.price,
-          );
+        //   final double priceB = double.parse(
+        //     productA.discountPrice ?? productB.price,
+        //   );
 
-          return priceA.compareTo(priceB);
-        });
+        //   return priceA.compareTo(priceB);
+        // });
         break;
       case 'desc':
-        filteredProducts.sort((a, b) {
-          final ProductModel productA = ProductModel.fromMap(
-            jsonDecode(
-              a,
-            ),
-          );
+        // filteredProducts.sort((a, b) {
+        //   final ProductModel productA = ProductModel.fromMap(
+        //     jsonDecode(
+        //       a,
+        //     ),
+        //   );
 
-          final ProductModel productB = ProductModel.fromMap(
-            jsonDecode(
-              b,
-            ),
-          );
+        //   final ProductModel productB = ProductModel.fromMap(
+        //     jsonDecode(
+        //       b,
+        //     ),
+        //   );
 
-          final double priceA = double.parse(
-            productA.discountPrice ?? productB.price,
-          );
+        //   final double priceA = double.parse(
+        //     productA.discountPrice ?? productB.price,
+        //   );
 
-          final double priceB = double.parse(
-            productA.discountPrice ?? productB.price,
-          );
+        //   final double priceB = double.parse(
+        //     productA.discountPrice ?? productB.price,
+        //   );
 
-          return priceB.compareTo(priceA);
-        });
+        //   return priceB.compareTo(priceA);
+        // });
         break;
     }
 
@@ -221,15 +221,21 @@ class LocalProductDatasourceImpl implements LocalProductDatasource {
   @override
   Future<bool> removeProductToFavorites({required String productId}) async {
     try {
-      final List<String> favotireProducts = await getFavoriteProducts();
-
-      final int productIndex = favotireProducts.indexWhere((element) {
-        return element.contains(productId);
-      });
-
-      favotireProducts.removeAt(
-        productIndex,
+      final List<String> favotireProducts = await storage.getStringList(
+        key: AppStorageKeys.favotireProducts,
       );
+
+      for (int index = 0; index < favotireProducts.length; index++) {
+        final ProductModel product = ProductModel.fromMap(
+          jsonDecode(
+            favotireProducts[index],
+          ),
+        );
+
+        if (product.id == int.parse(productId)) {
+          favotireProducts.removeAt(index);
+        }
+      }
 
       return await storage.setStringList(
         key: AppStorageKeys.favotireProducts,

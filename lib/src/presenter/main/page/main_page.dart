@@ -40,7 +40,7 @@ class _MainPageState extends State<MainPage> {
             child: controller.widgets[controller.indexSelected],
           ),
           bottomNavigationBar: BottomNavigationBar(
-            elevation: 1,
+            elevation: 10,
             items: controller.iconsAssets.asMap().entries.map((e) {
               return BottomNavigationBarItem(
                 label: '',

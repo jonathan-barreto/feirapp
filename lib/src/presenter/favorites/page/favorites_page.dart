@@ -120,7 +120,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: theme.primaryColor,
-            elevation: 1,
+            elevation: 10,
             title: Text(
               'FAVORITOS',
               style: theme.textTheme.titleSmall?.copyWith(
