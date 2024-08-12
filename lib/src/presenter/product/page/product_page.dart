@@ -1,3 +1,4 @@
+import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/di/di.dart';
@@ -5,11 +6,11 @@ import 'package:feirapp/src/presenter/product/controller/product_controller.dart
 import 'package:feirapp/src/presenter/product/widgets/content_product_page_widget.dart';
 
 class ProductPage extends StatefulWidget {
-  final String id;
+  final ProductEntity product;
 
   const ProductPage({
     super.key,
-    required this.id,
+    required this.product,
   });
 
   @override
@@ -24,7 +25,7 @@ class _ProductPageState extends State<ProductPage> {
     super.initState();
 
     controller.init(
-      id: widget.id,
+      productEntity: widget.product,
     );
   }
 

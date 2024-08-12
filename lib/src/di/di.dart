@@ -2,6 +2,7 @@ import 'package:feirapp/src/core/http_client/http_client.dart';
 import 'package:feirapp/src/core/http_client/http_client_impl.dart';
 import 'package:feirapp/src/core/local_storage/local_storage.dart';
 import 'package:feirapp/src/core/local_storage/local_storage_impl.dart';
+import 'package:feirapp/src/core/shared/widgets/input/controller/input_widget_controller.dart';
 import 'package:feirapp/src/data/datasources/auth_datasource.dart';
 import 'package:feirapp/src/data/datasources/auth_datasource_impl.dart';
 import 'package:feirapp/src/data/datasources/credential_datasource.dart';
@@ -19,6 +20,7 @@ import 'package:feirapp/src/domain/repositories/auth_repository.dart';
 import 'package:feirapp/src/domain/repositories/credential_repository.dart';
 import 'package:feirapp/src/domain/repositories/local_product_repository.dart';
 import 'package:feirapp/src/domain/repositories/product_repository.dart';
+import 'package:feirapp/src/domain/usecases/get_favorites_products_by_filters_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_favorites_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_if_product_is_favorite_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_more_products_by_link_usecase.dart';
@@ -206,6 +208,11 @@ Future<void> init() async {
       repository: getIt<LocalProductRepository>(),
     ),
   );
+  getIt.registerFactory<GetFavoritesProductsByFiltersUsecase>(
+    () => GetFavoritesProductsByFiltersUsecase(
+      repository: getIt<LocalProductRepository>(),
+    ),
+  );
 
   // Controllers
   getIt.registerFactory<MainController>(() => MainController());
@@ -260,12 +267,19 @@ Future<void> init() async {
   getIt.registerFactory<FavoritesController>(
     () => FavoritesController(
       getFavoritesProductsUsecase: getIt<GetFavoritesProductsUsecase>(),
+      getFavoritesProductsByFiltersUsecase:
+          getIt<GetFavoritesProductsByFiltersUsecase>(),
       getProductsByIdsUsecase: getIt<GetProductsByIdsUsecase>(),
+      removeProductToFavoritesUsecase: getIt<RemoveProductToFavoritesUsecase>(),
     ),
   );
 
   getIt.registerFactory<FilterController>(
     () => FilterController(),
+  );
+
+  getIt.registerFactory<InputWidgetController>(
+    () => InputWidgetController(),
   );
 
   // Singleton's

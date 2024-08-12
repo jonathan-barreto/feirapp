@@ -2,6 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:feirapp/src/core/errors/exceptions.dart';
 import 'package:feirapp/src/core/errors/failure.dart';
 import 'package:feirapp/src/data/datasources/local_product_datasource.dart';
+import 'package:feirapp/src/domain/entities/product_entity.dart';
+import 'package:feirapp/src/domain/entities/selected_filters_entity.dart';
 import 'package:feirapp/src/domain/repositories/local_product_repository.dart';
 
 class LocalProductRepositoryImpl implements LocalProductRepository {
@@ -23,12 +25,27 @@ class LocalProductRepositoryImpl implements LocalProductRepository {
   }
 
   @override
+  Future<Either<Failure, List<String>>> getFavoriteProductsByFilters({
+    required SelectedFiltersEntity filters,
+  }) async {
+    try {
+      return Right(
+        await datasource.getFavoriteProductsByFilters(
+          filters: filters,
+        ),
+      );
+    } on StorageException {
+      return Left(StorageFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, bool>> saveProductToFavorites({
-    required String productId,
+    required ProductEntity product,
   }) async {
     try {
       final bool result = await datasource.saveProductToFavorites(
-        productId: productId,
+        product: product,
       );
 
       return Right(result);

@@ -1,3 +1,4 @@
+import 'package:feirapp/src/core/shared/widgets/input/widget/input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/presenter/filter/widgets/filter_button_widget.dart';
@@ -25,10 +26,15 @@ class SearchBarWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          TextFieldSearchBarWidget(
-            controller: textController,
-            clearPressed: () => clearPressed(),
-            onChange: (value) => onChange(value),
+          // TextFieldSearchBarWidget(
+          //   controller: textController,
+          //   clearPressed: () => clearPressed(),
+          //   onChange: (value) => onChange(value),
+          // ),
+          Expanded(
+            child: InputWidget(
+              onChanged: (value) {},
+            ),
           ),
           const SizedBox(
             width: AppStyleValues.small,

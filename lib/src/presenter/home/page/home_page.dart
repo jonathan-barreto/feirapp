@@ -1,3 +1,4 @@
+import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/core/shared/extensions/get_user_first_name_extension.dart';
 import 'package:feirapp/src/core/shared/widgets/banner_ad_widget.dart';
@@ -28,6 +29,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     final Size size = MediaQuery.of(context).size;
 
     final double itemHeight = (size.height - kToolbarHeight) / 2;
@@ -40,55 +43,67 @@ class _HomePageState extends State<HomePage> {
       childAspectRatio: (itemWidth / itemHeight),
     );
 
-    return SafeArea(
-      child: AnimatedBuilder(
-        animation: controller,
-        builder: (BuildContext context, Widget? child) {
-          return Column(
-            children: [
-              Visibility(
-                visible: controller.loading == true,
-                child: const Expanded(
-                  child: StandardLoadingWidget(),
-                ),
-              ),
-              Visibility(
-                visible: controller.loading == false,
-                child: Expanded(
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverList.list(
-                        children: [
-                          AppBarHomeWidget(
-                            name: '${currentUser.data?.name.getFirstName()}',
-                          ),
-                          const BannerAdWidget(),
-                        ],
-                      ),
-                      SliverPadding(
-                        padding: const EdgeInsets.all(
-                          AppStyleValues.small,
-                        ),
-                        sliver: SliverGrid.builder(
-                          itemCount: controller.products.length,
-                          gridDelegate: gridDelegate,
-                          itemBuilder: (context, index) {
-                            final product = controller.products[index];
-
-                            return CardProductWidget(
-                              product: product,
-                              addProductFunction: () async {},
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: theme.primaryColor,
+        elevation: 1,
+        title: Text(
+          'FEIRAPP',
+          style: theme.textTheme.titleSmall?.copyWith(
+            color: AppColors.white,
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: AnimatedBuilder(
+          animation: controller,
+          builder: (BuildContext context, Widget? child) {
+            return Column(
+              children: [
+                Visibility(
+                  visible: controller.loading == true,
+                  child: const Expanded(
+                    child: StandardLoadingWidget(),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
+                Visibility(
+                  visible: controller.loading == false,
+                  child: Expanded(
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverList.list(
+                          children: [
+                            AppBarHomeWidget(
+                              name: '${currentUser.data?.name.getFirstName()}',
+                            ),
+                            const BannerAdWidget(),
+                          ],
+                        ),
+                        SliverPadding(
+                          padding: const EdgeInsets.all(
+                            AppStyleValues.small,
+                          ),
+                          sliver: SliverGrid.builder(
+                            itemCount: controller.products.length,
+                            gridDelegate: gridDelegate,
+                            itemBuilder: (context, index) {
+                              final product = controller.products[index];
+
+                              return CardProductWidget(
+                                product: product,
+                                addProductFunction: () async {},
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

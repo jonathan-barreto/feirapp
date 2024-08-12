@@ -1,3 +1,4 @@
+import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/domain/entities/selected_filters_entity.dart';
@@ -55,30 +56,46 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return AnimatedBuilder(
       animation: controller,
       builder: (BuildContext context, Widget? child) {
-        return GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            children: [
-              Visibility(
-                visible: controller.loading == true,
-                child: const Expanded(
-                  child: Center(
-                    child: StandardLoadingWidget(),
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: theme.primaryColor,
+            elevation: 1,
+            title: Text(
+              'PRODUTOS',
+              style: theme.textTheme.titleSmall?.copyWith(
+                color: AppColors.white,
+              ),
+            ),
+          ),
+          body: SafeArea(
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: Column(
+                children: [
+                  Visibility(
+                    visible: controller.loading == true,
+                    child: const Expanded(
+                      child: Center(
+                        child: StandardLoadingWidget(),
+                      ),
+                    ),
                   ),
-                ),
+                  Visibility(
+                    visible: controller.loading == false,
+                    child: SearchPageContent(
+                      controller: controller,
+                      openFilterPageOnPressed: openFilterPage,
+                      clearOnPressed: clearOnPressed,
+                    ),
+                  ),
+                ],
               ),
-              Visibility(
-                visible: controller.loading == false,
-                child: SearchPageContent(
-                  controller: controller,
-                  openFilterPageOnPressed: openFilterPage,
-                  clearOnPressed: clearOnPressed,
-                ),
-              ),
-            ],
+            ),
           ),
         );
       },

@@ -45,10 +45,11 @@ class ProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> init({required String id}) async {
+  Future<void> init({required ProductEntity productEntity}) async {
     showLoading();
 
-    productId = id;
+    product = productEntity;
+    productId = '${product?.id}';
 
     await checkIfProductIsFavorite();
 
@@ -127,13 +128,15 @@ class ProductController extends ChangeNotifier {
   }
 
   Future<void> saveProductToFavorites() async {
-    final Either<Failure, bool> result = await saveProductToFavoriteUsecase(
-      productId,
-    );
+    if (product != null) {
+      final Either<Failure, bool> result = await saveProductToFavoriteUsecase(
+        product!,
+      );
 
-    result.fold((l) => null, (r) => null);
+      result.fold((l) => null, (r) => null);
 
-    checkIfProductIsFavorite();
+      checkIfProductIsFavorite();
+    }
   }
 
   Future<void> removeProductToFavorites() async {

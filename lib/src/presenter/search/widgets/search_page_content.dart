@@ -1,11 +1,10 @@
-import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/core/shared/widgets/card_product_widget.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/core/shared/widgets/feedback_widget.dart';
+import 'package:feirapp/src/core/shared/widgets/input_and_filter_button_widget.dart';
 import 'package:feirapp/src/presenter/search/controller/search_page_controller.dart';
 import 'package:feirapp/src/presenter/search/widgets/bottom_loading_more_products_widget.dart';
-import 'package:feirapp/src/presenter/search/widgets/search_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 class SearchPageContent extends StatelessWidget {
@@ -35,20 +34,14 @@ class SearchPageContent extends StatelessWidget {
             slivers: [
               SliverList.list(
                 children: [
-                  Container(
-                    height: AppStyleValues.extraLarge * 2,
-                    color: AppColors.white,
-                    child: SearchBarWidget(
-                      textController: controller.textController,
-                      onPressed: openFilterPageOnPressed,
-                      clearPressed: clearOnPressed,
-                      onChange: (value) {
-                        controller.searchByProductName(
-                          productName: value,
-                        );
-                      },
-                    ),
-                  )
+                  InputAndFilterButtonWidget(
+                    openFilterOnPressed: openFilterPageOnPressed,
+                    onChanged: (value) {
+                      controller.searchByProductName(
+                        productName: value ?? '',
+                      );
+                    },
+                  ),
                 ],
               ),
               SliverVisibility(
