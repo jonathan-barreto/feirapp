@@ -24,7 +24,13 @@ class SearchPageContent extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
 
     final double itemHeight = (size.height - kToolbarHeight) / 2;
-    final double itemWidth = size.width / 2;
+
+    final gridDelegate = SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+      mainAxisSpacing: AppStyleValues.small,
+      crossAxisSpacing: AppStyleValues.small,
+      childAspectRatio: (((AppStyleValues.extraLarge + 2) * 4.5) / itemHeight),
+    );
 
     return Expanded(
       child: Stack(
@@ -68,12 +74,7 @@ class SearchPageContent extends StatelessWidget {
                   ),
                   sliver: SliverGrid.builder(
                     itemCount: controller.products.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: AppStyleValues.small,
-                      crossAxisSpacing: AppStyleValues.small,
-                      childAspectRatio: (itemWidth / itemHeight),
-                    ),
+                    gridDelegate: gridDelegate,
                     itemBuilder: (context, index) {
                       final product = controller.products[index];
 

@@ -28,14 +28,18 @@ import 'package:feirapp/src/domain/usecases/get_product_by_id_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_by_ids_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_with_discount_usecase.dart';
+import 'package:feirapp/src/domain/usecases/get_saved_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_user_credentials_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_user_usecase.dart';
 import 'package:feirapp/src/domain/usecases/login_usecase.dart';
 import 'package:feirapp/src/domain/usecases/logout_usecase.dart';
 import 'package:feirapp/src/domain/usecases/remove_product_to_favorite_usecase.dart';
 import 'package:feirapp/src/domain/usecases/remove_user_credential_usecase.dart';
+import 'package:feirapp/src/domain/usecases/save_product_to_cart_usecase.dart';
 import 'package:feirapp/src/domain/usecases/save_product_to_favorite_usecase.dart';
 import 'package:feirapp/src/domain/usecases/save_user_credentials_usecase.dart';
+import 'package:feirapp/src/domain/usecases/update_product_quantity_usecase.dart';
+import 'package:feirapp/src/presenter/cart/controller/cart_controller.dart';
 import 'package:feirapp/src/presenter/favorites/controller/favorites_controller.dart';
 import 'package:feirapp/src/presenter/filter/controller/filter_controller.dart';
 import 'package:feirapp/src/presenter/home/controller/home_controller.dart';
@@ -208,8 +212,27 @@ Future<void> init() async {
       repository: getIt<LocalProductRepository>(),
     ),
   );
+
   getIt.registerFactory<GetFavoritesProductsByFiltersUsecase>(
     () => GetFavoritesProductsByFiltersUsecase(
+      repository: getIt<LocalProductRepository>(),
+    ),
+  );
+
+  getIt.registerFactory<GetSavedProductsUsecase>(
+    () => GetSavedProductsUsecase(
+      repository: getIt<LocalProductRepository>(),
+    ),
+  );
+
+  getIt.registerFactory<SaveProductToCartUsecase>(
+    () => SaveProductToCartUsecase(
+      repository: getIt<LocalProductRepository>(),
+    ),
+  );
+
+  getIt.registerFactory<UpdateProductQuantityUsecase>(
+    () => UpdateProductQuantityUsecase(
       repository: getIt<LocalProductRepository>(),
     ),
   );
@@ -220,6 +243,7 @@ Future<void> init() async {
   getIt.registerFactory<HomeController>(
     () => HomeController(
       getProductsWithDiscountUsecase: getIt<GetProductsWithDiscountUsecase>(),
+      saveProductToCartUsecase: getIt<SaveProductToCartUsecase>(),
     ),
   );
 
@@ -280,6 +304,13 @@ Future<void> init() async {
 
   getIt.registerFactory<InputWidgetController>(
     () => InputWidgetController(),
+  );
+
+  getIt.registerFactory<CartController>(
+    () => CartController(
+      getSavedProductsUsecase: getIt<GetSavedProductsUsecase>(),
+      updateProductQuantityUsecase: getIt<UpdateProductQuantityUsecase>(),
+    ),
   );
 
   // Singleton's

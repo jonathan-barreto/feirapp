@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
 
 class ProductModel extends ProductEntity {
-  const ProductModel({
+  ProductModel({
     required super.id,
     required super.name,
     required super.price,

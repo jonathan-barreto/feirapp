@@ -245,4 +245,102 @@ class LocalProductDatasourceImpl implements LocalProductDatasource {
       throw StorageException();
     }
   }
+
+  @override
+  Future<List<ProductEntity>> getSavedProducts() async {
+    try {
+      final List<String> products = await storage.getStringList(
+        key: AppStorageKeys.cartProducts,
+      );
+
+      return products.map((e) => ProductEntity.fromMap(jsonDecode(e))).toList();
+    } catch (e) {
+      throw StorageException();
+    }
+  }
+
+  @override
+  Future<bool> saveProductToCart({required ProductEntity product}) async {
+    try {
+      final List<String> productsInCart = await storage.getStringList(
+        key: AppStorageKeys.cartProducts,
+      );
+
+      if (productsInCart.isEmpty) {
+        productsInCart.add(
+          product.toJson(),
+        );
+      } else {
+        final int productIndex = productsInCart.indexWhere((element) {
+          final ProductEntity productInCart = ProductEntity.fromMap(
+            jsonDecode(
+              element,
+            ),
+          );
+
+          return productInCart.id == product.id;
+        });
+
+        if (productIndex >= 0) {
+          final ProductEntity productInCart = ProductEntity.fromMap(
+            jsonDecode(
+              productsInCart[productIndex],
+            ),
+          );
+
+          int totalQuantity = productInCart.quantity + 1;
+          product.quantity = totalQuantity;
+
+          productsInCart[productIndex] = product.toJson();
+        } else {
+          productsInCart.add(
+            product.toJson(),
+          );
+        }
+      }
+
+      return await storage.setStringList(
+        key: AppStorageKeys.cartProducts,
+        values: productsInCart,
+      );
+    } catch (e) {
+      throw StorageException();
+    }
+  }
+
+  @override
+  Future<bool> updateProductQuantity({required ProductEntity product}) async {
+    try {
+      final List<String> productsInCart = await storage.getStringList(
+        key: AppStorageKeys.cartProducts,
+      );
+
+      final int productIndex = productsInCart.indexWhere((element) {
+        final ProductEntity productEntity = ProductEntity.fromMap(
+          jsonDecode(element),
+        );
+
+        return productEntity.id == product.id;
+      });
+
+      if (productIndex != -1) {
+        productsInCart[productIndex] = product.toJson();
+      } else {
+        throw StorageException();
+      }
+
+      return await storage.setStringList(
+        key: AppStorageKeys.cartProducts,
+        values: productsInCart,
+      );
+    } catch (e) {
+      throw StorageException();
+    }
+  }
+
+  @override
+  Future<bool> removeProductToCart({required ProductEntity product}) async {
+    // TODO: implement removeProductToCart
+    throw UnimplementedError();
+  }
 }

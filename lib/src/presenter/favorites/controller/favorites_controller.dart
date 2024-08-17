@@ -55,12 +55,6 @@ class FavoritesController extends ChangeNotifier {
   Future<String?> init() async {
     showLoading();
 
-    await Future.delayed(
-      const Duration(
-        seconds: 1,
-      ),
-    );
-
     String? errorMessage;
 
     errorMessage = await getFavoritesProducts();
@@ -98,12 +92,6 @@ class FavoritesController extends ChangeNotifier {
     showFilterLoading();
 
     String? errorMessage;
-
-    await Future.delayed(
-      const Duration(
-        seconds: 1,
-      ),
-    );
 
     final result = await getFavoritesProductsByFiltersUsecase(
       filters,

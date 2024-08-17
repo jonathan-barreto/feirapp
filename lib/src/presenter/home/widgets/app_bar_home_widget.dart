@@ -12,14 +12,12 @@ class AppBarHomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final ThemeData theme = Theme.of(context);
 
     return Container(
       width: double.infinity,
-      height: screenHeight * 0.1,
-      color: themeData.appBarTheme.backgroundColor,
+      height: AppStyleValues.extraLarge * 1.5,
+      color: theme.appBarTheme.backgroundColor,
       padding: const EdgeInsets.symmetric(
         horizontal: AppStyleValues.small,
       ),
@@ -33,15 +31,15 @@ class AppBarHomeWidget extends StatelessWidget {
             AutoSizeText(
               'Olá, $name!',
               maxLines: 1,
-              style: textTheme.bodyLarge?.copyWith(
+              style: theme.textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             Container(
-              width: 50,
-              height: 50,
+              width: AppStyleValues.extraLarge + 2,
+              height: AppStyleValues.extraLarge + 2,
               decoration: BoxDecoration(
-                color: themeData.primaryColor,
+                color: theme.primaryColor,
                 shape: BoxShape.circle,
               ),
             ),

@@ -83,4 +83,45 @@ class LocalProductRepositoryImpl implements LocalProductRepository {
       return Left(StorageFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<ProductEntity>>> getSavedProducts() async {
+    try {
+      final result = await datasource.getSavedProducts();
+
+      return Right(result);
+    } on StorageException {
+      return Left(StorageFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> saveProductToCart({
+    required ProductEntity product,
+  }) async {
+    try {
+      final bool result = await datasource.saveProductToCart(
+        product: product,
+      );
+
+      return Right(result);
+    } on StorageException {
+      return Left(StorageFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> updateProductQuantity({
+    required ProductEntity product,
+  }) async {
+   try {
+      final bool result = await datasource.updateProductQuantity(
+        product: product,
+      );
+
+      return Right(result);
+    } on StorageException {
+      return Left(StorageFailure());
+    }
+  }
 }

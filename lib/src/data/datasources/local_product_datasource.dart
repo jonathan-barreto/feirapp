@@ -19,4 +19,18 @@ abstract class LocalProductDatasource {
   Future<bool> removeProductToFavorites({
     required String productId,
   });
+
+  Future<List<ProductEntity>> getSavedProducts();
+
+  Future<bool> saveProductToCart({
+    required ProductEntity product,
+  });
+
+  Future<bool> updateProductQuantity({
+    required ProductEntity product,
+  });
+
+  Future<bool> removeProductToCart({
+    required ProductEntity product,
+  });
 }

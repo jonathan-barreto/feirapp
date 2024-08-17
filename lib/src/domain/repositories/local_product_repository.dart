@@ -21,4 +21,14 @@ abstract class LocalProductRepository {
   Future<Either<Failure, bool>> removeProductToFavorites({
     required String productId,
   });
+
+  Future<Either<Failure, List<ProductEntity>>> getSavedProducts();
+
+  Future<Either<Failure, bool>> saveProductToCart({
+    required ProductEntity product,
+  });
+
+  Future<Either<Failure, bool>> updateProductQuantity({
+    required ProductEntity product,
+  });
 }

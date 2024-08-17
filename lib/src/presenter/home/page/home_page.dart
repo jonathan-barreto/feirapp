@@ -6,6 +6,7 @@ import 'package:feirapp/src/core/shared/widgets/card_product_widget.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/di/di.dart';
 import 'package:feirapp/src/domain/entities/current_user_entity.dart';
+import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/presenter/home/controller/home_controller.dart';
 import 'package:feirapp/src/presenter/home/widgets/app_bar_home_widget.dart';
 import 'package:flutter/material.dart';
@@ -27,33 +28,37 @@ class _HomePageState extends State<HomePage> {
     controller.init();
   }
 
+  Future<void> addProductInCart({required ProductEntity product}) async {
+    controller.addProductInCart(
+      product: product,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
     final Size size = MediaQuery.of(context).size;
-
     final double itemHeight = (size.height - kToolbarHeight) / 2;
-    final double itemWidth = size.width / 2;
 
     final gridDelegate = SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 2,
       mainAxisSpacing: AppStyleValues.small,
       crossAxisSpacing: AppStyleValues.small,
-      childAspectRatio: (itemWidth / itemHeight),
+      childAspectRatio: (((AppStyleValues.extraLarge + 2) * 4.5) / itemHeight),
     );
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: theme.primaryColor,
-        elevation: 10,
-        title: Text(
-          'FEIRAPP',
-          style: theme.textTheme.titleSmall?.copyWith(
-            color: AppColors.white,
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: theme.primaryColor,
+      //   elevation: 10,
+      //   title: Text(
+      //     'FEIRAPP',
+      //     style: theme.textTheme.titleSmall?.copyWith(
+      //       color: AppColors.white,
+      //     ),
+      //   ),
+      // ),
       body: SafeArea(
         child: AnimatedBuilder(
           animation: controller,
@@ -91,7 +96,9 @@ class _HomePageState extends State<HomePage> {
 
                               return CardProductWidget(
                                 product: product,
-                                addProductFunction: () async {},
+                                addProductFunction: () => addProductInCart(
+                                  product: product,
+                                ),
                               );
                             },
                           ),

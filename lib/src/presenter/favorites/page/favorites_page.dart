@@ -1,5 +1,4 @@
 import 'package:feirapp/src/core/shared/constants/app_assets.dart';
-import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:feirapp/src/core/shared/widgets/circular_progress_indicator_custom.dart';
 import 'package:feirapp/src/core/shared/widgets/feedback_widget.dart';
@@ -112,22 +111,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-
     return AnimatedBuilder(
       animation: controller,
       builder: (context, child) {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: theme.primaryColor,
-            elevation: 10,
-            title: Text(
-              'FAVORITOS',
-              style: theme.textTheme.titleSmall?.copyWith(
-                color: AppColors.white,
-              ),
-            ),
-          ),
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SafeArea(

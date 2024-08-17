@@ -45,19 +45,19 @@ class _ProfilePageState extends State<ProfilePage> {
       animation: controller,
       builder: (context, child) {
         return Scaffold(
-          appBar: AppBar(
-            actions: [
-              Visibility(
-                visible: controller.loading == false,
-                child: IconButton(
-                  onPressed: logout,
-                  icon: const Icon(
-                    Icons.exit_to_app,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          // appBar: AppBar(
+          //   actions: [
+          //     Visibility(
+          //       visible: controller.loading == false,
+          //       child: IconButton(
+          //         onPressed: logout,
+          //         icon: const Icon(
+          //           Icons.exit_to_app,
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
           backgroundColor: AppColors.white,
           body: SafeArea(
             child: Column(

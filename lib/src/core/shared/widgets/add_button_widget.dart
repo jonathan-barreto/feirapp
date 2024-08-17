@@ -2,10 +2,10 @@ import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:flutter/material.dart';
 
-class AddToCartButtonWidget extends StatelessWidget {
+class AddButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const AddToCartButtonWidget({
+  const AddButtonWidget({
     super.key,
     required this.onPressed,
   });

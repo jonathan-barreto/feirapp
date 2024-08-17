@@ -7,12 +7,14 @@ import 'package:feirapp/src/domain/entities/product_entity.dart';
 import 'package:feirapp/src/presenter/product/page/product_page.dart';
 import 'package:flutter/material.dart';
 
-class FavoriteContainerWidget extends StatelessWidget {
+class HorizontalProductContainerWidget extends StatelessWidget {
   final ProductEntity product;
+  final Widget optionsWidget;
 
-  const FavoriteContainerWidget({
+  const HorizontalProductContainerWidget({
     super.key,
     required this.product,
+    required this.optionsWidget,
   });
 
   @override
@@ -82,6 +84,7 @@ class FavoriteContainerWidget extends StatelessWidget {
                   ],
                 ),
               ),
+              optionsWidget,
             ],
           ),
         ),

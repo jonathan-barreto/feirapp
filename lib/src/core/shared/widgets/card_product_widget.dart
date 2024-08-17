@@ -1,6 +1,6 @@
 import 'package:feirapp/src/core/shared/constants/app_endpoints.dart';
 import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
-import 'package:feirapp/src/core/shared/widgets/add_to_cart_button_widget.dart';
+import 'package:feirapp/src/core/shared/widgets/add_button_widget.dart';
 import 'package:feirapp/src/core/shared/widgets/internet_image_widget.dart';
 import 'package:feirapp/src/core/shared/widgets/product_price_widget.dart';
 import 'package:feirapp/src/core/shared/widgets/product_title_widget.dart';
@@ -58,9 +58,6 @@ class CardProductWidget extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // DiscountContainerWidget(
-                    //   discount: product.discount ?? 0,
-                    // ),
                     ProductPriceWidget(
                       price: product.price,
                       discountPrice: product.discountPrice,
@@ -73,7 +70,7 @@ class CardProductWidget extends StatelessWidget {
                       productUnit: product.unit,
                       productWeight: product.weight,
                     ),
-                    AddToCartButtonWidget(
+                    AddButtonWidget(
                       onPressed: addProductFunction,
                     ),
                   ],

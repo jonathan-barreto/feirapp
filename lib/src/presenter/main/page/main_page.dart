@@ -1,3 +1,4 @@
+import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/domain/entities/user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:feirapp/src/di/di.dart';
@@ -32,10 +33,22 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return AnimatedBuilder(
       animation: controller,
       builder: (context, child) {
         return Scaffold(
+          appBar: AppBar(
+            backgroundColor: theme.primaryColor,
+            elevation: 10,
+            title: Text(
+              controller.appbarTitle,
+              style: theme.textTheme.titleSmall?.copyWith(
+                color: AppColors.white,
+              ),
+            ),
+          ),
           body: SafeArea(
             child: controller.widgets[controller.indexSelected],
           ),

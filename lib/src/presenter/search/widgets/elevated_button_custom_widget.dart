@@ -1,4 +1,5 @@
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
+import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
 import 'package:flutter/material.dart';
 
 class ElevatedButtonCustomWidget extends StatelessWidget {
@@ -26,12 +27,20 @@ class ElevatedButtonCustomWidget extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
+        elevation: const MaterialStatePropertyAll(0),
         backgroundColor: MaterialStatePropertyAll(
           isLight ? AppColors.white : Theme.of(context).primaryColor,
         ),
         side: MaterialStatePropertyAll(
           BorderSide(
             color: Theme.of(context).primaryColor,
+          ),
+        ),
+        shape: MaterialStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              AppStyleValues.small,
+            ),
           ),
         ),
       ),

@@ -62,16 +62,16 @@ class _SearchPageState extends State<SearchPage> {
       animation: controller,
       builder: (BuildContext context, Widget? child) {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: theme.primaryColor,
-            elevation: 10,
-            title: Text(
-              'PRODUTOS',
-              style: theme.textTheme.titleSmall?.copyWith(
-                color: AppColors.white,
-              ),
-            ),
-          ),
+          // appBar: AppBar(
+          //   backgroundColor: theme.primaryColor,
+          //   elevation: 10,
+          //   title: Text(
+          //     'PRODUTOS',
+          //     style: theme.textTheme.titleSmall?.copyWith(
+          //       color: AppColors.white,
+          //     ),
+          //   ),
+          // ),
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
