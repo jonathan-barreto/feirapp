@@ -1,16 +1,10 @@
-# feirapp
+# FEIRAPP
 
-A new Flutter project.
+Feirapp é um aplicativo de hortifruti desenvolvido com o objetivo de ser uma solução prática para facilitar a organização e a compra de produtos de feira. Criado com foco em ser utilizado no dia a dia, o Feirapp também serve como uma base sólida para meus estudos sobre Clean Architecture no Flutter.
 
-## Getting Started
+Este projeto foi construído para consolidar o uso de boas práticas de desenvolvimento, seguindo padrões arquiteturais que garantem um código modular, testável e escalável. Além disso, ele oferece uma experiência de usuário simples e eficiente.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot 1](screenshots/Screenshot_33.png)
