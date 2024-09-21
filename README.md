@@ -40,4 +40,4 @@ CART PAGE
 
 CONFIG PAGE
 
-![Screenshot 1](screenshots/Screenshot_40.png)
+![Screenshot 1](screenshots/Screenshot_41.png)
