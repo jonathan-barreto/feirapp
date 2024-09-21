@@ -1,13 +1,16 @@
 import 'package:feirapp/src/core/shared/constants/app_colors.dart';
 import 'package:feirapp/src/core/shared/constants/app_style_values.dart';
+import 'package:feirapp/src/core/shared/extensions/string_converter_to_brl_extension.dart';
 import 'package:feirapp/src/presenter/search/widgets/elevated_button_custom_widget.dart';
 import 'package:flutter/material.dart';
 
 class TotalCartContainerWidget extends StatelessWidget {
+  final double cartTotal;
   final VoidCallback onPressed;
 
   const TotalCartContainerWidget({
     super.key,
+    required this.cartTotal,
     required this.onPressed,
   });
 
@@ -39,7 +42,7 @@ class TotalCartContainerWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'R\$ 50,00',
+                  '$cartTotal'.converterToBRL(),
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),

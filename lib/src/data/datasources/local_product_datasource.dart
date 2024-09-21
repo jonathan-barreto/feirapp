@@ -20,7 +20,7 @@ abstract class LocalProductDatasource {
     required String productId,
   });
 
-  Future<List<ProductEntity>> getSavedProducts();
+  Future<List<ProductEntity>> getProductsFromCart();
 
   Future<bool> saveProductToCart({
     required ProductEntity product,

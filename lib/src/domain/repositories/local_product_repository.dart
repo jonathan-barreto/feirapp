@@ -22,7 +22,7 @@ abstract class LocalProductRepository {
     required String productId,
   });
 
-  Future<Either<Failure, List<ProductEntity>>> getSavedProducts();
+  Future<Either<Failure, List<ProductEntity>>> getProductsFromCart();
 
   Future<Either<Failure, bool>> saveProductToCart({
     required ProductEntity product,

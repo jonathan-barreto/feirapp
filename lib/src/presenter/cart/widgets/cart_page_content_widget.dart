@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 
 class CartPageContentWidget extends StatelessWidget {
   final List<ProductEntity> products;
+  final double cartTotal;
   final void Function(ProductEntity) addQuantity;
   final void Function(ProductEntity) removeQuantity;
 
   const CartPageContentWidget({
     super.key,
     required this.products,
+    required this.cartTotal,
     required this.addQuantity,
     required this.removeQuantity,
   });
@@ -40,6 +42,7 @@ class CartPageContentWidget extends StatelessWidget {
         ),
         Expanded(
           child: TotalCartContainerWidget(
+            cartTotal: cartTotal,
             onPressed: () {},
           ),
         ),

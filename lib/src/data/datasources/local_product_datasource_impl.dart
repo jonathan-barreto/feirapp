@@ -247,7 +247,7 @@ class LocalProductDatasourceImpl implements LocalProductDatasource {
   }
 
   @override
-  Future<List<ProductEntity>> getSavedProducts() async {
+  Future<List<ProductEntity>> getProductsFromCart() async {
     try {
       final List<String> products = await storage.getStringList(
         key: AppStorageKeys.cartProducts,

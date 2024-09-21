@@ -2,22 +2,23 @@ import 'package:dartz/dartz.dart';
 import 'package:feirapp/src/core/errors/failure.dart';
 import 'package:feirapp/src/core/usecase/usecase.dart';
 import 'package:feirapp/src/domain/entities/product_entity.dart';
-import 'package:feirapp/src/domain/usecases/get_saved_products_usecase.dart';
+import 'package:feirapp/src/domain/usecases/get_products_from_cart_usecase.dart';
 import 'package:feirapp/src/domain/usecases/update_product_quantity_usecase.dart';
 import 'package:flutter/material.dart';
 
 class CartController extends ChangeNotifier {
-  final GetSavedProductsUsecase getSavedProductsUsecase;
+  final GetProductsFromCartUsecase getProductsFromCartUsecase;
   final UpdateProductQuantityUsecase updateProductQuantityUsecase;
 
   CartController({
-    required this.getSavedProductsUsecase,
+    required this.getProductsFromCartUsecase,
     required this.updateProductQuantityUsecase,
   });
 
   bool loading = true;
 
   List<ProductEntity>? products;
+  double cartTotal = 0;
 
   void showLoading() {
     loading = true;
@@ -38,14 +39,34 @@ class CartController extends ChangeNotifier {
       ),
     );
 
-    final result = await getSavedProductsUsecase(
+    final result = await getProductsFromCartUsecase(
       NoParams(),
     );
 
     result.fold((l) => null, (r) => products = r);
     notifyListeners();
 
+    setCartTotal();
+
     hideLoading();
+  }
+
+  Future<void> setCartTotal() async {
+    cartTotal = 0;
+
+    if (products != null) {
+      for (int index = 0; index < (products?.length ?? 0); index++) {
+        final ProductEntity product = products![index];
+
+        final double price = double.parse(
+          product.discountPrice ?? product.price,
+        );
+
+        cartTotal = cartTotal + (price * product.quantity);
+      }
+    }
+
+    notifyListeners();
   }
 
   Future<void> addQuantity({required ProductEntity product}) async {
@@ -54,6 +75,8 @@ class CartController extends ChangeNotifier {
     updateProductQuantity(
       product: product,
     );
+
+    setCartTotal();
 
     notifyListeners();
   }
@@ -64,6 +87,8 @@ class CartController extends ChangeNotifier {
     updateProductQuantity(
       product: product,
     );
+
+    setCartTotal();
 
     notifyListeners();
   }

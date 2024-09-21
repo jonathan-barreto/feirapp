@@ -28,7 +28,7 @@ import 'package:feirapp/src/domain/usecases/get_product_by_id_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_by_ids_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_products_with_discount_usecase.dart';
-import 'package:feirapp/src/domain/usecases/get_saved_products_usecase.dart';
+import 'package:feirapp/src/domain/usecases/get_products_from_cart_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_user_credentials_usecase.dart';
 import 'package:feirapp/src/domain/usecases/get_user_usecase.dart';
 import 'package:feirapp/src/domain/usecases/login_usecase.dart';
@@ -219,8 +219,8 @@ Future<void> init() async {
     ),
   );
 
-  getIt.registerFactory<GetSavedProductsUsecase>(
-    () => GetSavedProductsUsecase(
+  getIt.registerFactory<GetProductsFromCartUsecase>(
+    () => GetProductsFromCartUsecase(
       repository: getIt<LocalProductRepository>(),
     ),
   );
@@ -308,7 +308,7 @@ Future<void> init() async {
 
   getIt.registerFactory<CartController>(
     () => CartController(
-      getSavedProductsUsecase: getIt<GetSavedProductsUsecase>(),
+      getProductsFromCartUsecase: getIt<GetProductsFromCartUsecase>(),
       updateProductQuantityUsecase: getIt<UpdateProductQuantityUsecase>(),
     ),
   );

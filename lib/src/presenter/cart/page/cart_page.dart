@@ -47,7 +47,8 @@ class _CartPageState extends State<CartPage> {
           body: SafeArea(
             child: controller.loading
                 ? const StandardLoadingWidget()
-                : controller.products == null
+                : controller.products == null ||
+                        (controller.products?.isEmpty ?? false)
                     ? const Center(
                         child: FeedbackWidget(
                           feedbackMessage: 'Carrinho vazio.',
@@ -55,6 +56,7 @@ class _CartPageState extends State<CartPage> {
                       )
                     : CartPageContentWidget(
                         products: controller.products ?? [],
+                        cartTotal: controller.cartTotal,
                         addQuantity: (ProductEntity product) {
                           addQuantity(product: product);
                         },
